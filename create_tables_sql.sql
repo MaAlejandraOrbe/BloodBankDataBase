@@ -5,15 +5,7 @@ CREATE TABLE BloodBank(
 	  city TEXT NOT NULL,
 	  contact_number INTEGER NOT NULL,
 	  person_responsible TEXT,
-	  capacity_stock INTEGER NOT NULL,
-	  A_pos_stock INTEGER,
-	  A_neg_stock INTEGER,
-	  B_pos_stock INTEGER,
-	  B_neg_stock INTEGER,
-	  AB_pos_stock INTEGER,
-	  AB_neg_stock INTEGER,
-	  O_pos_stock INTEGER,
-	  O_neg_stock INTEGER	 	  
+	  capacity_stock INTEGER NOT NULL  
 );
 
 CREATE TABLE Donor(
@@ -37,7 +29,7 @@ CREATE TABLE Donations(
 	  quantity INTEGER NOT NULL,
 	  expiration_date DATE NOT NULL,
 	  FOREIGN KEY (donor_id) REFERENCES Donor (id) ON DELETE CASCADE,
-	  FOREIGN KEY (bloodBank_id) REFERENCES BloodBank(ID) ON DELETE SET NULL
+	  FOREIGN KEY (bloodBank_id) REFERENCES BloodBank(ID) ON DELETE CASCADE
 	  );
 	  
 CREATE TABLE Recipient(
@@ -78,8 +70,9 @@ CREATE TABLE BloodRequest(
 	  bloodBank_id INTEGER NOT NULL,
 	  quantity_order INTEGER NOT NULL,
 	  status TEXT NOT NULL,
+	donation_id INTEGER,
 	  FOREIGN KEY (bloodBank_id) REFERENCES BloodBank(ID) ON DELETE CASCADE,
 	  FOREIGN KEY (recipient_id) REFERENCES Recipient(ID) ON DELETE CASCADE
+	FOREIGN KEY (donation_id) REFERENCES Donations(ID) ON DELETE SET NULL
 );
-
 
