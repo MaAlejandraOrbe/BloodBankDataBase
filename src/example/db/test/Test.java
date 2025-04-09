@@ -1,4 +1,4 @@
-package example.db.test;
+ package example.db.test;
 
 public class Test {
 
