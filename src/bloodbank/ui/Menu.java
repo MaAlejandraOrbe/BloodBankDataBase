@@ -29,7 +29,8 @@ public class Menu {
 	LocalDate date2 = LocalDate.of(2013,4,5);
 	Donation donation = new Donation(3,4,"status",date1,date2);
 	
-	donation.setBloodbank(bloodbank);
+	//donation.setBloodbank(bloodbank);
+	//da error en el .
 	
 	
 }
