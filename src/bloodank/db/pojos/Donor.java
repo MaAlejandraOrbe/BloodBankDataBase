@@ -1,8 +1,13 @@
 package bloodank.db.pojos;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Donor implements Serializable {
+	
+	//aqui lo d edonations, creo que debe ser asi. 
+	//TODO Confirmar que está bien lo de donations aquí.
 	
 	private static final long serialVersionUID =1L;
 	private Integer id;
@@ -12,9 +17,12 @@ public class Donor implements Serializable {
 	private Integer contact_number;
 	private String person_responsible;
 	private Integer capacity_stock;
+	private List<Donation>donations;
+	
 	
 	public Donor() {
 		super();
+		this.donations=new ArrayList<Donation>();
 	}
 	
 	
@@ -27,6 +35,7 @@ public class Donor implements Serializable {
 		this.contact_number=contact_number;
 		this.person_responsible=person_responsible;
 		this.capacity_stock=capacity_stock;
+		this.donations=new ArrayList<Donation>();
 	}
 
 
@@ -98,7 +107,18 @@ public class Donor implements Serializable {
 	public void setCapacity_stock(Integer capacity_stock) {
 		this.capacity_stock = capacity_stock;
 	}
+	
+	
+	public List<Donation> getDonations() {
+		return donations;
+	}
 
+
+	public void setDonations(List<Donation> donations) {
+		this.donations = donations;
+	}
+
+	
 
 	@Override
 	public int hashCode() {
