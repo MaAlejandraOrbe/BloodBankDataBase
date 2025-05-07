@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import managers.*;
+import bloodbank.ifaces.*;
 
 //POJO (plain old java object)
 //POJOs must use object wrappers (Integer, Float, etc.) instead of primitive types (int, floar, etc.)
@@ -42,6 +42,15 @@ public class BloodBank implements Serializable{
 		this.contact_number = contact_number;
 		this.donations = new ArrayList<Donation>();
 	}
+
+	public BloodBank(String address, String city, Integer contact_number) {
+		super();
+		this.address = address;
+		this.city = city;
+		this.contact_number = contact_number;
+		this.donations = new ArrayList<Donation>();
+	}
+
 
 	//POJOs need getters and setters
 	public Integer getId() {
