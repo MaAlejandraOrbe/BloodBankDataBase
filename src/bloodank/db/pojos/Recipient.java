@@ -15,7 +15,7 @@ public class Recipient implements Serializable{
 	private String blood_type;
 	private String country;
 	private Integer contact_number;
-	private Integer emergeny_contact_number;
+	private Integer emergency_contact_number;
 	private Hospital hospital;
 	
 	public Recipient() {
@@ -25,7 +25,7 @@ public class Recipient implements Serializable{
 
 	//TODO: CONFIRMAR QUE LO DE HSOPTIALS ES ASI O NO SE PONE EN CONSTRUCTOR
 	public Recipient(Integer id, String first_nanme, String last_name, LocalDate dOB, String blood_type, String country,
-			Integer contact_number, Integer emergeny_contact_number, Hospital hospital) {
+			Integer contact_number, Integer emergency_contact_number, Hospital hospital) {
 		super();
 		this.id = id;
 		this.first_nanme = first_nanme;
@@ -34,7 +34,7 @@ public class Recipient implements Serializable{
 		this.blood_type = blood_type;
 		this.country = country;
 		this.contact_number = contact_number;
-		this.emergeny_contact_number = emergeny_contact_number;
+		this.emergency_contact_number = emergency_contact_number;
 		this.hospital = hospital;
 	}
 
@@ -94,12 +94,12 @@ public class Recipient implements Serializable{
 		this.contact_number = contact_number;
 	}
 
-	public Integer getEmergeny_contact_number() {
-		return emergeny_contact_number;
+	public Integer getEmergency_contact_number() {
+		return emergency_contact_number;
 	}
 
-	public void setEmergeny_contact_number(Integer emergeny_contact_number) {
-		this.emergeny_contact_number = emergeny_contact_number;
+	public void setEmergency_contact_number(Integer emergency_contact_number) {
+		this.emergency_contact_number = emergeny_contact_number;
 	}
 
 	public Hospital getHospital() {
@@ -131,7 +131,7 @@ public class Recipient implements Serializable{
 	public String toString() {
 		return "Recipient [id=" + id + ", first_nanme=" + first_nanme + ", last_name=" + last_name + ", DOB=" + DOB
 				+ ", blood_type=" + blood_type + ", country=" + country + ", contact_number=" + contact_number
-				+ ", emergeny_contact_number=" + emergeny_contact_number + ", hospital=" + hospital + "]";
+				+ ", emergency_contact_number=" + emergency_contact_number + ", hospital=" + hospital + "]";
 	}
 	
 	
