@@ -15,41 +15,27 @@ public class Recipient implements Serializable{
 	private String blood_type;
 	private String country;
 	private Integer contact_number;
-<<<<<<< HEAD
 	private Integer emergency_contact_number;
-	private Hospital hospital;
-=======
-	private Integer emergeny_contact_number;
-	
->>>>>>> 2a9489adf24a1d87bfd1c2f4627dcf401f683d31
-	
+
 	public Recipient() {
 		super();
 		
 	}
 
 	//TODO: CONFIRMAR QUE LO DE HSOPTIALS ES ASI O NO SE PONE EN CONSTRUCTOR
-	public Recipient(Integer id, String first_nanme, String last_name, LocalDate dOB, String blood_type, String country,
-<<<<<<< HEAD
-			Integer contact_number, Integer emergency_contact_number, Hospital hospital) {
-=======
-			Integer contact_number, Integer emergeny_contact_number) {
->>>>>>> 2a9489adf24a1d87bfd1c2f4627dcf401f683d31
+	public Recipient(Integer id, String first_nanme, String last_name, LocalDate DOB, String blood_type, String country,
+			Integer contact_number, Integer emergency_contact_number) {
+
 		super();
 		this.id = id;
 		this.first_nanme = first_nanme;
 		this.last_name = last_name;
-		this.DOB = dOB;
+		this.DOB = DOB;
 		this.blood_type = blood_type;
 		this.country = country;
 		this.contact_number = contact_number;
-<<<<<<< HEAD
 		this.emergency_contact_number = emergency_contact_number;
-		this.hospital = hospital;
-=======
-		this.emergeny_contact_number = emergeny_contact_number;
-		
->>>>>>> 2a9489adf24a1d87bfd1c2f4627dcf401f683d31
+
 	}
 
 	public Integer getId() {
@@ -80,8 +66,8 @@ public class Recipient implements Serializable{
 		return DOB;
 	}
 
-	public void setDOB(LocalDate dOB) {
-		DOB = dOB;
+	public void setDOB(LocalDate DOB) {
+		this.DOB = DOB;
 	}
 
 	public String getBlood_type() {
@@ -113,16 +99,9 @@ public class Recipient implements Serializable{
 	}
 
 	public void setEmergency_contact_number(Integer emergency_contact_number) {
-		this.emergency_contact_number = emergeny_contact_number;
+		this.emergency_contact_number = emergency_contact_number;
 	}
 
-	public Hospital getHospital() {
-		return hospital;
-	}
-
-	public void setHospital(Hospital hospital) {
-		this.hospital = hospital;
-	}
 
 	@Override
 	public int hashCode() {
@@ -145,7 +124,7 @@ public class Recipient implements Serializable{
 	public String toString() {
 		return "Recipient [id=" + id + ", first_nanme=" + first_nanme + ", last_name=" + last_name + ", DOB=" + DOB
 				+ ", blood_type=" + blood_type + ", country=" + country + ", contact_number=" + contact_number
-				+ ", emergency_contact_number=" + emergency_contact_number + ", hospital=" + hospital + "]";
+				+ ", emergency_contact_number=" + emergency_contact_number + "]";
 	}
 	
 	
