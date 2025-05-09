@@ -12,7 +12,7 @@ public class Hospital implements Serializable{
 	private String person_responsible;
 	private Integer contact_number;
 	
-	//TODO: connection of recipient with hospitals
+	
 	
 	public Hospital() {
 		super();
