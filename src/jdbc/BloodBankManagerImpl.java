@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import bloodank.db.pojos.BloodBank;
+import bloodbank.db.pojos.BloodBank;
 import bloodbank.ifaces.BloodBankManager;
 
 public class BloodBankManagerImpl implements BloodBankManager {
