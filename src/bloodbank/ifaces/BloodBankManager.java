@@ -2,8 +2,7 @@ package bloodbank.ifaces;
 
 import java.util.List;
 
-import bloodank.db.pojos.BloodBank;
-
+import bloodbank.db.pojos.*;
 
 public interface BloodBankManager {
 	
