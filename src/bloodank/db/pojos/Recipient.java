@@ -16,7 +16,7 @@ public class Recipient implements Serializable{
 	private String country;
 	private Integer contact_number;
 	private Integer emergeny_contact_number;
-	private Hospital hospital;
+	
 	
 	public Recipient() {
 		super();
@@ -25,7 +25,7 @@ public class Recipient implements Serializable{
 
 	//TODO: CONFIRMAR QUE LO DE HSOPTIALS ES ASI O NO SE PONE EN CONSTRUCTOR
 	public Recipient(Integer id, String first_nanme, String last_name, LocalDate dOB, String blood_type, String country,
-			Integer contact_number, Integer emergeny_contact_number, Hospital hospital) {
+			Integer contact_number, Integer emergeny_contact_number) {
 		super();
 		this.id = id;
 		this.first_nanme = first_nanme;
@@ -35,7 +35,7 @@ public class Recipient implements Serializable{
 		this.country = country;
 		this.contact_number = contact_number;
 		this.emergeny_contact_number = emergeny_contact_number;
-		this.hospital = hospital;
+		
 	}
 
 	public Integer getId() {
