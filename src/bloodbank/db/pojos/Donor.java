@@ -1,4 +1,4 @@
-package bloodank.db.pojos;
+package bloodbank.db.pojos;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.List;
@@ -12,12 +12,12 @@ public class Donor implements Serializable {
 	private static final long serialVersionUID =1L;
 	private Integer id;
 	private String name;
-	private String adress;
+	private String address;
 	private String city;
 	private Integer contact_number;
 	private String person_responsible;
 	private Integer capacity_stock;
-	private List<Donation>donations;
+	private List<Donation> donations;
 	
 	
 	public Donor() {
@@ -26,11 +26,11 @@ public class Donor implements Serializable {
 	}
 	
 	
-	public Donor(Integer id, String name, String adress, String city, Integer contact_number, String person_responsible, Integer capacity_stock) {
+	public Donor(Integer id, String name, String address, String city, Integer contact_number, String person_responsible, Integer capacity_stock) {
 		super();
 		this.id=id;
 		this.name=name;
-		this.adress=adress;
+		this.address=address;
 		this.city=city;
 		this.contact_number=contact_number;
 		this.person_responsible=person_responsible;
@@ -59,13 +59,13 @@ public class Donor implements Serializable {
 	}
 
 
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 
 
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String adress) {
+		this.address = address;
 	}
 
 
@@ -141,7 +141,7 @@ public class Donor implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Donor [id=" + id + ", name=" + name + ", adress=" + adress + ", city=" + city + ", contact_number="
+		return "Donor [id=" + id + ", name=" + name + ", adress=" + address + ", city=" + city + ", contact_number="
 				+ contact_number + ", person_responsible=" + person_responsible + ", capacity_stock=" + capacity_stock
 				+ "]";
 	}

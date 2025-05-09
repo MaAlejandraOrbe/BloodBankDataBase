@@ -1,4 +1,4 @@
-package bloodank.db.pojos;
+package bloodbank.db.pojos;
 import java.io.Serializable;
 import java.util.Objects;
 
