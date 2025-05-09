@@ -15,8 +15,13 @@ public class Recipient implements Serializable{
 	private String blood_type;
 	private String country;
 	private Integer contact_number;
+<<<<<<< HEAD
 	private Integer emergency_contact_number;
 	private Hospital hospital;
+=======
+	private Integer emergeny_contact_number;
+	
+>>>>>>> 2a9489adf24a1d87bfd1c2f4627dcf401f683d31
 	
 	public Recipient() {
 		super();
@@ -25,7 +30,11 @@ public class Recipient implements Serializable{
 
 	//TODO: CONFIRMAR QUE LO DE HSOPTIALS ES ASI O NO SE PONE EN CONSTRUCTOR
 	public Recipient(Integer id, String first_nanme, String last_name, LocalDate dOB, String blood_type, String country,
+<<<<<<< HEAD
 			Integer contact_number, Integer emergency_contact_number, Hospital hospital) {
+=======
+			Integer contact_number, Integer emergeny_contact_number) {
+>>>>>>> 2a9489adf24a1d87bfd1c2f4627dcf401f683d31
 		super();
 		this.id = id;
 		this.first_nanme = first_nanme;
@@ -34,8 +43,13 @@ public class Recipient implements Serializable{
 		this.blood_type = blood_type;
 		this.country = country;
 		this.contact_number = contact_number;
+<<<<<<< HEAD
 		this.emergency_contact_number = emergency_contact_number;
 		this.hospital = hospital;
+=======
+		this.emergeny_contact_number = emergeny_contact_number;
+		
+>>>>>>> 2a9489adf24a1d87bfd1c2f4627dcf401f683d31
 	}
 
 	public Integer getId() {
