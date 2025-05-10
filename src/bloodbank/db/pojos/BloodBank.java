@@ -12,7 +12,7 @@ import bloodbank.ifaces.*;
 //POJOs need to import the class serializable (means it can be saved to a file/database...)
 
 public class BloodBank implements Serializable{
-
+ //TODO añadir nombre
 	/**
 	 * 
 	 */
