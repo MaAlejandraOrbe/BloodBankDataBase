@@ -1,6 +1,6 @@
 package bloodbank.ifaces;
-import java.util.List;
-//import bloodbank.db.pojos;
+//import java.util.List;
+//import bloodbank.db.*;
 
 public interface RequestsManager {
 	
