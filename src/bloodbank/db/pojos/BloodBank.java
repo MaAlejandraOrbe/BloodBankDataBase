@@ -19,9 +19,11 @@ public class BloodBank implements Serializable{
 	private static final long serialVersionUID = 1L;
 	//POJOs used to contain attributes
 	private Integer id;
+	private String name;
 	private String address;
 	private String city;
-	private Integer contact_number;
+	private String contact_number;
+	private String person_responsible;
 	private BloodBankManager bbManager;
 	private List<Donation> donations;
 	
@@ -33,18 +35,22 @@ public class BloodBank implements Serializable{
 	}
 	
 	
-	//Not needed for POJOs but useful to me
-	public BloodBank(Integer id, String address, String city, Integer contact_number) {
+	//Not nceeded for POJOs but useful to me
+	public BloodBank(Integer id,String name, String address, String city, String contact_number,String person_responsible) {
 		super();
 		this.id = id;
+		this.name = name;
 		this.address = address;
 		this.city = city;
 		this.contact_number = contact_number;
+		this.person_responsible = person_responsible;
 		this.donations = new ArrayList<Donation>();
 	}
+	
 
-	public BloodBank(String address, String city, Integer contact_number) {
+	public BloodBank(String name, String address, String city, String contact_number) {
 		super();
+		this.name = name;
 		this.address = address;
 		this.city = city;
 		this.contact_number = contact_number;
@@ -53,11 +59,19 @@ public class BloodBank implements Serializable{
 
 
 	//POJOs need getters and setters
+	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getAddress() {
 		return address;
@@ -71,11 +85,20 @@ public class BloodBank implements Serializable{
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public Integer getContact_number() {
+	public String getContact_number() {
 		return contact_number;
 	}
-	public void setContact_number(Integer contact_number) {
+	public void setContact_number(String contact_number) {
 		this.contact_number = contact_number;
+	}
+	
+	public String getPerson_responsible() {
+		return person_responsible;
+	}
+
+
+	public void setPerson_responsible(String person_responsible) {
+		this.person_responsible = person_responsible;
 	}
 	public BloodBankManager getBbManager() {
 		return bbManager;
@@ -123,13 +146,16 @@ public class BloodBank implements Serializable{
 			BloodBank other = (BloodBank) obj;
 			return id == other.id;
 		}
-	
-	
-	//could have other methods such as to string
-	@Override
-	public String toString() {
-		return "BloodBank [id=" + id + ", contact_number=" + contact_number + "]";
-	}
+
+		//could have other methods such as to string
+		
+		@Override
+		public String toString() {
+			return "BloodBank [id=" + id + ", name=" + name + ", address=" + address + ", city=" + city
+					+ ", contact_number=" + contact_number + ", person_responsible=" + person_responsible
+					+ ", bbManager=" + bbManager + ", donations=" + donations + "]";
+		}
+
 	
 	
 
