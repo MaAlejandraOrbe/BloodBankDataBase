@@ -68,7 +68,7 @@ public class Menu {
 		BloodBank bloodbank = new BloodBank(name, address, city, contact_number);
 		
 		//call the bloodbankmanager
-		bbManager.insertBloodBank(bloodbank);
+		bbManager.newBloodBank(bloodbank);
 		
 	}
 
