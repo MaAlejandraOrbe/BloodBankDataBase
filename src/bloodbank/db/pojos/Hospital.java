@@ -10,7 +10,7 @@ public class Hospital implements Serializable{
 	private String city;
 	private String address;
 	private String person_responsible;
-	private Integer contact_number;
+	private String contact_number;
 	
 	
 	
@@ -19,7 +19,7 @@ public class Hospital implements Serializable{
 	}
 
 	public Hospital(Integer id, String name, String city, String address, String person_responsible,
-			Integer contact_number) {
+			String contact_number) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -28,6 +28,9 @@ public class Hospital implements Serializable{
 		this.person_responsible = person_responsible;
 		this.contact_number = contact_number;
 	}
+	
+	 //Hospital h = new Hospital(id,name, city, address,personResponsible,contactNumber);
+     
 
 	public Integer getId() {
 		return id;
@@ -69,11 +72,11 @@ public class Hospital implements Serializable{
 		this.person_responsible = person_responsible;
 	}
 
-	public Integer getContact_number() {
+	public String getContact_number() {
 		return contact_number;
 	}
 
-	public void setContact_number(Integer contact_number) {
+	public void setContact_number(String contact_number) {
 		this.contact_number = contact_number;
 	}
 

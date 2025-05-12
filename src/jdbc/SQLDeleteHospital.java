@@ -26,15 +26,8 @@ public class SQLDeleteHospital {
             String address          = rs.getString("address");
             String personResponsible= rs.getString("person_responsible");
             String contactNumber    = rs.getString("contact_number");
-            Hospital h = new Hospital(
-                id,
-                name,
-                city,
-                address,
-                personResponsible,
-                contactNumber
-            );
-            System.out.println(h);
+            Hospital h = new Hospital(id,name, city, address,personResponsible,contactNumber);
+            System.out.println(h); 
         }
         rs.close();
         stmt.close();

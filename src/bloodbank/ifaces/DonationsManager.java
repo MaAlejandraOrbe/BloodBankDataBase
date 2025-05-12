@@ -1,6 +1,7 @@
 package bloodbank.ifaces;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import bloodbank.db.pojos.*;
@@ -8,15 +9,16 @@ import bloodbank.db.pojos.*;
 
 
 public interface DonationsManager {
+	
+	public void newDonation(Donation Donation);
+	public void newDonor(Donor donor);
+	public void linkDonorToDonation(int donorId, int donationId);
+	public List<Donor> searchDonor(String firstName,String lastName, Date DOB);
+	public List<Donation> searchDonation(String status);
+	public void updateDonation(Donation donation);
+	
 
-	public int insertDonor(Donor donor);
-	public int insertDonation(Donation donation);
-	public List<Donor> searchDonor(String name,String adress, String city, Integer contact_number, String person_responsible, Integer capacity_stock);
-	public List<Donation> searchDonation(Integer quantity, String status, LocalDate donation_date, LocalDate expiration_date); //TODO hay que poner el atributo bloodbank?
-	public Donor getDonor(int id);
-	public Donation getDonation(int id);
-	public void changeDonor(Donor donor); 
-	public void changeDonation(Donation donor); 
-	public void addDonor(int DonorId, int DonationId);
+	
 	
 }
+
