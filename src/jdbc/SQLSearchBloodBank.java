@@ -47,8 +47,10 @@ public class SQLSearchBloodBank {
                 String personResp     = rs.getString("person_responsible");
                 int    capacityStock  = rs.getInt("capacity_stock");
 
-                //BloodBank bb = new BloodBank(id, name, address, city, contactNumber, personResp, capacityStock);
-                //System.out.println(bb);
+                BloodBank bb = new BloodBank( id, name, address, city,  contactNumber, personResp,
+                    capacityStock
+                );
+                System.out.println(bb);
             }
 
             
