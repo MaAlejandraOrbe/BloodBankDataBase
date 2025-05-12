@@ -27,8 +27,9 @@ public class SQLDeleteBloodBank {
             int contact   = rs.getInt("contact_number");
             String person = rs.getString("person_responsible");
             int capacity  = rs.getInt("capacity_stock");
-            BloodBank bb = new BloodBank(id, name, addr, city, contact, person, capacity);
-            System.out.println(bb);
+           // BloodBank bb = new BloodBank(id, name, addr, city, contact, person, capacity);
+            //TODO quitar capacity de bloodbank en sql
+            //System.out.println(bb);
         }
         rs.close();
         stmt.close();

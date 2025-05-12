@@ -7,11 +7,11 @@ import bloodbank.db.pojos.*;
 public interface BloodBankManager {
 	
 	
-		public int insertBloodBank(BloodBank bloodbank);
-		public List<BloodBank> searchBloodBank(String address, String city, Integer contact_number);
-		public BloodBank getBloodBank(int id);		
-		public void changeBloodBank(BloodBank bloodbank); 
-		public void addDonation(int BloodBankId, int DonationId);
+		public void newBloodBank(BloodBank bloodbank);
+		public void linkDonation(BloodBank bloodbank, Donation donation);
+		public void deleteBloodBank(BloodBank bloodbank);
+		public List<BloodBank> searchBloodBank(String name, String city);
+		public void linkBloodRequest(BloodBank bloodbank, BloodRequest bloodrequest);
 			
 		}
 

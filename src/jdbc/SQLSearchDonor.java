@@ -46,18 +46,8 @@ public class SQLSearchDonor {
                 String contactNumber       = rs.getString("contact_number");
                 int    emergencyContactNum = rs.getInt("emergency_contact_number");
 
-                Donor donor = new Donor(
-                    id,
-                    firstName,
-                    lastName,
-                    dob,
-                    bloodType,
-                    eligibleToDonate,
-                    country,
-                    contactNumber,
-                    emergencyContactNum
-                );
-                System.out.println(donor);
+              //  Donor donor = new Donor(id, firstName, lastName, dob, bloodType, eligibleToDonate, country, contactNumber, emergencyContactNum);
+               // System.out.println(donor);
             }
 
             rs.close();

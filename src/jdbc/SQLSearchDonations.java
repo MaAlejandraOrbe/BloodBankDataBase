@@ -40,16 +40,8 @@ public class SQLSearchDonations {
                 int    quantity       = rs.getInt("quantity");
                 Date   expirationDate = rs.getDate("expiration_date");
 
-                Donation donation = new Donation(
-                    id,
-                    donorId,
-                    bloodBankId,
-                    status,
-                    dateDonation,
-                    quantity,
-                    expirationDate
-                );
-                System.out.println(donation);
+                //Donation donation = new Donation(id, donorId, bloodBankId, status, dateDonation, quantity, expirationDate);
+                //System.out.println(donation);
             }
 
             rs.close();

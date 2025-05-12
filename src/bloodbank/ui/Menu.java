@@ -56,14 +56,16 @@ public class Menu {
 
 	private static void createBloodBank() throws IOException {
 		System.out.println("Please input the bloodbank's data");
+		System.out.println("Name");
+		String name = reader.readLine();
 		System.out.println("Address");
 		String address = reader.readLine();
 		System.out.println("City");
 		String city = reader.readLine();
 		System.out.println("Contact number");
-		Integer contact_number = Integer.parseInt(reader.readLine());
+		String contact_number = reader.readLine();
 		
-		BloodBank bloodbank = new BloodBank(address,city,contact_number);
+		BloodBank bloodbank = new BloodBank(name, address, city, contact_number);
 		
 		//call the bloodbankmanager
 		bbManager.insertBloodBank(bloodbank);
@@ -79,21 +81,6 @@ public class Menu {
 		// TODO Auto-generated method stub
 		
 	}
-		
-	//esto es para probar
-	BloodBank bloodbank = new BloodBank(12,"b","n",12345);
-	LocalDate date1 = LocalDate.of(1999,12,3);
-	LocalDate date2 = LocalDate.of(2013,4,5);
-	Donation donation = new Donation(3,4,"status",date1,date2);
 	
-	//donation.setBloodbank(bloodbank);
-	//da error en el .
-	
-	
-
-
-	
-
-
 	
 }
