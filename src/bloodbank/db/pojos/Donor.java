@@ -18,8 +18,8 @@ public class Donor implements Serializable {
 	private String blood_type;
 	private String country;
 	private Boolean eligible_donate;
-	private Integer contact_number;
-	private Integer emergency_contact_number;
+	private String contact_number;
+	private String emergency_contact_number;
 	private List<Donation> donations;
 	
 	
@@ -30,7 +30,7 @@ public class Donor implements Serializable {
 	
 	
 	public Donor(Integer id, String first_name, String last_name, LocalDate dOB, String blood_type, String country,
-			Boolean eligible_donate, Integer contact_number, Integer emergency_contact_number) {
+			Boolean eligible_donate, String  contact_number, String  emergency_contact_number) {
 		super();
 		this.id = id;
 		this.first_name = first_name;
@@ -116,22 +116,24 @@ public class Donor implements Serializable {
 	}
 
 
-	public Integer getContact_number() {
+	
+
+	public String getContact_number() {
 		return contact_number;
 	}
 
 
-	public void setContact_number(Integer contact_number) {
+	public void setContact_number(String contact_number) {
 		this.contact_number = contact_number;
 	}
 
 
-	public Integer getEmergency_contact_number() {
+	public String getEmergency_contact_number() {
 		return emergency_contact_number;
 	}
 
 
-	public void setEmergency_contact_number(Integer emergency_contact_number) {
+	public void setEmergency_contact_number(String emergency_contact_number) {
 		this.emergency_contact_number = emergency_contact_number;
 	}
 

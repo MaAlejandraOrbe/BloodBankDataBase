@@ -9,13 +9,13 @@ public class Recipient implements Serializable{
 	
 	private static final long serialVersionUID =1L;
 	private Integer id;
-	private String first_nanme;
+	private String first_name;
 	private String last_name;
 	private LocalDate DOB;
 	private String blood_type;
 	private String country;
-	private Integer contact_number;
-	private Integer emergency_contact_number;
+	private String  contact_number;
+	private String  emergency_contact_number;
 
 	public Recipient() {
 		super();
@@ -24,11 +24,11 @@ public class Recipient implements Serializable{
 
 	//TODO: CONFIRMAR QUE LO DE HSOPTIALS ES ASI O NO SE PONE EN CONSTRUCTOR
 	public Recipient(Integer id, String first_nanme, String last_name, LocalDate DOB, String blood_type, String country,
-			Integer contact_number, Integer emergency_contact_number) {
+			String contact_number, String emergency_contact_number) {
 
 		super();
 		this.id = id;
-		this.first_nanme = first_nanme;
+		this.first_name = first_nanme;
 		this.last_name = last_name;
 		this.DOB = DOB;
 		this.blood_type = blood_type;
@@ -46,12 +46,12 @@ public class Recipient implements Serializable{
 		this.id = id;
 	}
 
-	public String getFirst_nanme() {
-		return first_nanme;
+	public String getFirst_name() {
+		return first_name;
 	}
 
-	public void setFirst_nanme(String first_nanme) {
-		this.first_nanme = first_nanme;
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
 	}
 
 	public String getLast_name() {
@@ -86,22 +86,24 @@ public class Recipient implements Serializable{
 		this.country = country;
 	}
 
-	public Integer getContact_number() {
+	
+
+
+	public String getContact_number() {
 		return contact_number;
 	}
 
-	public void setContact_number(Integer contact_number) {
+	public void setContact_number(String contact_number) {
 		this.contact_number = contact_number;
 	}
 
-	public Integer getEmergency_contact_number() {
+	public String getEmergency_contact_number() {
 		return emergency_contact_number;
 	}
 
-	public void setEmergency_contact_number(Integer emergency_contact_number) {
+	public void setEmergency_contact_number(String emergency_contact_number) {
 		this.emergency_contact_number = emergency_contact_number;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -122,7 +124,7 @@ public class Recipient implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Recipient [id=" + id + ", first_nanme=" + first_nanme + ", last_name=" + last_name + ", DOB=" + DOB
+		return "Recipient [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", DOB=" + DOB
 				+ ", blood_type=" + blood_type + ", country=" + country + ", contact_number=" + contact_number
 				+ ", emergency_contact_number=" + emergency_contact_number + "]";
 	}
