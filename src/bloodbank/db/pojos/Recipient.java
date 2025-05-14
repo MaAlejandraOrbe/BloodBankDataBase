@@ -1,6 +1,6 @@
 package bloodbank.db.pojos;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Date;
 import java.util.Objects;
 
 public class Recipient implements Serializable{
@@ -11,7 +11,7 @@ public class Recipient implements Serializable{
 	private Integer id;
 	private String first_name;
 	private String last_name;
-	private LocalDate DOB;
+	private Date DOB;
 	private String blood_type;
 	private String country;
 	private String  contact_number;
@@ -23,7 +23,7 @@ public class Recipient implements Serializable{
 	}
 
 	//TODO: CONFIRMAR QUE LO DE HSOPTIALS ES ASI O NO SE PONE EN CONSTRUCTOR
-	public Recipient(Integer id, String first_nanme, String last_name, LocalDate DOB, String blood_type, String country,
+	public Recipient(Integer id, String first_nanme, String last_name, Date DOB, String blood_type, String country,
 			String contact_number, String emergency_contact_number) {
 
 		super();
@@ -62,11 +62,11 @@ public class Recipient implements Serializable{
 		this.last_name = last_name;
 	}
 
-	public LocalDate getDOB() {
+	public Date getDOB() {
 		return DOB;
 	}
 
-	public void setDOB(LocalDate DOB) {
+	public void setDOB(Date DOB) {
 		this.DOB = DOB;
 	}
 

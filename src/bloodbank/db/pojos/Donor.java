@@ -1,6 +1,6 @@
 package bloodbank.db.pojos;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Date;
 import java.util.Objects;
 import java.util.List;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class Donor implements Serializable {
 	private Integer id;
 	private String first_name;
 	private String last_name;
-	private LocalDate DOB;
+	private Date DOB;
 	private String blood_type;
 	private String country;
 	private Boolean eligible_donate;
@@ -29,7 +29,7 @@ public class Donor implements Serializable {
 	}
 	
 	
-	public Donor(Integer id, String first_name, String last_name, LocalDate dOB, String blood_type, String country,
+	public Donor(Integer id, String first_name, String last_name, Date dOB, String blood_type, String country,
 			Boolean eligible_donate, String  contact_number, String  emergency_contact_number) {
 		super();
 		this.id = id;
@@ -76,12 +76,12 @@ public class Donor implements Serializable {
 	}
 
 
-	public LocalDate getDOB() {
+	public Date getDOB() {
 		return DOB;
 	}
 
 
-	public void setDOB(LocalDate dOB) {
+	public void setDOB(Date dOB) {
 		DOB = dOB;
 	}
 

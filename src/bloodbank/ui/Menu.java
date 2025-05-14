@@ -3,7 +3,7 @@ package bloodbank.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.time.LocalDate;
+import java.time.Date;
 
 import bloodbank.db.pojos.*;
 import bloodbank.ifaces.*;

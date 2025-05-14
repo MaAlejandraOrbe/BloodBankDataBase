@@ -1,7 +1,7 @@
 package bloodbank.db.pojos;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Date;
 import java.util.Objects;
 
 public class Donation implements Serializable {
@@ -12,9 +12,9 @@ public class Donation implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String status;
-	private LocalDate donation_date; //LocalDate fecha = LocalDate.of(1995, 4, 10); (ano, mes, dia)
+	private Date donation_date; //Date fecha = Date.of(1995, 4, 10); (ano, mes, dia)
 	private Integer quantity;
-	private LocalDate expiration_date;
+	private Date expiration_date;
 	private BloodBank bloodbank;
 	private Donor donor;
 	
@@ -24,7 +24,7 @@ public class Donation implements Serializable {
 	}
 	
 	
-	public Donation(Integer id, String status, LocalDate donation_date, Integer quantity, LocalDate expiration_date,
+	public Donation(Integer id, String status, Date donation_date, Integer quantity, Date expiration_date,
 			BloodBank bloodbank, Donor donor) {
 		super();
 		this.id = id;
@@ -59,12 +59,12 @@ public class Donation implements Serializable {
 	}
 
 
-	public LocalDate getDonation_date() {
+	public Date getDonation_date() {
 		return donation_date;
 	}
 
 
-	public void setDonation_date(LocalDate donation_date) {
+	public void setDonation_date(Date donation_date) {
 		this.donation_date = donation_date;
 	}
 
@@ -79,12 +79,12 @@ public class Donation implements Serializable {
 	}
 
 
-	public LocalDate getExpiration_date() {
+	public Date getExpiration_date() {
 		return expiration_date;
 	}
 
 
-	public void setExpiration_date(LocalDate expiration_date) {
+	public void setExpiration_date(Date expiration_date) {
 		this.expiration_date = expiration_date;
 	}
 
