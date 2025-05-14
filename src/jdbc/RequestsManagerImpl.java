@@ -18,18 +18,51 @@ public class RequestsManagerImpl implements RequestsManager {
 	    public RequestsManagerImpl(Connection c) {
 	        this.c = c;
 	    }
-
+	    
+	
+	    //TODO: COMPROBAR QUE ESTO SEA CORRECTO
 	@Override
 	public void fullfillBloodRequest(BloodRequest bloodRequest) {
-		// TODO Auto-generated method stub
+		try {
+			
+			String sql="UPDATE bloodRequest SET" +" quantity order = ?, " + "status = ?, " + "WHERE id = ? ";
+			PreparedStatement p;
+			p=c.prepareStatement(sql);
+			p.setInt(1,bloodRequest.getQuantity_order());
+			p.setString(2,bloodRequest.getStatus());
+			p.executeUpdate();
+			p.close();
+			
+		}catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 
 	}
+	
+	
 
+	//TODO: COMPROBAR QUE SEA CORRECTO
 	@Override
 	public void newBloodRequest(BloodRequest bloodRequest) {
+		try {
+		String sql= "INSERT INTO BloodRequest (quantity_order,status,bloodBank_id,recipient_id,donation_id) VALUES(?,?,?,?,?) ";
+		PreparedStatement p=c.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+		p.setInt(1, bloodRequest.getQuantity_order());;
+		p.setString(2,bloodRequest.getStatus());
+		p.setInt(3,bloodRequest.getBloodBank().getId());
+		p.setInt(4,bloodRequest.getRecipient().getId());
+		p.setInt(5,bloodRequest.getDonation().getId());
 		
-
+		p.executeUpdate();
+		p.close();
+		
+		}catch(SQLException e) {
+			System.out.println("Database error with new BloodRequest.");
+			e.printStackTrace();
+		}
 	}
+	
 
 	@Override
 	public void newRecipient(Recipient recipient) {
@@ -78,15 +111,38 @@ public class RequestsManagerImpl implements RequestsManager {
 
 	}
 
+	//TODO: COMPROBAR QUE SEA CORRECTO
+	
 	@Override
 	public void linkRecipientToBloodRequest(int recipientId, int bloodRequestId) {
-		// TODO Auto-generated method stub
+		try {
+			String sql="INSERT INTO recipientsBloodRequest(recipientId, bloodRequestId) VALUES (?,?)";
+			PreparedStatement p=c.prepareStatement(sql);
+			p.setInt(1, recipientId);
+			p.setInt(2, bloodRequestId);
+			p.executeUpdate();
+			p.close();
+		}catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 
 	}
 
+	
 	@Override
 	public void deleteRecipient(int id) {
-		// TODO Auto-generated method stub
+		
+		try {
+		String sql= "DELETE FROM Recipient WHERE ID = ?";
+		PreparedStatement p=c.prepareStatement(sql);
+		p.setInt(1, id);
+		p.executeUpdate();
+		p.close();
+		}catch (SQLException e) {
+            System.out.println("Database error in deleteRecipient.");
+            e.printStackTrace();
+        }
 
 	}
 
