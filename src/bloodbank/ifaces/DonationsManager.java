@@ -14,6 +14,8 @@ public interface DonationsManager {
 	public void newDonor(Donor donor);
 	public void linkDonorToDonation(int donorId, int donationId);
 	public List<Donor> searchDonor(String firstName,String lastName, Date DOB);
+	private Donor getDonorById(int id);
+	private BloodBank getBloodBankById(int id)
 	public List<Donation> searchDonation(String status);
 	public void updateDonation(Donation donation);
 	
