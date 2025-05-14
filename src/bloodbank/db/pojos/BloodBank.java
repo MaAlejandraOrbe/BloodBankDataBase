@@ -24,6 +24,7 @@ public class BloodBank implements Serializable{
 	private String city;
 	private String contact_number;
 	private String person_responsible;
+	private Integer capacity_stock;
 	private BloodBankManager bbManager;
 	private List<Donation> donations;
 	
@@ -36,7 +37,7 @@ public class BloodBank implements Serializable{
 	
 	
 	//Not nceeded for POJOs but useful to me
-	public BloodBank(Integer id,String name, String address, String city, String contact_number,String person_responsible) {
+	public BloodBank(Integer id,String name, String address, String city, String contact_number,String person_responsible, Integer capacity_stock) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -44,6 +45,7 @@ public class BloodBank implements Serializable{
 		this.city = city;
 		this.contact_number = contact_number;
 		this.person_responsible = person_responsible;
+		this.capacity_stock = capacity_stock;
 		this.donations = new ArrayList<Donation>();
 	}
 	
@@ -95,10 +97,14 @@ public class BloodBank implements Serializable{
 	public String getPerson_responsible() {
 		return person_responsible;
 	}
-
-
 	public void setPerson_responsible(String person_responsible) {
 		this.person_responsible = person_responsible;
+	}
+	public Integer getCapacity_stock() {
+		return capacity_stock;
+	}
+	public void setCapacity_stock(Integer capacity_stock) {
+		this.capacity_stock = capacity_stock;
 	}
 	public BloodBankManager getBbManager() {
 		return bbManager;
@@ -115,20 +121,7 @@ public class BloodBank implements Serializable{
 		this.donations = donations;
 	}
 	
-	//These 2 methods are not needed by the POJO
-	public void addDonation(Donation donation) {
-		if (!donations.contains(donation)) {
-			donations.add(donation);
-		}
-		
-	}
 	
-	public void removeDonation(Donation donation) {
-		if (donations.contains(donation)) {
-			donations.remove(donation);
-		}
-	}
-
 	//POJOs need an equals() method which use just the primary key
 		@Override
 		public int hashCode() {
@@ -147,16 +140,18 @@ public class BloodBank implements Serializable{
 			return id == other.id;
 		}
 
-		//could have other methods such as to string
-		
+
 		@Override
 		public String toString() {
 			return "BloodBank [id=" + id + ", name=" + name + ", address=" + address + ", city=" + city
 					+ ", contact_number=" + contact_number + ", person_responsible=" + person_responsible
-					+ ", bbManager=" + bbManager + ", donations=" + donations + "]";
+					+ ", capacity_stock=" + capacity_stock + ", bbManager=" + bbManager + ", donations=" + donations
+					+ "]";
 		}
 
-	
-	
+		//could have other methods such as to string
+		
+		
+		
 
 }

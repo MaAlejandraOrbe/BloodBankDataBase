@@ -29,10 +29,10 @@ public class BloodBankManagerImpl implements BloodBankManager {
             p.setString(1, bloodbank.getName());
             p.setString(2, bloodbank.getAddress());
             p.setString(3, bloodbank.getCity());
-            p.setInt(4, bloodbank.getContact_number());
+            p.setString(4, bloodbank.getContact_number());
             p.setString(5, bloodbank.getPerson_responsible());
             //TODO add capacity stock to bloodbank
-            p.setInt(6, bloodbank.getCapacityStock());
+            p.setInt(6, bloodbank.getCapacity_stock());
             p.executeUpdate();
             p.close();
         } catch (SQLException e) {
@@ -47,7 +47,7 @@ public class BloodBankManagerImpl implements BloodBankManager {
     }
 
     @Override
-    //TODO i dont know where u guys created this but as an argument we dont need bloodbank
+    //TODO hay un error que no entiendo
     public void deleteBloodBank(int id) {
         try {
             String sql = "DELETE FROM BloodBank WHERE ID = ?";
@@ -71,17 +71,17 @@ public class BloodBankManagerImpl implements BloodBankManager {
             p.setString(2, city);
             ResultSet rs = p.executeQuery();
             while (rs.next()) {
-                int    id               = rs.getInt("ID");
+                Integer id           = rs.getInt("ID");
                 String namebb           = rs.getString("name");
                 String address          = rs.getString("address");
                 String citybb           = rs.getString("city");
-                int    contactNumber    = rs.getInt("contact_number");
+                String contactNumber   = rs.getString("contact_number");
                 String personResponsible= rs.getString("person_responsible");
-                int    capacityStock    = rs.getInt("capacity_stock");
+                Integer capacityStock= rs.getInt("capacity_stock");
                 
-                BloodBank bb = new BloodBank(id, namebb,address,citybb,contactNumber,personResponsible,capacityStock);
+                BloodBank bb = new BloodBank(id, namebb, address ,citybb ,contactNumber,personResponsible,capacityStock);
                 list.add(bb);
-            }
+            } 
             rs.close();
             p.close();
             
@@ -95,4 +95,4 @@ public class BloodBankManagerImpl implements BloodBankManager {
     @Override
     public void linkBloodRequest(BloodBank bloodbank, BloodRequest bloodrequest) {
         
-}
+    }}

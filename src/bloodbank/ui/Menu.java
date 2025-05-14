@@ -17,7 +17,7 @@ public class Menu {
 
 	public static void main(String[] args) throws IOException {
 		
-		bbManager = new BloodBankManagerImpl();
+		//bbManager = new BloodBankManagerImpl();
 		reader=new BufferedReader(new InputStreamReader(System.in));
 		
 		System.out.println("Welcome to the Bloodbank Management Solution");

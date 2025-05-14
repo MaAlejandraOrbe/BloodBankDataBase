@@ -39,17 +39,15 @@ public class SQLSearchBloodBank {
 			
          // print results
             while (rs.next()) {
-                int    id             = rs.getInt("ID");
+                Integer    id             = rs.getInt("ID");
                 String name           = rs.getString("name");
                 String address        = rs.getString("address");
                 String city           = rs.getString("city");
-                int    contactNumber  = rs.getInt("contact_number");
+                String    contactNumber  = rs.getString("contact_number");
                 String personResp     = rs.getString("person_responsible");
                 int    capacityStock  = rs.getInt("capacity_stock");
 
-                BloodBank bb = new BloodBank( id, name, address, city,  contactNumber, personResp,
-                    capacityStock
-                );
+                BloodBank bb = new BloodBank(id, name, address, city,  contactNumber, personResp, capacityStock);
                 System.out.println(bb);
             }
 
