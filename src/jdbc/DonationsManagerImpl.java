@@ -31,9 +31,9 @@ public class DonationsManagerImpl implements DonationsManager {
             p.setInt(1, donation.getDonor().getId());
             p.setInt(2, donation.getBloodbank().getId());
             p.setString(3, donation.getStatus());
-            p.setDate(4, Date.valueOf(donation.getDonation_date()));
+            p.setDate(4, donation.getDonation_date());
             p.setInt(5, donation.getQuantity());
-            p.setDate(6, Date.valueOf(donation.getExpiration_date()));
+            p.setDate(6, donation.getExpiration_date());
             p.executeUpdate();
             p.close();
         } catch (SQLException e) {
@@ -52,7 +52,7 @@ public class DonationsManagerImpl implements DonationsManager {
             PreparedStatement p = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             p.setString(1, donor.getFirst_name());
             p.setString(2, donor.getLast_name());
-            p.setDate(3,Date.valueOf(donor.getDOB()));
+            p.setDate(3,donor.getDOB());
             p.setString(4, donor.getBlood_type());
             p.setBoolean(5, donor.getEligible_donate());
             p.setString(6, donor.getCountry());
@@ -99,7 +99,7 @@ public class DonationsManagerImpl implements DonationsManager {
                 Integer id = rs.getInt("ID");
                 String fn = rs.getString("first_name");
                 String ln = rs.getString("last_name");
-                java.time.LocalDate dobLd = rs.getDate("DOB").toLocalDate();
+                Date dobLd = rs.getDate("DOB");
                 String bloodType = rs.getString("blood_type");
                 Boolean eligible = rs.getBoolean("eligible_to_donate");
                 String country = rs.getString("country");
@@ -117,7 +117,68 @@ public class DonationsManagerImpl implements DonationsManager {
         }
         return list;
     }
+    
+    private Donor getDonorById(int id) {
+    	try {
+    		String sql="SELECT * FROM  Donor WHERE ID = ?";
+    		PreparedStatement p=c.prepareStatement(sql);
+    		p.setInt(1,id);
+    		ResultSet rs=p.executeQuery();
+    		
+    		Donor d=null;
+    		if(rs.next()) {
+    			d= new Donor(rs.getInt("ID"),
+    					rs.getString("first_name"),
+    	                rs.getString("last_name"),
+    	                rs.getDate("DOB"),
+    	                rs.getString("blood_type"),
+    	                rs.getString("country"),
+    	                rs.getBoolean("eligible_to_donate"),
+    	                rs.getString("contact_number"),
+    	                rs.getString("emergency_contact_number")
+    	            );
+    			}
+    		rs.close();
+    		p.close();
+    		return d;
+    		}
+    	catch (SQLException e) {
+            System.out.println("Error retrieving Donor with ID " + id);
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    private BloodBank getBloodBankById(int id) {
+        try {
+            String sql = "SELECT * FROM BloodBank WHERE ID = ?";
+            PreparedStatement p = c.prepareStatement(sql);
+            p.setInt(1, id);
+            ResultSet rs = p.executeQuery();
+            BloodBank b=null;
+            if (rs.next()) {
+            
+                return new BloodBank(
+                    rs.getInt("ID"),
+                    rs.getString("name"),
+                    rs.getString("address"),
+                    rs.getString("city"),
+                    rs.getString("contactNumber"),
+                    rs.getString("personResponsible"),
+                    rs.getInt("current_stock")
+                );
+            }
+            rs.close();
+            p.close();
+            return b;
+        } catch (SQLException e) {
+        	 System.out.println("Error retrieving BloodBank with ID " + id);
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    
     @Override
     public List<Donation> searchDonation(String status) {
         List<Donation> list = new ArrayList<Donation>();
@@ -127,19 +188,26 @@ public class DonationsManagerImpl implements DonationsManager {
             p.setString(1, "%" + status + "%");
             ResultSet rs = p.executeQuery();
             while (rs.next()) {
+            	Integer id           = rs.getInt("ID");
+            	String  st           = rs.getString("status");
+                Date dateDon   = rs.getDate("date_donation");
+                Integer quantity     = rs.getInt("quantity");
+                Date expDate   = rs.getDate("expiration_date");
                 Integer bbid           = rs.getInt("bloodBank_id");
                 Integer donorid           = rs.getInt("donor_id");
-                Integer quantity     = rs.getInt("quantity");
-                String  st           = rs.getString("status");
-                java.time.LocalDate dateDon   = rs.getDate("date_donation").toLocalDate();
-                java.time.LocalDate expDate   = rs.getDate("expiration_date").toLocalDate();
-                Donation d = new Donation(donorid,st,dateDon,quantity,expDate,bbid,donorid);
+                
+                BloodBank bloodBank=getBloodBankById(bbid);
+                Donor donor=getDonorById(donorid);
+                
+                Donation d = new Donation(id,st,dateDon,quantity,expDate,bloodBank,donor);
+                            
                 list.add(d);
+                
+                /*public Donation(Integer id, String status, Date donation_date, Integer quantity, Date expiration_date,
+			BloodBank bloodbank, Donor donor)*/
             }
             
-            /*public Donation(Integer id, String status, LocalDate donation_date, Integer quantity, LocalDate expiration_date,
-			BloodBank bloodbank, Donor donor) {
-	*/
+            
             rs.close();
             p.close();
         } catch (SQLException e) {
@@ -148,6 +216,8 @@ public class DonationsManagerImpl implements DonationsManager {
         }
         return list;
     }
+    
+    /*method get id bb y get id donor.*/
 
     @Override
     public void updateDonation(Donation donation) {
@@ -155,9 +225,9 @@ public class DonationsManagerImpl implements DonationsManager {
             String sql = "UPDATE Donations SET status = ?, date_donation = ?, quantity = ?, expiration_date = ? WHERE ID = ?";
             PreparedStatement p = c.prepareStatement(sql);
             p.setString(1, donation.getStatus());
-            p.setDate(2, Date.valueOf(donation.getDonation_date()));
+            p.setDate(2, donation.getDonation_date());
             p.setInt(3, donation.getQuantity());
-            p.setDate(4, Date.valueOf(donation.getExpiration_date()));
+            p.setDate(4,donation.getExpiration_date());
             p.setInt(5, donation.getId());
             p.executeUpdate();
             p.close();

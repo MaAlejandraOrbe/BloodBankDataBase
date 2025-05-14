@@ -1,7 +1,7 @@
 package bloodbank.ifaces;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import bloodbank.db.pojos.*;

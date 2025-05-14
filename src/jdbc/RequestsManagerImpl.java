@@ -74,7 +74,7 @@ public class RequestsManagerImpl implements RequestsManager {
 		PreparedStatement p=c.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 		p.setString(1, recipient.getFirst_name());
 		p.setString(2, recipient.getLast_name());
-		p.setDate(3,Date.valueOf(recipient.getDOB()));
+		p.setDate(3,recipient.getDOB());
 		p.setString(4, recipient.getBlood_type());
 		p.setString(5,recipient.getCountry());
 		p.setString(6, recipient.getContact_number());
