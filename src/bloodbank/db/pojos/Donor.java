@@ -1,5 +1,6 @@
 package bloodbank.db.pojos;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.List;
 import java.util.ArrayList;
@@ -11,12 +12,14 @@ public class Donor implements Serializable {
 	
 	private static final long serialVersionUID =1L;
 	private Integer id;
-	private String name;
-	private String address;
-	private String city;
+	private String first_name;
+	private String last_name;
+	private LocalDate DOB;
+	private String blood_type;
+	private String country;
+	private Boolean eligible_donate;
 	private Integer contact_number;
-	private String person_responsible;
-	private Integer capacity_stock;
+	private Integer emergency_contact_number;
 	private List<Donation> donations;
 	
 	
@@ -26,18 +29,22 @@ public class Donor implements Serializable {
 	}
 	
 	
-	public Donor(Integer id, String name, String address, String city, Integer contact_number, String person_responsible, Integer capacity_stock) {
+	public Donor(Integer id, String first_name, String last_name, LocalDate dOB, String blood_type, String country,
+			Boolean eligible_donate, Integer contact_number, Integer emergency_contact_number) {
 		super();
-		this.id=id;
-		this.name=name;
-		this.address=address;
-		this.city=city;
-		this.contact_number=contact_number;
-		this.person_responsible=person_responsible;
-		this.capacity_stock=capacity_stock;
+		this.id = id;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		DOB = dOB;
+		this.blood_type = blood_type;
+		this.country = country;
+		this.eligible_donate = eligible_donate;
+		this.contact_number = contact_number;
+		this.emergency_contact_number = emergency_contact_number;
 		this.donations=new ArrayList<Donation>();
 	}
 
+	
 
 	public Integer getId() {
 		return id;
@@ -49,33 +56,63 @@ public class Donor implements Serializable {
 	}
 
 
-	public String getName() {
-		return name;
+	public String getFirst_name() {
+		return first_name;
 	}
 
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
 	}
 
 
-	public String getAddress() {
-		return address;
+	public String getLast_name() {
+		return last_name;
 	}
 
 
-	public void setAddress(String adress) {
-		this.address = address;
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
 	}
 
 
-	public String getCity() {
-		return city;
+	public LocalDate getDOB() {
+		return DOB;
 	}
 
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setDOB(LocalDate dOB) {
+		DOB = dOB;
+	}
+
+
+	public String getBlood_type() {
+		return blood_type;
+	}
+
+
+	public void setBlood_type(String blood_type) {
+		this.blood_type = blood_type;
+	}
+
+
+	public String getCountry() {
+		return country;
+	}
+
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+
+	public Boolean getEligible_donate() {
+		return eligible_donate;
+	}
+
+
+	public void setEligible_donate(Boolean eligible_donate) {
+		this.eligible_donate = eligible_donate;
 	}
 
 
@@ -89,26 +126,16 @@ public class Donor implements Serializable {
 	}
 
 
-	public String getPerson_responsible() {
-		return person_responsible;
+	public Integer getEmergency_contact_number() {
+		return emergency_contact_number;
 	}
 
 
-	public void setPerson_responsible(String person_responsible) {
-		this.person_responsible = person_responsible;
+	public void setEmergency_contact_number(Integer emergency_contact_number) {
+		this.emergency_contact_number = emergency_contact_number;
 	}
 
 
-	public Integer getCapacity_stock() {
-		return capacity_stock;
-	}
-
-
-	public void setCapacity_stock(Integer capacity_stock) {
-		this.capacity_stock = capacity_stock;
-	}
-	
-	
 	public List<Donation> getDonations() {
 		return donations;
 	}
@@ -118,7 +145,11 @@ public class Donor implements Serializable {
 		this.donations = donations;
 	}
 
-	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -141,12 +172,13 @@ public class Donor implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Donor [id=" + id + ", name=" + name + ", adress=" + address + ", city=" + city + ", contact_number="
-				+ contact_number + ", person_responsible=" + person_responsible + ", capacity_stock=" + capacity_stock
-				+ "]";
+		return "Donor [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", DOB=" + DOB
+				+ ", blood_type=" + blood_type + ", country=" + country + ", eligible_donate=" + eligible_donate
+				+ ", contact_number=" + contact_number + ", emergency_contact_number=" + emergency_contact_number
+				+ ", donations=" + donations + "]";
 	}
 	
 	
-	
+
 
 }
