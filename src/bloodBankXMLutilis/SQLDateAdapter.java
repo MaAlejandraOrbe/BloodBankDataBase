@@ -1,23 +1,24 @@
-/*package bloodBankXMLutilis;
+package bloodBankXMLutilis;
 
-import java.sql.Date;
-import java.time.Date;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-javax.xml.bind.annotation.adapters.XmlAdapter
+import java.sql.Date;
 
-public class SQLDateAdapter extends XmlAdapter<String,Date> {
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-private DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy-MM-dd");
+public class SQLDateAdapter extends XmlAdapter<String, Date> {
 	
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 	@Override
-	public String marshal(Date sqlDate)throws Exception{
-		return sqlDate.toDate().format(formatter);
+	public String marshal(Date sqlDate) throws Exception {
+		return sqlDate.toLocalDate().format(formatter);
 	}
-	
+
 	@Override
-	public Date unmarshal(String string)throws Exception{
-		Date Date=Date.parse(string,formatter);
-		return Date.valueOf(Date);
+	public Date unmarshal(String string) throws Exception {
+		LocalDate localDate = LocalDate.parse(string, formatter);
+		return Date.valueOf(localDate);
 	}
+
 }
-*/

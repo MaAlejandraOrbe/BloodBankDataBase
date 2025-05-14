@@ -12,8 +12,10 @@ public class Donation implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String status;
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date donation_date; //Date fecha = Date.of(1995, 4, 10); (ano, mes, dia)
 	private Integer quantity;
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date expiration_date;
 	private BloodBank bloodbank;
 	private Donor donor;

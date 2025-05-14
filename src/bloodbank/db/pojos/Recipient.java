@@ -11,6 +11,7 @@ public class Recipient implements Serializable{
 	private Integer id;
 	private String first_name;
 	private String last_name;
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date DOB;
 	private String blood_type;
 	private String country;
