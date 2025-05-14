@@ -1,8 +1,12 @@
 package bloodbank.db.pojos;
 
 import java.io.Serializable;
-import java.time.Date;
+import java.sql.Date;
 import java.util.Objects;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import bloodBankXMLutilis.SQLDateAdapter;
 
 public class Donation implements Serializable {
 
