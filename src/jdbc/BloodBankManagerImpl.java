@@ -41,10 +41,7 @@ public class BloodBankManagerImpl implements BloodBankManager {
         }
     }
 
-    @Override
-    public void linkDonation(BloodBank bloodbank, Donation donation) {
-        
-    }
+
 
     @Override
     //TODO hay un error que no entiendo
@@ -92,7 +89,4 @@ public class BloodBankManagerImpl implements BloodBankManager {
         return list;
     }
 
-    @Override
-    public void linkBloodRequest(BloodBank bloodbank, BloodRequest bloodrequest) {
-        
-    }}
+    
