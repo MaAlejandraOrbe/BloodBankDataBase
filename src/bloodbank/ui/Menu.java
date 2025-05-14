@@ -3,7 +3,7 @@ package bloodbank.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import java.time.format.DateTimeFormatter;
 
 import bloodbank.db.pojos.*;
 import bloodbank.ifaces.*;
@@ -11,47 +11,63 @@ import jdbc.*;
 
 public class Menu {
 	
-	private static BloodBankManager bbManager;
-	private static BufferedReader reader;
+	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
+	private static BloodBankManager bbManager;
+	private static DonationsManager donationsManager;
+	private static RequestsManager requestsManager;
+	
+	//TODO una linea de JPA
+	
+	//TODO private static XMLManager xmlManager = new XMLManagerImpl();
 
 	public static void main(String[] args) throws IOException {
 		
-		//bbManager = new BloodBankManagerImpl();
-		reader=new BufferedReader(new InputStreamReader(System.in));
-		
-		System.out.println("Welcome to the Bloodbank Management Solution");
-		System.out.println("Please choose the option you want by typing its number");
-		System.out.println("1. Create a new Bloodbank");
-		System.out.println("2. Search for a Bloodbank ");
-		System.out.println("3. Modify a Bloodbank");
-		System.out.println("0. Exit ");
-		int choice = Integer.parseInt(reader.readLine());
-		
-		switch(choice) {
-		case 1: {
-			//create a bloodbank
-			createBloodBank();
-			break;
-		}
-		case 2:{
-			//search for a bloodbank
-			searchBloodBank();
-			break;
-		}
-		case 3:{
-			//modify a bloodbank
-			modifyBloodBank();
-			break;
-		}
-		case 0:{
-			return;
-		}
-		
-	}
+		ConnectionManager connectionManager = new ConnectionManager();
+		bbManager = new BloodBankManagerImpl(connectionManager.getConnection());
+		donationsManager = new DonationsManagerImpl(connectionManager.getConnection());
+		requestsManager = new RequestsManagerImpl(connectionManager.getConnection());
+		//algo de JPA
 	
-	}
-	
+		while(true) {
+			try {
+				System.out.println("Welcome to the Bloodbank Management Solution"); //TODO cambiar nombre
+				System.out.println("Choose an option please:");
+				System.out.println("1. Create a new Bloodbank");
+				System.out.println("2. Search for a Bloodbank ");
+				System.out.println("3. Modify a Bloodbank");
+				System.out.println("0. Exit ");
+				int choice = Integer.parseInt(reader.readLine());
+				
+				switch(choice) {
+				case 1: {
+					//create a bloodbank
+					createBloodBank();
+					break;
+				}
+				case 2:{
+					//search for a bloodbank
+					searchBloodBank();
+					break;
+				}
+				case 3:{
+					//modify a bloodbank
+					modifyBloodBank();
+					break;
+				}
+				case 0:{
+					return;
+				}
+				
+			}
+			
+			}
+			
+			}
+		}
+		
+		
 	
 
 	private static void createBloodBank() throws IOException {
