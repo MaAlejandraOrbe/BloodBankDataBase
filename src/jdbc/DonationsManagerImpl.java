@@ -149,6 +149,39 @@ public class DonationsManagerImpl implements DonationsManager {
         return null;
     }
     
+    //!!!!! I DID THIS ONE TO USE IN MENU FOLLOWING THE EXAMPLE OD DOGSCLNIC
+    public Donor getDonorByEmail(String email) {
+    	try {
+    		String sql="SELECT * FROM  Donor WHERE email = ?";
+    		PreparedStatement p=c.prepareStatement(sql);
+    		p.setString(1,email);
+    		ResultSet rs=p.executeQuery();
+    		
+    		Donor d=null;
+    		if(rs.next()) {
+    			d= new Donor(rs.getInt("id"),
+    					rs.getString("first_name"),
+    	                rs.getString("last_name"),
+    	                rs.getDate("DOB"),
+    	                rs.getString("blood_type"),
+    	                rs.getString("country"),
+    	                rs.getBoolean("eligible_to_donate"),
+    	                rs.getString("contact_number"),
+    	                rs.getString("emergency_contact_number")
+    	            );
+    			}
+    		rs.close();
+    		p.close();
+    		return d;
+    		}
+    	catch (SQLException e) {
+            System.out.println("Error retrieving Donor with email" + email);
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
     private BloodBank getBloodBankById(int id) {
         try {
             String sql = "SELECT * FROM BloodBank WHERE ID = ?";
@@ -203,8 +236,6 @@ public class DonationsManagerImpl implements DonationsManager {
                             
                 list.add(d);
                 
-                /*public Donation(Integer id, String status, Date donation_date, Integer quantity, Date expiration_date,
-			BloodBank bloodbank, Donor donor)*/
             }
             
             

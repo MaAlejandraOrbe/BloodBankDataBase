@@ -3,12 +3,14 @@ package bloodbank.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Date;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import bloodbank.db.pojos.*;
 import bloodbank.ifaces.*;
 import jdbc.*;
+import jpa.*;
 
 public class Menu {
 	
@@ -19,6 +21,9 @@ public class Menu {
 	private static DonationsManager donationsManager;
 	private static RequestsManager requestsManager;
 	
+	private static UserManager userManager;
+	
+	
 	//TODO una linea de JPA
 	
 	//TODO private static XMLManager xmlManager = new XMLManagerImpl();
@@ -26,37 +31,42 @@ public class Menu {
 	public static void main(String[] args) throws IOException {
 		
 		ConnectionManager connectionManager = new ConnectionManager();
+		
 		bbManager = new BloodBankManagerImpl(connectionManager.getConnection());
 		donationsManager = new DonationsManagerImpl(connectionManager.getConnection());
 		requestsManager = new RequestsManagerImpl(connectionManager.getConnection());
-		//algo de JPA
+		
+		userManager=new JPAUserManager();
+		
 	
 		while (true) {
 			try {
 				System.out.println("Welcome to the BloodBank management solution");//TODO cambiar nombre
 				System.out.println("Choose an option, please:");
-				System.out.println("1. Enter as a donor");
-				System.out.println("2. Enter as a recipient");
-				System.out.println("3. Enter as a worker");
+				System.out.println("1. Register as a donor");
+				System.out.println("2. Register as a recipient");
+				//TODO: CONFIRMAR ESTO ES LOGIN
+				System.out.println("3. Enter as a worker (login)");
 				System.out.println("0. Exit");
 
 				int choice = Integer.parseInt(reader.readLine());
 
 				switch (choice) {
 				case 1: {
-					newDonor();
+					registerDonor();
 					break;
 				}
 				case 2: {
-					newRecipient();
+					registerRecipient();
 					break;
 				}
 				case 3: {
-					//();
+					//login();
 					break;
 				}
 				case 0: {
 					connectionManager.closeConnection();
+					userManager.close();
 					return;
 				}
 				}
@@ -69,32 +79,117 @@ public class Menu {
 				e.printStackTrace();
 			}
 		}
+	}
 
-		private static void newDonor() {
-			/*System.out.println("Please, input the dono data:");
-			System.out.println("Name:");
-			String name = r.readLine();
-			System.out.println("Phone:");
-			Integer phone = Integer.parseInt(r.readLine());
-			System.out.println("Email:");
-			String email = r.readLine();
-			System.out.println("Username:");
-			String username = r.readLine();
-			System.out.println("Password:");
-			String password = r.readLine();
-			Owner o = new Owner(name, phone, email);
-			ownerMan.insertOwner(o);
-			User u = new User(username, password, email);
-			userMan.register(u);
-			Role r = userMan.getRole("owner");
-			userMan.assignRole(u, r);
-			*/
-		}
-		private static void newRecipient() {
-			//TODO
+		public static void registerDonor() throws IOException {
+			System.out.println("Please, input the Donor info:");
+	        System.out.print("First name: ");
+	        String firstName = reader.readLine();
+	        System.out.print("Last name: ");
+	        String lastName = reader.readLine();
+	        
+	        System.out.print("DOB (YYYY-MM-DD): ");
+	        String dob = reader.readLine();
+	        
+	        //TODO: COMPROBAR ESTO DE DOB Y DATE, QUE SEA ASI
+	        Date dobDate=Date.valueOf(dob);
+	        
+	        System.out.print("Blood type: ");
+	        String bloodType = reader.readLine();
+	        
+	        //AQUI USO ESTO PARA QUE SEA BOOLEAN, COMO EL TIPO QUE HEMOS PUESTO EN EL POJO.
+	        System.out.print("Eligible to donate? (1 = yes, 0 = no): ");
+	        boolean eligible = reader.readLine().trim().equals("1");
+	        
+	        
+	        System.out.print("Country: ");
+	        String country = reader.readLine();
+	        System.out.print("Contact number: ");
+	        String contact = reader.readLine();
+	        System.out.print("Emergency contact number: ");
+	        String emergency = reader.readLine();
+	        
+	        
+	        //TODO: I CREATED AND OBJECT WITH ID NULL BECASE THE USER WONT PUT IT,
+	        //WHAT IS BETTER CREATE IT LIKE THAT OR SHOULD I HAVE A CONSTRUCTOR
+	        //IN DONOR WITHOUT ID?
+	        
+	        
+	        Donor donor=new Donor(null,firstName,lastName,dobDate,bloodType,country,eligible,contact,emergency);
+	        donationsManager.newDonor(donor);
+	        
+	        System.out.println("New donor registerd correctly!");
+			
 		}
 		
+		public static void registerRecipient() throws IOException {
+			System.out.println("Please, input the Recipient info:");
+            System.out.print("First name: ");
+            String firstName = reader.readLine();
+            System.out.print("Last name: ");
+            String lastName = reader.readLine();
+            System.out.print("DOB (YYYY-MM-DD): ");
+	        String dob = reader.readLine();
+	        
+	        //TODO: COMPROBAR ESTO DE DOB Y DATE, QUE SEA ASI
+	        Date dobDate=Date.valueOf(dob);
+	        
+	        System.out.print("Blood type: ");
+	        String bloodType = reader.readLine();
+	        
+	       
+	        
+            System.out.print("Country: ");
+            String country = reader.readLine();
+            System.out.print("Contact number: ");
+            String contact = reader.readLine();
+            System.out.print("Emergency contact number: ");
+            String emergency = reader.readLine();
+
+	        //TODO: I CREATED AND OBJECT WITH ID NULL BECASE THE USER WONT PUT IT,
+	        //WHAT IS BETTER CREATE IT LIKE THAT OR SHOULD I HAVE A CONSTRUCTOR
+	        //IN DONOR WITHOUT ID?
+	        
+	        Recipient recipient=new Recipient(null, firstName,lastName,dobDate,bloodType,country,contact,emergency);
+	        requestsManager.newRecipient(recipient);
+	       
+	        System.out.println("New recipient registerd correctly!");
+			
+		}
+		
+		
+		public static void login() throws IOException {
+			while(true) {
+				System.out.println("Username: ");
+				String username=reader.readLine();
+				System.out.println("Password: ");
+				String password=reader.readLine();
+				
+				User user =userManager.login(username, password);
+				if(user!=null) {
+					
+					//TODO: CONFIRM THE ROLES ARE THAT, WE HAVE DONOR AND RECIEPIENT, I THINK ANOTHER ROLE IS A BBWORKER AND A HOSPITALWORKER
+					if(user.getRole().getName().equals("donor")){
+						//TODO: I THINK IT WILL BE BBMANAGER, WHEN IN DOGCLINIC IS OWNER. CONFIRM THISSSSSS!!!!
+						// codeeee
+					}else if(user.getRole().getName().equals("recipient"));
+					//codeeee
+				}
+				else {
+					System.out.println("Wrong username/password combination.");
+				}
+
+				}
+			
+		}
 	
+		
+		
+		
+		
+	/*public static void bloodbankMenu() {
+		
+		
 		while(true) {
 			try {
 				System.out.println("Welcome to the Bloodbank Management Solution"); //TODO cambiar nombre
@@ -124,10 +219,14 @@ public class Menu {
 				
 			}
 			
-			}
 			
 			}
-		}
+			}
+	}*/
+		
+		
+	
+		
 		
 
 	//TODO ns que poner en los parentesis
