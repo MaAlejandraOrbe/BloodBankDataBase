@@ -184,7 +184,7 @@ public class Menu {
 		}
 	
 		
-		
+
 		
 		
 	/*public static void bloodbankMenu() {
@@ -266,6 +266,53 @@ public class Menu {
 		System.out.println("The bloodbank has been deleted.");
 		
 	}
+	
+	public static void donationMenu(int id) {
+		/*
+    public void newDonation(Donation Donation);
+	public List<Donation> searchDonation(String status);
+	public void updateDonation(Donation donation);
+		 * */
+		while(true) {
+		try {
+			System.out.println("What do you want to do with the donation?: ");
+			System.out.println("1. Search donation");
+			System.out.println("2. Update donation");
+				
+			//TODO: COMPROBAR QUE SEA A ESE MENU.
+			System.out.println("0.Back to BloodBank menu");
+				
+			int choice=Integer.parseInt(reader.readLine());
+			
+			switch(choice) {
+			
+			case 1:
+				//
+				
+				break;
+				
+			case 2:
+				//updateDonation(id);
+				
+				
+			case 0:
+				return;
+			}
+		
+		
+		} catch (NumberFormatException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
+
+	/*private static void updateDonation(int id) {
+		Donation d=donationsManager.getDonorById(id);
+		
+		
+	}*/
 	
 	
 }

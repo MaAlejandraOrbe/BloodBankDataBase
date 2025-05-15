@@ -118,7 +118,7 @@ public class DonationsManagerImpl implements DonationsManager {
         return list;
     }
     
-    private Donor getDonorById(int id) {
+    public Donor getDonorById(int id) {
     	try {
     		String sql="SELECT * FROM  Donor WHERE ID = ?";
     		PreparedStatement p=c.prepareStatement(sql);
@@ -248,7 +248,7 @@ public class DonationsManagerImpl implements DonationsManager {
         return list;
     }
     
-    /*method get id bb y get id donor.*/
+    
 
     @Override
     public void updateDonation(Donation donation) {
