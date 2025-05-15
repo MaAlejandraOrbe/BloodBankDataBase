@@ -8,9 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import bloodbank.db.pojos.BloodBank;
-import bloodbank.db.pojos.Donation;
-import bloodbank.db.pojos.BloodRequest;
+import bloodbank.db.pojos.*;
 import bloodbank.ifaces.BloodBankManager;
 
 public class BloodBankManagerImpl implements BloodBankManager {
@@ -31,7 +29,6 @@ public class BloodBankManagerImpl implements BloodBankManager {
             p.setString(3, bloodbank.getCity());
             p.setString(4, bloodbank.getContact_number());
             p.setString(5, bloodbank.getPerson_responsible());
-            //TODO add capacity stock to bloodbank
             p.setInt(6, bloodbank.getCapacity_stock());
             p.executeUpdate();
             p.close();
@@ -44,7 +41,6 @@ public class BloodBankManagerImpl implements BloodBankManager {
 
 
     @Override
-    //TODO hay un error que no entiendo
     public void deleteBloodBank(int id) {
         try {
             String sql = "DELETE FROM BloodBank WHERE ID = ?";
