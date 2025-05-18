@@ -17,13 +17,14 @@ public class JPAUserManager implements UserManager{
 		if(this.getRoles().isEmpty()) {
 			
 			//TODO: VERIFY THESE ARE THE ROLES WE SHOULD DO.
-			Role bloodbankManager=new Role("bloodbank manager");
-			Role donor=new Role("donor");
-			Role recipient=new Role("recipient");
+			Role bloodbankManager=new Role("bloodbankManager");
+			Role donationsManager=new Role("donationsManager");
+			Role requestsManager=new Role("requestsManager");
 			
 			this.createRole(bloodbankManager);
-			this.createRole(donor);
-			this.createRole(recipient);
+			this.createRole(donationsManager);
+			this.createRole(requestsManager);
+			
 			}
 			
 			

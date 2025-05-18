@@ -50,6 +50,20 @@ public class Donor implements Serializable {
 		this.donations=new ArrayList<Donation>();
 	}
 
+	public Donor( String first_name, String last_name, Date dOB, String blood_type, String country,
+			Boolean eligible_donate, String  contact_number, String  emergency_contact_number) {
+		super();
+		
+		this.first_name = first_name;
+		this.last_name = last_name;
+		DOB = dOB;
+		this.blood_type = blood_type;
+		this.country = country;
+		this.eligible_donate = eligible_donate;
+		this.contact_number = contact_number;
+		this.emergency_contact_number = emergency_contact_number;
+		this.donations=new ArrayList<Donation>();
+	}
 	
 
 	public Integer getId() {

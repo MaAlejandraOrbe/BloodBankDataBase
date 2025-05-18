@@ -149,38 +149,41 @@ public class DonationsManagerImpl implements DonationsManager {
         return null;
     }
     
-    //!!!!! I DID THIS ONE TO USE IN MENU FOLLOWING THE EXAMPLE OD DOGSCLNIC
-    public Donor getDonorByEmail(String email) {
+    
+   
+    
+    public Donation getDonationById(int id) {
     	try {
-    		String sql="SELECT * FROM  Donor WHERE email = ?";
+    		String sql="SELECT * FROM  Donations WHERE ID = ?";
     		PreparedStatement p=c.prepareStatement(sql);
-    		p.setString(1,email);
+    		p.setInt(1,id);
     		ResultSet rs=p.executeQuery();
     		
-    		Donor d=null;
+    		int bbid=rs.getInt("bloodBank_id");
+    		int donorid=rs.getInt("donor_id");
+    		
+    		BloodBank bloodBank=getBloodBankById(bbid);
+            Donor donor=getDonorById(donorid);
+    		
+    		Donation d=null;
     		if(rs.next()) {
-    			d= new Donor(rs.getInt("id"),
-    					rs.getString("first_name"),
-    	                rs.getString("last_name"),
-    	                rs.getDate("DOB"),
-    	                rs.getString("blood_type"),
-    	                rs.getString("country"),
-    	                rs.getBoolean("eligible_to_donate"),
-    	                rs.getString("contact_number"),
-    	                rs.getString("emergency_contact_number")
-    	            );
-    			}
+    			d= new Donation(rs.getInt("ID"),
+    					rs.getString("status"),
+    					rs.getDate("date_donation"),
+    					rs.getInt("quantity"),
+    					rs.getDate("expiration_date"),
+    					bloodBank,donor
+    					);
+    		}
     		rs.close();
     		p.close();
     		return d;
-    		}
-    	catch (SQLException e) {
-            System.out.println("Error retrieving Donor with email" + email);
+    		}catch (SQLException e) {
+            System.out.println("Error retrieving Donation with ID " + id);
             e.printStackTrace();
         }
         return null;
     }
-    
     
     private BloodBank getBloodBankById(int id) {
         try {
