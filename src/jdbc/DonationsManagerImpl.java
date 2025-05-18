@@ -13,6 +13,7 @@ import java.util.List;
 import bloodbank.db.pojos.Donor;
 import bloodbank.db.pojos.BloodBank;
 import bloodbank.db.pojos.Donation;
+import bloodbank.db.pojos.DonationsWorker;
 import bloodbank.ifaces.DonationsManager;
 
 public class DonationsManagerImpl implements DonationsManager {
@@ -22,7 +23,64 @@ public class DonationsManagerImpl implements DonationsManager {
     public DonationsManagerImpl(Connection c) {
         this.c = c;
     }
+    
+    @Override
+    public void insertDonationsWorker(DonationsWorker donationsWorker) {
+    	try {
+			Statement s = c.createStatement();
+			String sql = "INSERT INTO owners (name, phone, email) VALUES ('" + donationsWorker.getName() + "', "
+					+ donationsWorker.getPhone() + ", '" + donationsWorker.getEmail() + "')";
+			s.executeUpdate(sql);
+			s.close();
+		} catch (SQLException e) {
+			System.out.println("Database exception.");
+			e.printStackTrace();
+		}
+    }
+    
+    public DonationsWorker getDonationsWorkerByEmail(String email) {
+    	try {
+			String sql = "SELECT * FROM owners WHERE email = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setString(1, email);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			Integer id = rs.getInt("id");
+			String name = rs.getString("name");
+			Integer phone = rs.getInt("phone");
+			DonationsWorker dw = new DonationsWorker(id, name, phone, email);
+			rs.close();
+			p.close();
+			return dw;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
+    }
+    
+    public DonationsWorker getDonationsWorker(int id) {
+    	try {
+			String sql = "SELECT * FROM donationsWorker WHERE id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			String name = rs.getString("name");
+			Integer phone = rs.getInt("phone");
+			String email = rs.getString("email");
+			DonationsWorker dw = new DonationsWorker(id, name, phone, email);
+			rs.close();
+			p.close();
+			return dw;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
+    }
 
+    
     public void newDonation(Donation donation) {
         try {
             String sql = "INSERT INTO Donations (donor_id, bloodBank_id, status, date_donation, quantity, expiration_date) " +
@@ -251,7 +309,27 @@ public class DonationsManagerImpl implements DonationsManager {
         return list;
     }
     
-    
+    @Override
+    public void updateDonor(Donor donor) {
+        String sql = "UPDATE donors SET first_name = ?, last_name = ?, dob = ?, blood_type = ?, country = ?, " +
+                     "eligible_to_donate = ?, contact_number = ?, emergency_contact_number = ? WHERE id = ?";
+        try (PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, donor.getFirst_name());
+            ps.setString(2, donor.getLast_name());
+            ps.setDate(3, donor.getDOB());
+            ps.setString(4, donor.getBlood_type());
+            ps.setString(5, donor.getCountry());
+            ps.setBoolean(6, donor.getEligible_donate());
+            ps.setString(7, donor.getContact_number());
+            ps.setString(8, donor.getEmergency_contact_number());
+            ps.setInt(9, donor.getId());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error updating donor.");
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void updateDonation(Donation donation) {
