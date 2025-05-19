@@ -4,6 +4,9 @@ import bloodbank.db.pojos.*;
 
 public interface RequestsManager {
 	
+	public void insertRequestsWorker(RequestsWorker requestsWorker);
+	public RequestsWorker getRequestsWorkerByEmail(String email);
+	public RequestsWorker getRequestsWorker(int id);
 	
 	public void fullfillBloodRequest(BloodRequest bloodRequest);
 	public void newBloodRequest(BloodRequest bloodRequest);

@@ -23,7 +23,6 @@ public class RequestsManagerImpl implements RequestsManager {
 	    }
 	    
 	
-	    @Override
 	    public void insertRequestsWorker(RequestsWorker requestsWorker) {
 	    	try {
 	    		Statement s=c.createStatement();
@@ -38,7 +37,7 @@ public class RequestsManagerImpl implements RequestsManager {
 	    }
 	    
 	    
-	    public RequestsWorker getWorkerByEmail(String email) {
+	    public RequestsWorker getRequestsWorkerByEmail(String email) {
 	    	try {
 				String sql = "SELECT * FROM owners WHERE email = ?";
 				PreparedStatement p = c.prepareStatement(sql);
