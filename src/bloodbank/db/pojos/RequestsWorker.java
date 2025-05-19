@@ -43,7 +43,7 @@ private static final long serialVersionUID= -1238696454242523L;
 	}
 
 
-	public RequestsWorker(String name, Integer phone, String email, List<BloodRequest> bloodRequests) {
+	public RequestsWorker(String name, Integer phone, String email) {
 		super();
 		this.name = name;
 		this.phone = phone;

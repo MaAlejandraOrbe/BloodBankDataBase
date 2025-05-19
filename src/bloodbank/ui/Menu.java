@@ -174,7 +174,30 @@ public class Menu {
 			userManager.assignRole(u, r);
 			
 		}
-
+		
+		private static void registerRequestsWorker() throws IOException {
+			System.out.println("Please, input the donations worker data: ");
+			System.out.println("Name: ");
+			String name=reader.readLine();
+			System.out.println("Phone: ");
+			Integer phone=Integer.parseInt(reader.readLine());
+			System.out.println("Email: ");
+			String email=reader.readLine();
+			System.out.println("Username: ");
+			String username=reader.readLine();
+			System.out.println("Password: ");
+			String password=reader.readLine();
+			
+			RequestsWorker rW=new RequestsWorker(name,phone,email);
+			//requestsManager
+			/*DonationsWorker dW=new DonationsWorker(name,phone,email);
+			donationsManager.insertDonationsWorker(dW);
+			User u=new User(username,password,email);
+			userManager.register(u);
+			Role r=userManager.getRole("donationsWorker");
+			userManager.assignRole(u, r);*/
+			
+		}
 		
 
 		private static void donationsWorkerMenu(String email) throws NumberFormatException, IOException {
