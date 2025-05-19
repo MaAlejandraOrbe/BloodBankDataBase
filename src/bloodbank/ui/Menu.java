@@ -97,7 +97,7 @@ public class Menu {
 					donationsWorkerMenu(user.getEmail());
 					
 				}else if(user.getRole().getName().equals("requestsWorker")) {
-					//requestsWorkerrMenu(user.getEmail());
+					requestsWorkerMenu(user.getEmail());
 				
 			}
 			else {
@@ -126,17 +126,12 @@ public class Menu {
 					int hospChoice=Integer.parseInt(reader.readLine());
 					switch(hospChoice) {
 					case 1: {
-						
 						registerDonationsWorker();
-						break;
-						
-						
+						break;	
 					}
 					
 					case 2:{
-						
-						//registerRequestsmanager();
-						
+						registerRequestsWorker();
 						break;}
 					case 3:{
 						//
@@ -189,13 +184,12 @@ public class Menu {
 			String password=reader.readLine();
 			
 			RequestsWorker rW=new RequestsWorker(name,phone,email);
-			//requestsManager
-			/*DonationsWorker dW=new DonationsWorker(name,phone,email);
-			donationsManager.insertDonationsWorker(dW);
+			requestsManager.insertRequestsWorker(rW);
 			User u=new User(username,password,email);
 			userManager.register(u);
-			Role r=userManager.getRole("donationsWorker");
-			userManager.assignRole(u, r);*/
+			Role r=userManager.getRole("requestsWorker");
+			userManager.assignRole(u, r);
+			
 			
 		}
 		
@@ -443,7 +437,65 @@ public class Menu {
 		
 
 		
-		
+		private static void requestsWorkerMenu(String email) {
+			
+			RequestsWorker  rW=requestsManager.getRequestsWorkerByEmail(email);
+			
+			while(true) {
+				
+			try {
+				System.out.println("Welcome Requests Worker, choose what do you want to do");
+				System.out.println("1.Create blood request");
+				System.out.println("2.Create recipient");
+				System.out.println("3.Create hospital");
+				System.out.println("4.Delete recipient");
+				System.out.println("5.Delete hospital");
+				System.out.println("6.Search blood request");
+				System.out.println("7.Search hospital");
+				System.out.println("8.Search recipient");
+				System.out.println("9.Fulfill requests ");
+				System.out.println("10.Update blood request");
+				System.out.println("0.Back to main menu");
+				int choice=Integer.parseInt(reader.readLine());
+			
+			
+			switch(choice) {
+			case 1:
+				
+				break;
+			case 2: 
+				
+				break;
+			case 3:
+				
+				
+				break;
+			case 4:
+				
+				break;
+			case 5:
+				
+			case 6:
+				
+				break;
+			case 0:
+				return;
+			
+			
+			}
+			
+		}
+			catch (NumberFormatException e) {
+				System.out.println("You didn't type a number!");
+				e.printStackTrace();
+			} catch (IOException e) {
+				System.out.println("I/O Exception.");
+				e.printStackTrace();
+			}
+		}
+			
+			
+		}
 		
 		
 		
