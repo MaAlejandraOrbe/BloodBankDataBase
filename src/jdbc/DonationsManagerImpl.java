@@ -38,6 +38,8 @@ public class DonationsManagerImpl implements DonationsManager {
 		}
     }
     
+    
+    
     public DonationsWorker getDonationsWorkerByEmail(String email) {
     	try {
 			String sql = "SELECT * FROM owners WHERE email = ?";
