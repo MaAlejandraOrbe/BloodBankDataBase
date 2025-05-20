@@ -59,7 +59,7 @@ public class Menu {
 					break;
 				}
 				case 3: {
-					//login();
+					login();
 					break;
 				}
 				case 0: {
@@ -90,7 +90,7 @@ public class Menu {
 			if(user!=null) {
 				
 				if(user.getRole().getName().equals("bloodbankManager")){
-					//bloodBankManagerMenu(user.getEmail());
+					//bloodBankWorkerMenu(user.getEmail());
 					
 				}else if(user.getRole().getName().equals("donationsWorker")) {
 					donationsWorkerMenu(user.getEmail());
@@ -117,10 +117,7 @@ public class Menu {
 					System.out.println("Choose an option, please: ");
 					System.out.println("1. Register as donations worker.");
 					System.out.println("2. Register as requests worker.");
-					System.out.println("3. Login.");
-					//TODO:  I THINK HERE OF THEY DONT CHOOSE 1-3 IT SHOULD BE GO BACK
-					//TO THE FIRST MENU
-					System.out.println("0. Exit.");
+					System.out.println("0. Back to main menu");
 					
 					int hospChoice=Integer.parseInt(reader.readLine());
 					switch(hospChoice) {
@@ -132,12 +129,10 @@ public class Menu {
 					case 2:{
 						registerRequestsWorker();
 						break;}
-					case 3:{
-						//
-					}
 					case 0:{
-						//
-					}	
+						return;
+					}
+						
 			}
 		}catch(NumberFormatException e) {
 			System.out.println("You did not choose an option!");
@@ -460,23 +455,35 @@ public class Menu {
 			
 			switch(choice) {
 			case 1:
-				
+				createBloodRequest(rW.getId());
 				break;
 			case 2: 
-				
+				createRecipient(rW.getId());
 				break;
 			case 3:
-				
-				
+				createHospital(rW.getId());
 				break;
 			case 4:
-				
+				//deleteRecipient(rW.getId());
 				break;
 			case 5:
-				
-			case 6:
-				
+				//deleteHospital(rW.getId());
 				break;
+			case 6:
+				//searchBloodRequest();
+				break;
+			case 7:
+				//searchHospital();
+				break;
+			case 8:
+				//searchRecipient();
+				break;
+			case 9:
+				//TODO: CONFIRMAR TIPO
+				//fullfillRequests();
+				
+			case 10:
+				//updateBloodRequest(rW.getId());
 			case 0:
 				return;
 			
@@ -495,142 +502,37 @@ public class Menu {
 			
 			
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 
-		
-		
-		public static void registerRecipient() throws IOException {
-			System.out.println("Please, input the Recipient info:");
-            System.out.print("First name: ");
-            String firstName = reader.readLine();
-            System.out.print("Last name: ");
-            String lastName = reader.readLine();
-            System.out.print("DOB (YYYY-MM-DD): ");
-	        String dob = reader.readLine();
-	        
-	        //TODO: COMPROBAR ESTO DE DOB Y DATE, QUE SEA ASI
-	        Date dobDate=Date.valueOf(dob);
-	        
-	        System.out.print("Blood type: ");
-	        String bloodType = reader.readLine();
-	        
-	       
-	        
-            System.out.print("Country: ");
-            String country = reader.readLine();
-            System.out.print("Contact number: ");
-            String contact = reader.readLine();
-            System.out.print("Emergency contact number: ");
-            String emergency = reader.readLine();
-
-	        //TODO: I CREATED AND OBJECT WITH ID NULL BECASE THE USER WONT PUT IT,
-	        //WHAT IS BETTER CREATE IT LIKE THAT OR SHOULD I HAVE A CONSTRUCTOR
-	        //IN DONOR WITHOUT ID?
-	        
-	        Recipient recipient=new Recipient(null, firstName,lastName,dobDate,bloodType,country,contact,emergency);
-	        requestsManager.newRecipient(recipient);
-	       
-	        System.out.println("New recipient registerd correctly!");
+		private static void createBloodRequest(int id) {
+			// TODO Auto-generated method stub
 			
 		}
-		
-		
-	
-		
 
-		
-		
-	/*public static void bloodbankMenu() {
-		
-		
-		while(true) {
-			try {
-				System.out.println("Welcome to the Bloodbank Management Solution"); //TODO cambiar nombre
-				System.out.println("Choose an option please:");
-				System.out.println("1. Create a new Bloodbank");
-				System.out.println("2. Search for a Bloodbank ");
-				System.out.println("3. Modify a Bloodbank");
-				System.out.println("0. Exit ");
-				int choice = Integer.parseInt(reader.readLine());
-				
-				switch(choice) {
-				case 1: {
-					createBloodBank();
-					break;
-				}
-				case 2:{
-					searchBloodBank();
-					break;
-				}
-				case 3:{
-					deleteBloodBank();
-					break;
-				}
-				case 0:{
-					return;
-				}
-				
-			}
+		private static void createRecipient(int id) {
+			// TODO Auto-generated method stub
 			
+		}
+
+		private static void createHospital(int id) {
+			// TODO Auto-generated method stub
 			
-			}
-			}
-	}*/
+		}
+
 		
 		
-	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 
-	//TODO ns que poner en los parentesis
-	private static void createBloodBank() throws IOException {
-		System.out.println("Please input the bloodbank's data:");
-		System.out.println("Name:");
-		String name = reader.readLine();
-		System.out.println("Address:");
-		String address = reader.readLine();
-		System.out.println("City:");
-		String city = reader.readLine();
-		System.out.println("Contact number:");
-		String contact_number = reader.readLine();
-		
-		BloodBank bloodbank = new BloodBank(name, address, city, contact_number);
-		
-		bbManager.newBloodBank(bloodbank);
-		
-	}
-
-	//TODO ns si esta bien
-	private static void searchBloodBank(String name, String city) throws IOException {
-		System.out.println("Input the name and city of the bloodbank you want to search for:");
-		//TODO entender su codigo. List<BloodBank> listbloodbank = bbManager.searchBloodBank(name, city);
-		System.out.println("Name:");
-		name = reader.readLine();
-		System.out.println("City:");
-		city = reader.readLine();
-		
-		bbManager.searchBloodBank(name, city);
 		
 		
-	}
-	
-	private static void deleteBloodBank(int id) {
-		bbManager.deleteBloodBank(id);
-		System.out.println("The bloodbank has been deleted.");
-		
-	}
-	
-	
 }

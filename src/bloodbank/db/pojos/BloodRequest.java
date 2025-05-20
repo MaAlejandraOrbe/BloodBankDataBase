@@ -1,5 +1,6 @@
 package bloodbank.db.pojos;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class BloodRequest implements Serializable{
@@ -25,6 +26,22 @@ public class BloodRequest implements Serializable{
 		this.id=id;
 		this.quantity_order=quantity_order;
 		this.status=status;
+	}
+	
+	
+
+	
+	
+
+	public BloodRequest(Integer quantity_order, String status, BloodBank bloodBank, Recipient recipient,
+			Donation donation) {
+		super();
+		this.quantity_order = quantity_order;
+		this.status = status;
+		this.bloodBank = bloodBank;
+		this.recipient = recipient;
+		
+		
 	}
 
 	public Integer getId() {
