@@ -122,14 +122,14 @@ public class ConnectionManager {
             s.executeUpdate(table7);
             
             //donationsWorkers table
-            String table8 ="CREATE TABLE donationsWorkers("+
+            /*String table8 ="CREATE TABLE donationsWorkers("+
                     "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
  				   "name TEXT NOT NULL,"+
                     "phone INTEGER,"+
  				   "email TEXT NOT NULL)";
  		
  		s.executeUpdate(table8);
-
+*/
             s.close();
         } catch (SQLException e) {
             // If tables already exist, just ignore
