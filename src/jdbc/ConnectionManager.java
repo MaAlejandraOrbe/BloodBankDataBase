@@ -120,6 +120,15 @@ public class ConnectionManager {
               + " FOREIGN KEY (donation_id) REFERENCES Donations(ID) ON DELETE SET NULL"
               + ")";
             s.executeUpdate(table7);
+            
+            //donationsWorkers table
+            String table8 ="CREATE TABLE donationsWorkers("+
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+ 				   "name TEXT NOT NULL,"+
+                    "phone INTEGER,"+
+ 				   "email TEXT NOT NULL)";
+ 		
+ 		s.executeUpdate(table8);
 
             s.close();
         } catch (SQLException e) {

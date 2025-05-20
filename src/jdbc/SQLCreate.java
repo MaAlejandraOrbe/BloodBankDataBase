@@ -118,8 +118,22 @@ public class SQLCreate {
 			stmt7.executeUpdate(sql7);
 			stmt7.close();
 			
+			
+			/*
+			Statement stmt8=c.createStatement(); 
+			String sql8="CREATE TABLE donationsWorkers("+
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+ 				   "name TEXT NOT NULL,"+
+                    "phone INTEGER,"+
+ 				   "email TEXT NOT NULL)";
+ 		
+ 		stmt8.executeUpdate(sql8);
+ 		stmt8.close(); */
+			
 			c.close();
 			System.out.println("Database connection closed");
+			
+			
 			
 
 		}catch (Exception e) {
