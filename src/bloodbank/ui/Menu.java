@@ -55,8 +55,7 @@ public class Menu {
 					break;
 				}
 				case 2: {
-					//TODO: IF THEY CHOOSE NUMBER 2, THEN THEY WILL HAVE
-					//OTHER MENU TO CHOOSE RECIPIENT MANAGER OR DONATION MANAGER
+					hospitalWorkerMenu();
 					break;
 				}
 				case 3: {
