@@ -6,6 +6,7 @@ import bloodbank.ifaces.UserManager;
 import bloodbank.db.pojos.*;
 
 public class JPAUserManager implements UserManager{
+	
 	EntityManager em;
 	
 	public JPAUserManager() {
