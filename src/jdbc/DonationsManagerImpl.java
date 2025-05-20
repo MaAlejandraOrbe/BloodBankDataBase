@@ -22,7 +22,7 @@ public class DonationsManagerImpl implements DonationsManager {
     private Connection c;
     
     //bloodbank_database.db
-    String dbName="bloodbank_database.db";
+    //String dbName="bloodbank_database.db";
 
     public DonationsManagerImpl(Connection c) {
         this.c = c;

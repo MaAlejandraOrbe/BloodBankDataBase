@@ -130,6 +130,18 @@ public class ConnectionManager {
  		
  		s.executeUpdate(table8);
 */
+            /*
+        	
+			String dw = "CREATE TABLE donationsWorkers (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
+					+ " phone INTEGER," + " email TEXT NOT NULL)";
+			s.executeUpdate(dw);
+			String rw = "CREATE TABLE requestsWorkers (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
+					+ " dob DATE NOT NULL," + " breed TEXT," + " ownerId INTEGER REFERENCES owners(id))";
+			s.executeUpdate(rw);
+			String bbw = "CREATE TABLE bloodbankWorkers (id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL,"
+					+ " phone INTEGER," + " email TEXT NOT NULL," + " speciality TEXT)";
+			s.executeUpdate(bbw); */
+			
             s.close();
         } catch (SQLException e) {
             // If tables already exist, just ignore
