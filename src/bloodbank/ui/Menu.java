@@ -235,6 +235,7 @@ public static void main(String[] args) throws IOException {
 					switch(hospChoice) {
 					case 1: {
 						registerDonationsWorker();
+						
 						break;	
 					}
 					
@@ -273,6 +274,8 @@ public static void main(String[] args) throws IOException {
 			userManager.register(u);
 			Role r=userManager.getRole("donationsWorker");
 			userManager.assignRole(u, r);
+			
+			donationsWorkerMenu( email);
 			
 		}
 		

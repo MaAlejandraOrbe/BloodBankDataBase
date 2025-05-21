@@ -61,7 +61,7 @@ public class DonationsManagerImpl implements DonationsManager {
     public void insertDonationsWorker(DonationsWorker donationsWorker) {
     	try {
 			Statement s = c.createStatement();
-			String sql = "INSERT INTO donationsWorkers (name, phone, email) VALUES ('" + donationsWorker.getName() + "', "
+			String sql = "INSERT INTO donationsWorker (name, phone, email) VALUES ('" + donationsWorker.getName() + "', "
 					+ donationsWorker.getPhone() + ", '" + donationsWorker.getEmail() + "')";
 			s.executeUpdate(sql);
 			s.close();
@@ -75,7 +75,7 @@ public class DonationsManagerImpl implements DonationsManager {
     
     public DonationsWorker getDonationsWorkerByEmail(String email) {
     	try {
-			String sql = "SELECT * FROM donationsWorkers WHERE email = ?";
+			String sql = "SELECT * FROM donationsWorker WHERE email = ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, email);
 			ResultSet rs = p.executeQuery();
@@ -96,7 +96,7 @@ public class DonationsManagerImpl implements DonationsManager {
     
     public DonationsWorker getDonationsWorker(int id) {
     	try {
-			String sql = "SELECT * FROM donationsWorkers WHERE id = ?";
+			String sql = "SELECT * FROM donationsWorker WHERE id = ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
