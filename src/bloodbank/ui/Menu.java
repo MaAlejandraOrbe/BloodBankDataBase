@@ -585,17 +585,17 @@ public static void main(String[] args) throws IOException {
 				//deleteHospital(rW.getId());
 				break;
 			case 6:
-				//searchBloodRequest();
+				//searchBloodRequest(rW.getId());
 				break;
 			case 7:
-				//searchHospital();
+				//searchHospital(rW.getId());
 				break;
 			case 8:
-				//searchRecipient();
+				//searchRecipient(rW.getId());
 				break;
 			case 9:
 				//TODO: CONFIRMAR TIPO
-				//fullfillRequests();
+				//fullfillRequests(rW.getId());
 				
 			case 10:
 				//updateBloodRequest(rW.getId());
