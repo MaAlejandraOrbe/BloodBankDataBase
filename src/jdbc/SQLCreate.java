@@ -109,7 +109,7 @@ public class SQLCreate {
 			stmt7.close();
 
 			Statement stmt8 = c.createStatement();
-			String sql8 = "CREATE TABLE IF NOT EXISTS donationsWorkers ("
+			String sql8 = "CREATE TABLE IF NOT EXISTS donationsWorker ("
 			           + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
 			           + "name TEXT NOT NULL, "
 			           + "phone INTEGER, "
@@ -117,6 +117,29 @@ public class SQLCreate {
 			           + ");";
 			stmt8.executeUpdate(sql8);
 			stmt8.close();
+			
+
+//			Statement stmt9 = c.createStatement();
+//			String sql9 = "CREATE TABLE IF NOT EXISTS requestsWorker ("
+//			           + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+//			           + "name TEXT NOT NULL, "
+//			           + "phone INTEGER, "
+//			           + "email TEXT NOT NULL"
+//			           + ");";
+//			stmt9.executeUpdate(sql9);
+//			stmt9.close();
+//			
+//			Statement stmt10 = c.createStatement();
+//			String sql10 = "CREATE TABLE IF NOT EXISTS bloodbankWorker ("
+//			           + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+//			           + "name TEXT NOT NULL, "
+//			           + "phone INTEGER, "
+//			           + "email TEXT NOT NULL"
+//			           + ");";
+//			stmt10.executeUpdate(sql10);
+//			stmt10.close();
+
+
 
 			c.close();
 			System.out.println("Database connection closed");
