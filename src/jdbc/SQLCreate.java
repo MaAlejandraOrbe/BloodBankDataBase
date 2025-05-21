@@ -8,14 +8,13 @@ public class SQLCreate {
 	
 	public static void main(String args[]) {
 		try {
-			
 			Class.forName("org.sqlite.JDBC");
 			Connection c = DriverManager.getConnection("jdbc:sqlite:bloodbank_database.db");
 			c.createStatement().execute("PRAGMA foreign_keys = ON");
 			System.out.println("Database connection opened");
-			
+
 			Statement stmt1 = c.createStatement();
-			String sql1 = "CREATE TABLE BloodBank ("
+			String sql1 = "CREATE TABLE IF NOT EXISTS BloodBank ("
 			           + "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
 			           + "name TEXT NOT NULL, "
 			           + "address TEXT NOT NULL, "
@@ -24,13 +23,11 @@ public class SQLCreate {
 			           + "person_responsible TEXT, "
 			           + "capacity_stock INTEGER NOT NULL"
 			           + ");";
-			
 			stmt1.executeUpdate(sql1);
 			stmt1.close();
-			
-			
+
 			Statement stmt2 = c.createStatement();
-			String sql2 = "CREATE TABLE Donor ("
+			String sql2 = "CREATE TABLE IF NOT EXISTS Donor ("
 			           + "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
 			           + "first_name TEXT NOT NULL, "
 			           + "last_name TEXT NOT NULL, "
@@ -41,12 +38,11 @@ public class SQLCreate {
 			           + "contact_number TEXT NOT NULL, "
 			           + "emergency_contact_number TEXT NOT NULL"
 			           + ");";
-
 			stmt2.executeUpdate(sql2);
 			stmt2.close();
-			
+
 			Statement stmt3 = c.createStatement();
-			String sql3 = "CREATE TABLE Donations ("
+			String sql3 = "CREATE TABLE IF NOT EXISTS Donations ("
 			           + "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
 			           + "donor_id INTEGER NOT NULL, "
 			           + "bloodBank_id INTEGER NOT NULL, "
@@ -57,12 +53,11 @@ public class SQLCreate {
 			           + "FOREIGN KEY (donor_id) REFERENCES Donor(ID) ON DELETE CASCADE, "
 			           + "FOREIGN KEY (bloodBank_id) REFERENCES BloodBank(ID) ON DELETE CASCADE"
 			           + ");";
-			
 			stmt3.executeUpdate(sql3);
 			stmt3.close();
-			
+
 			Statement stmt4 = c.createStatement();
-			String sql4 = "CREATE TABLE Recipient ("
+			String sql4 = "CREATE TABLE IF NOT EXISTS Recipient ("
 			           + "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
 			           + "first_name TEXT NOT NULL, "
 			           + "last_name TEXT NOT NULL, "
@@ -70,15 +65,13 @@ public class SQLCreate {
 			           + "blood_type TEXT NOT NULL, "
 			           + "country TEXT, "
 			           + "contact_number TEXT, "
-			           + "emergency_contact_number TEXT "
+			           + "emergency_contact_number TEXT"
 			           + ");";
-
-			
 			stmt4.executeUpdate(sql4);
 			stmt4.close();
-			
+
 			Statement stmt5 = c.createStatement();
-			String sql5 = "CREATE TABLE Hospitals ("
+			String sql5 = "CREATE TABLE IF NOT EXISTS Hospitals ("
 			           + "ID INTEGER PRIMARY KEY, "
 			           + "name TEXT NOT NULL, "
 			           + "city TEXT NOT NULL, "
@@ -86,24 +79,22 @@ public class SQLCreate {
 			           + "person_responsible TEXT, "
 			           + "contact_number TEXT NOT NULL"
 			           + ");";
-
 			stmt5.executeUpdate(sql5);
 			stmt5.close();
-			
+
 			Statement stmt6 = c.createStatement();
-			String sql6 = "CREATE TABLE Hospital_Recipient ("
+			String sql6 = "CREATE TABLE IF NOT EXISTS Hospital_Recipient ("
 			           + "recipient_id INTEGER NOT NULL, "
 			           + "hospital_id INTEGER NOT NULL, "
 			           + "PRIMARY KEY (recipient_id, hospital_id), "
 			           + "FOREIGN KEY (recipient_id) REFERENCES Recipient(ID) ON DELETE CASCADE, "
 			           + "FOREIGN KEY (hospital_id) REFERENCES Hospitals(ID) ON DELETE CASCADE"
 			           + ");";
-
 			stmt6.executeUpdate(sql6);
 			stmt6.close();
-			
+
 			Statement stmt7 = c.createStatement();
-			String sql7 = "CREATE TABLE BloodRequest ("
+			String sql7 = "CREATE TABLE IF NOT EXISTS BloodRequest ("
 			           + "ID INTEGER PRIMARY KEY, "
 			           + "recipient_id INTEGER NOT NULL, "
 			           + "bloodBank_id INTEGER NOT NULL, "
@@ -114,15 +105,23 @@ public class SQLCreate {
 			           + "FOREIGN KEY (recipient_id) REFERENCES Recipient(ID) ON DELETE CASCADE, "
 			           + "FOREIGN KEY (donation_id) REFERENCES Donations(ID) ON DELETE SET NULL"
 			           + ");";
-			
 			stmt7.executeUpdate(sql7);
 			stmt7.close();
-			
+
+			Statement stmt8 = c.createStatement();
+			String sql8 = "CREATE TABLE IF NOT EXISTS donationsWorkers ("
+			           + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+			           + "name TEXT NOT NULL, "
+			           + "phone INTEGER, "
+			           + "email TEXT NOT NULL"
+			           + ");";
+			stmt8.executeUpdate(sql8);
+			stmt8.close();
+
 			c.close();
 			System.out.println("Database connection closed");
-			
 
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

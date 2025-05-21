@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,16 +20,48 @@ import bloodbank.ifaces.DonationsManager;
 public class DonationsManagerImpl implements DonationsManager {
 
     private Connection c;
+    
+    //bloodbank_database.db
+    //String dbName="bloodbank_database.db";
 
     public DonationsManagerImpl(Connection c) {
         this.c = c;
     }
     
-    @Override
+   /* public DonationsManagerImpl() {
+    	try {
+    		Class.forName("org.sqlite.JDBC");
+    		c=DriverManager.getConnection("jdbc:sqlite:./db/"+dbName);
+    		c.createStatement().execute("PRAGMA foreign_keys=ON");
+    		this.createTables();
+    	}catch(SQLException e) {
+    		System.out.println("Problem with the database connection");
+    		e.printStackTrace();
+    	}catch(ClassNotFoundException e) {
+    		System.out.println("JDBC libraries not present.");
+    		e.printStackTrace();
+    	}
+    	
+    }
+    
+    
+    
+    private void createTables() throws SQLException {
+		String sql="CREATE TABLE donationsWorkers("+
+                   "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+				   "name TEXT NOT NULL,"+
+                   "phone INTEGER,"+
+				   "email TEXT NOT NULL)";
+		Statement s=c.createStatement();
+		s.executeUpdate(sql);
+		
+	}*/
+
+	@Override
     public void insertDonationsWorker(DonationsWorker donationsWorker) {
     	try {
 			Statement s = c.createStatement();
-			String sql = "INSERT INTO owners (name, phone, email) VALUES ('" + donationsWorker.getName() + "', "
+			String sql = "INSERT INTO donationsWorkers (name, phone, email) VALUES ('" + donationsWorker.getName() + "', "
 					+ donationsWorker.getPhone() + ", '" + donationsWorker.getEmail() + "')";
 			s.executeUpdate(sql);
 			s.close();
@@ -42,7 +75,7 @@ public class DonationsManagerImpl implements DonationsManager {
     
     public DonationsWorker getDonationsWorkerByEmail(String email) {
     	try {
-			String sql = "SELECT * FROM owners WHERE email = ?";
+			String sql = "SELECT * FROM donationsWorkers WHERE email = ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, email);
 			ResultSet rs = p.executeQuery();
@@ -63,7 +96,7 @@ public class DonationsManagerImpl implements DonationsManager {
     
     public DonationsWorker getDonationsWorker(int id) {
     	try {
-			String sql = "SELECT * FROM donationsWorker WHERE id = ?";
+			String sql = "SELECT * FROM donationsWorkers WHERE id = ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
