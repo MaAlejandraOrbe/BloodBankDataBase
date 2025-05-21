@@ -10,6 +10,7 @@ public interface UserManager {
 	public Role getRole(String name);
 	public List<Role> getRoles();
 	public void assignRole(User user,Role role);
+	//if user doesn´t exist return null
 	public User login(String name, String password);
 	public void close();
 	
