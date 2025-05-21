@@ -15,7 +15,7 @@ import jpa.*;
 public class Menu {
 	
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	
+	/*
 public static void main(String[] args) throws IOException {
 		
 		
@@ -126,8 +126,8 @@ public static void main(String[] args) throws IOException {
         	
         	
 	}
+	*/
 	
-	/*
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	
@@ -628,7 +628,7 @@ public static void main(String[] args) throws IOException {
 		private static void createHospital(int id) {
 			// TODO Auto-generated method stub
 			
-		}*/
+		}
 
 		
 		
