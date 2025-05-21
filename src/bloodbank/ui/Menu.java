@@ -75,10 +75,15 @@ public static void main(String[] args) throws IOException {
 		}
 
         private static void bloodbankWorkerMenu() throws NumberFormatException, IOException {
+        	
+        	while(true) {
         	System.out.printf("\nWelcome to bloodbank management: ");
-        	System.out.printf("\n1.Create BloodBank. ");
-        	System.out.printf("\n2.Update BloodBank.");
-        	System.out.printf("\n3.Delete BloodBank.");
+        	System.out.printf("\n1.Create Blood Bank. ");
+        	System.out.printf("\n2.Search Blood Bank.");
+        	System.out.printf("\n3.Update Blood Bank.");
+        	System.out.printf("\n4.Delete Donation.");
+        	System.out.printf("\n5.Delete Blood Bank.");
+        	System.out.printf("\n0.Exit.");
         	System.out.println("\nChoose an option, please: ");
         	
         	int choice = Integer.parseInt(reader.readLine());
@@ -106,10 +111,18 @@ public static void main(String[] args) throws IOException {
 			case 2:
 				break;
 			case 3: 
+				 break;
+				 
+			case 4:
+				break;
+			case 5: 
+				 break;
+				
+			case 0:
 				return;
 				
-				
 			}
+        	}
         	
         	
 	}
