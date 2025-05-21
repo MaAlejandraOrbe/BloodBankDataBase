@@ -152,8 +152,8 @@ public static void main(String[] args) throws IOException {
 	
 		while (true) {
 			try {
-				System.out.println("Welcome to the BloodBank management solution");//TODO cambiar nombre
-				System.out.println("Choose an option, please:");
+				System.out.println("\n\n\n\n\n\n\n\nWelcome to the BloodBank management solution");//TODO cambiar nombre
+				System.out.println("\nChoose an option, please:");
 				System.out.println("1. Register as blood bank manager.");
 				System.out.println("2. Register as hospital worker.");
 				System.out.println("3. Login.");
@@ -193,9 +193,9 @@ public static void main(String[] args) throws IOException {
 	
 	public static void login() throws IOException {
 		while(true) {
-			System.out.println("Username: ");
+			System.out.println("\nUsername: ");
 			String username=reader.readLine();
-			System.out.println("Password: ");
+			System.out.println("\nPassword: ");
 			String password=reader.readLine();
 			
 			User user =userManager.login(username, password);
@@ -225,11 +225,11 @@ public static void main(String[] args) throws IOException {
 			
 			while(true) {
 				try {
-					System.out.println("Welcome to hospital management: ");
-					System.out.println("Choose an option, please: ");
-					System.out.println("1. Register as donations worker.");
-					System.out.println("2. Register as requests worker.");
-					System.out.println("0. Back to main menu");
+					System.out.println("\nWelcome to hospital management: ");
+					System.out.println("\nChoose an option, please: ");
+					System.out.println("\n1. Register as donations worker.");
+					System.out.println("\n2. Register as requests worker.");
+					System.out.println("\n0. Back to main menu");
 					
 					int hospChoice=Integer.parseInt(reader.readLine());
 					switch(hospChoice) {
@@ -256,16 +256,16 @@ public static void main(String[] args) throws IOException {
 	}
 
 		private static void registerDonationsWorker() throws IOException {
-			System.out.println("Please, input the donations worker data: ");
-			System.out.println("Name: ");
+			System.out.println("\nPlease, input the donations worker data: ");
+			System.out.println("\nName: ");
 			String name=reader.readLine();
-			System.out.println("Phone: ");
+			System.out.println("\nPhone: ");
 			Integer phone=Integer.parseInt(reader.readLine());
-			System.out.println("Email: ");
+			System.out.println("\nEmail: ");
 			String email=reader.readLine();
-			System.out.println("Username: ");
+			System.out.println("\nUsername: ");
 			String username=reader.readLine();
-			System.out.println("Password: ");
+			System.out.println("\nPassword: ");
 			String password=reader.readLine();
 			
 			DonationsWorker dW=new DonationsWorker(name,phone,email);
@@ -310,7 +310,7 @@ public static void main(String[] args) throws IOException {
 			while(true) {
 				
 			try {
-				System.out.println("Welcome Donations Worker, choose what do you want to do");
+				System.out.println("\nWelcome Donations Worker, choose what do you want to do");
 				System.out.println("1.Create donation");
 				System.out.println("2.Create donor");
 				System.out.println("3.Search donor");
