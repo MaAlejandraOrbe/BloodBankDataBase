@@ -125,8 +125,6 @@ public static void main(String[] args) throws IOException {
 	private static UserManager userManager;
 	
 	
-	//TODO una linea de JPA
-	
 	//TODO private static XMLManager xmlManager = new XMLManagerImpl();
 
 	public static void main(String[] args) throws IOException {
