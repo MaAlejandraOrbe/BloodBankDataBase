@@ -15,7 +15,108 @@ import jpa.*;
 public class Menu {
 	
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	
+public static void main(String[] args) throws IOException {
+		
+		
+	
+		while (true) {
+			try {
+				System.out.println("\nWelcome to the BloodBank management solution");//TODO cambiar nombre
+				System.out.println("1. Register as blood bank worker.");
+				System.out.println("2. Register as hospital worker.");
+				System.out.println("3. Login.");
+				System.out.println("0. Exit");
+				System.out.println("Choose an option, please: ");
+
+				int choice = Integer.parseInt(reader.readLine());
+				switch(choice){
+				
+				case 1: 
+					System.out.println("Please, input the bloodbank worker data: ");
+					System.out.println("Name: ");
+					String name=reader.readLine();
+					System.out.println("Phone: ");
+					Integer phone=Integer.parseInt(reader.readLine());
+					System.out.println("Email: ");
+					String email=reader.readLine();
+					System.out.println("Username: ");
+					String username=reader.readLine();
+					System.out.println("Password: ");
+					String password=reader.readLine();
+					
+					
+					System.out.println("\nBloodBank worker created sucessfully.");
+					System.out.println("\nBloodBankWorker [ name=" + name + ", phone=" + phone + ", email=" + email+ "]");
+					
+					
+					bloodbankWorkerMenu();
+					break;
+					
+				case 2:
+					
+					break;
+				case 3:
+					break;
+				case 0:
+					return;
+				}
+					
+				}catch (NumberFormatException e) {
+					System.out.println("You didn't type a number!");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("I/O Exception.");
+					e.printStackTrace();
+				}
+			}
+			
+			
+		}
+
+        private static void bloodbankWorkerMenu() throws NumberFormatException, IOException {
+        	System.out.printf("\nWelcome to bloodbank management: ");
+        	System.out.printf("\n1.Create BloodBank. ");
+        	System.out.printf("\n2.Update BloodBank.");
+        	System.out.printf("\n3.Delete BloodBank.");
+        	System.out.println("\nChoose an option, please: ");
+        	
+        	int choice = Integer.parseInt(reader.readLine());
+			switch(choice){
+			case 1:
+				System.out.println("Name: ");
+				String name=reader.readLine();
+				System.out.println("Address: ");
+				String address=reader.readLine();
+				System.out.println("City: ");
+				String city=reader.readLine();
+				System.out.println("Contact number: ");
+				String contact_number=reader.readLine();
+				System.out.println("Person resposible: ");
+				String person_responsible=reader.readLine();
+				System.out.println("Capacity_stock: ");
+				Integer capacity_stock=Integer.parseInt(reader.readLine());
+				
+				System.out.println("\nBlooBank created successfully! ");
+				System.out.println( "\nBloodBank [ name=" + name + ", address=" + address + ", city=" + city
+					+ ", contact_number=" + contact_number + ", person_responsible=" + person_responsible
+					+ ", capacity_stock=" + capacity_stock+"]");
+				
+				
+			case 2:
+				break;
+			case 3: 
+				return;
+				
+				
+			}
+        	
+        	
+	}
+	
+	/*
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	
 	
 	private static BloodBankManager bbManager;
 	private static DonationsManager donationsManager;
@@ -516,7 +617,7 @@ public class Menu {
 		private static void createHospital(int id) {
 			// TODO Auto-generated method stub
 			
-		}
+		}*/
 
 		
 		

@@ -82,9 +82,13 @@ public class JPAUserManager implements UserManager{
 	
 	@Override
 	public Role getRole(String name) {
+		try {
 		Query q=em.createNativeQuery("SELECT * FROM roles WHERE name LIKE ?",Role.class);
 		q.setParameter(1, name);
 		Role r=(Role)q.getSingleResult();
 		return r;
+		}catch(NoResultException e) {
+			return null;
+		}
 	}
 }
