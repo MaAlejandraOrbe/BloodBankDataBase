@@ -132,5 +132,11 @@ private static final long serialVersionUID= -1238696454242523L;
 		}
 	}
 
-
+	/*
+	public void removeHospital(Hospital hospital) {
+		if(!bloodRequests.contains(hospital)) {
+			bloodRequests.remove(hospital);
+		}
+	}
+*/ //TODO tiene que tener un atributo hospital el requestsworker?
 }

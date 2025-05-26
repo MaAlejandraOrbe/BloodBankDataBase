@@ -15,118 +15,6 @@ import jpa.*;
 public class Menu {
 	
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	/*
-public static void main(String[] args) throws IOException {
-		
-		
-	
-		while (true) {
-			try {
-				System.out.println("\nWelcome to the BloodBank management solution");//TODO cambiar nombre
-				System.out.println("1. Register as blood bank worker.");
-				System.out.println("2. Register as hospital worker.");
-				System.out.println("3. Login.");
-				System.out.println("0. Exit");
-				System.out.println("Choose an option, please: ");
-
-				int choice = Integer.parseInt(reader.readLine());
-				switch(choice){
-				
-				case 1: 
-					System.out.println("Please, input the bloodbank worker data: ");
-					System.out.println("Name: ");
-					String name=reader.readLine();
-					System.out.println("Phone: ");
-					Integer phone=Integer.parseInt(reader.readLine());
-					System.out.println("Email: ");
-					String email=reader.readLine();
-					System.out.println("Username: ");
-					String username=reader.readLine();
-					System.out.println("Password: ");
-					String password=reader.readLine();
-					
-					
-					System.out.println("\nBloodBank worker created sucessfully.");
-					System.out.println("\nBloodBankWorker [ name=" + name + ", phone=" + phone + ", email=" + email+ "]");
-					
-					
-					bloodbankWorkerMenu();
-					break;
-					
-				case 2:
-					
-					break;
-				case 3:
-					break;
-				case 0:
-					return;
-				}
-					
-				}catch (NumberFormatException e) {
-					System.out.println("You didn't type a number!");
-					e.printStackTrace();
-				} catch (IOException e) {
-					System.out.println("I/O Exception.");
-					e.printStackTrace();
-				}
-			}
-			
-			
-		}
-
-        private static void bloodbankWorkerMenu() throws NumberFormatException, IOException {
-        	
-        	while(true) {
-        	System.out.printf("\nWelcome to bloodbank management: ");
-        	System.out.printf("\n1.Create Blood Bank. ");
-        	System.out.printf("\n2.Search Blood Bank.");
-        	System.out.printf("\n3.Update Blood Bank.");
-        	System.out.printf("\n4.Delete Donation.");
-        	System.out.printf("\n5.Delete Blood Bank.");
-        	System.out.printf("\n0.Exit.");
-        	System.out.println("\nChoose an option, please: ");
-        	
-        	int choice = Integer.parseInt(reader.readLine());
-			switch(choice){
-			case 1:
-				System.out.println("Name: ");
-				String name=reader.readLine();
-				System.out.println("Address: ");
-				String address=reader.readLine();
-				System.out.println("City: ");
-				String city=reader.readLine();
-				System.out.println("Contact number: ");
-				String contact_number=reader.readLine();
-				System.out.println("Person resposible: ");
-				String person_responsible=reader.readLine();
-				System.out.println("Capacity_stock: ");
-				Integer capacity_stock=Integer.parseInt(reader.readLine());
-				
-				System.out.println("\nBlooBank created successfully! ");
-				System.out.println( "\nBloodBank [ name=" + name + ", address=" + address + ", city=" + city
-					+ ", contact_number=" + contact_number + ", person_responsible=" + person_responsible
-					+ ", capacity_stock=" + capacity_stock+"]");
-				
-				
-			case 2:
-				break;
-			case 3: 
-				 break;
-				 
-			case 4:
-				break;
-			case 5: 
-				 break;
-				
-			case 0:
-				return;
-				
-			}
-        	}
-        	
-        	
-	}
-	*/
 	
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
@@ -192,6 +80,7 @@ public static void main(String[] args) throws IOException {
 		}
 	
 	public static void login() throws IOException {
+		
 		while(true) {
 			System.out.println("\nUsername: ");
 			String username=reader.readLine();
@@ -579,13 +468,13 @@ public static void main(String[] args) throws IOException {
 				createHospital(rW.getId());
 				break;
 			case 4:
-				//deleteRecipient(rW.getId());
+				deleteRecipient(rW.getId());
 				break;
 			case 5:
-				//deleteHospital(rW.getId());
+				deleteHospital(rW.getId());
 				break;
 			case 6:
-				//searchBloodRequest(rW.getId());
+				searchBloodRequest();
 				break;
 			case 7:
 				//searchHospital(rW.getId());
@@ -618,10 +507,64 @@ public static void main(String[] args) throws IOException {
 			
 		}
 
-		private static void createBloodRequest(int id) {
+		private static void deleteHospital(int id) {
+			/*
+			requestsManager.removeHospital(id);
+			System.out.println("The hospital has been removed. :(");
+			*/
+		}
+
+		private static void searchBloodRequest() {
+			System.out.println("Enter the information of the blood request that you wish to search for: ");
+			System.out.println("Enter status: ");
+			String status=reader.readLine();
+			System.out.println("Enter last name: ");
+			String lastName=reader.readLine();
+			System.out.print(" Enter date of birth (YYYY-MM-DD): ");
+	        String dob = reader.readLine();
+	        Date dobDate;
+	        try {
+	        	dobDate=Date.valueOf(dob);
+	        }catch(IllegalArgumentException ia) {
+	        	System.out.println("Invalid date format. Use YYY-MM-DD");
+	        	return;
+	        }
+	        
+	        List<Donor> results =donationsManager.searchDonor(firstName,lastName,dobDate);
+	        
+	        if(results.isEmpty()) {
+	        	System.out.println("No donors found matching the information given.");
+	        	
+	        }else {
+	        	System.out.println("Donor found !");
+	        	for(Donor d:results) {
+	        		System.out.println(d);
+	        	}
+	        }
+			
+		}
+
+		private static void deleteRecipient(int id) {
 			// TODO Auto-generated method stub
 			
 		}
+
+		private static void createBloodRequest(int id) {
+			/*
+			 * System.out.println("Please, input the Blood request info:");
+	        System.out.print("Quantity required: ");
+	        Integer quantity_order = Integer.parseInt(reader.readLine());
+	        System.out.print("Recipient: "); //TODO deberia de existir un recipient antes de crear un blood request
+	        String recipient = reader.readLine();
+  
+	        RequestsWorker rw = requestsManager.getRequestsWorker(id);
+	        Donor donor=new Donor(firstName,lastName,dobDate,bloodType,country,eligible,contact,emergency,dw);
+	        BloodRequest blood_request = new BloodRequest()
+	        donationsManager.newDonor(donor);
+	        System.out.println("New donor registerd correctly!");	
+	        */
+		}
+			
 
 		private static void createRecipient(int id) {
 			// TODO Auto-generated method stub
