@@ -515,6 +515,7 @@ public class Menu {
 		}
 
 		private static void searchBloodRequest() {
+			/*
 			System.out.println("Enter the information of the blood request that you wish to search for: ");
 			System.out.println("Enter status: ");
 			String status=reader.readLine();
@@ -541,7 +542,7 @@ public class Menu {
 	        		System.out.println(d);
 	        	}
 	        }
-			
+			*/
 		}
 
 		private static void deleteRecipient(int id) {
