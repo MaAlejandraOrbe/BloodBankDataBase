@@ -84,6 +84,36 @@ public class BloodBankManagerImpl implements BloodBankManager {
         }
         return list;
     }
+    
+   /* public BloodBank getBloodBankById(int id) {
+        try {
+            String sql = "SELECT * FROM BloodBank WHERE ID = ?";
+            PreparedStatement p = c.prepareStatement(sql);
+            p.setInt(1, id);
+            ResultSet rs = p.executeQuery();
+            BloodBank b=null;
+            if (rs.next()) {
+            
+                return new BloodBank(
+                    rs.getInt("ID"),
+                    rs.getString("name"),
+                    rs.getString("address"),
+                    rs.getString("city"),
+                    rs.getString("contactNumber"),
+                    rs.getString("personResponsible"),
+                    rs.getInt("current_stock")
+                );
+            }
+            rs.close();
+            p.close();
+            return b;
+        } catch (SQLException e) {
+        	 System.out.println("Error retrieving BloodBank with ID " + id);
+            e.printStackTrace();
+        }
+        return null;
+    }*/
+
 }
 
     

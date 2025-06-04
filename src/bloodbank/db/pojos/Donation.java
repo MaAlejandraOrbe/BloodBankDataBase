@@ -23,6 +23,7 @@ public class Donation implements Serializable {
 	private Date expiration_date;
 	private BloodBank bloodbank;
 	private Donor donor;
+	private DonationsWorker donationsWorker;
 	
 	
 	public Donation() {
@@ -41,10 +42,25 @@ public class Donation implements Serializable {
 		this.bloodbank = bloodbank;
 		this.donor = donor;
 	}
+	
+	
 
 
 	
 	
+	public Donation(String status, Date donation_date, Integer quantity, Date expiration_date, BloodBank bloodbank,
+			Donor donor,DonationsWorker  donationsWorker) {
+		super();
+		this.status = status;
+		this.donation_date = donation_date;
+		this.quantity = quantity;
+		this.expiration_date = expiration_date;
+		this.bloodbank = bloodbank;
+		this.donor = donor;
+		this.donationsWorker=donationsWorker;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}

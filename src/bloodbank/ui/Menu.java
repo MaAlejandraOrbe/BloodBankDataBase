@@ -88,23 +88,26 @@ public class Menu {
 			String password=reader.readLine();
 			
 			User user =userManager.login(username, password);
-			if(user!=null) {
+			if(user==null) {
+				System.out.println("Wrong username/password. Try again.");
+				continue;
+			}
+			
 				
 				if(user.getRole().getName().equals("bloodbankManager")){
 					//bloodBankWorkerMenu(user.getEmail());
+					break;
 					
 				}else if(user.getRole().getName().equals("donationsWorker")) {
 					donationsWorkerMenu(user.getEmail());
 					
+					break;
 				}else if(user.getRole().getName().equals("requestsWorker")) {
 					requestsWorkerMenu(user.getEmail());
+					break;
 				
 			}
-			else {
-				System.out.println("Wrong username/password combination.");
 			}
-
-			}}
 		
 	}
 
@@ -212,7 +215,7 @@ public class Menu {
 			
 			switch(choice) {
 			case 1:
-				createDonation(); //INCOMPLETE, IDK HOW
+				createDonation(dw.getId()); 
 				break;
 			case 2: 
 				createDonor(dw.getId());
@@ -227,8 +230,10 @@ public class Menu {
 				break;
 			case 5:
 				updateDonor(dw.getId());
+				break;
 			case 6:
 				updateDonation(dw.getId());
+				
 				break;
 			case 0:
 				return;
@@ -255,9 +260,56 @@ public class Menu {
 		
 
 		//TODO: IDK HOW TO MANAGE THE BLOODBANK AND DONOR ID, ???/ (MALE)
-		private static void createDonation() {
+		private static void createDonation(int id) throws IOException {
 			System.out.println("Please, input the donation info: ");
-			System.out.println("");;
+			System.out.println("Status: ");
+			String status=reader.readLine();
+			System.out.println("Donation date: ");
+			String donationDate=reader.readLine();
+			Date ddate;
+			try {
+				ddate=Date.valueOf(donationDate);
+			}catch(IllegalArgumentException iae) {
+				System.out.println("Invalid date format. Use YYYY-MM-DD");
+				return;
+			}
+			System.out.println("Quantity: ");
+			int  quantity=Integer.parseInt(reader.readLine());
+			
+			System.out.println("Expiration date of donation: ");
+			String expirationDate=reader.readLine();
+			Date edate;
+			try {
+				edate=Date.valueOf(expirationDate);
+			}catch(IllegalArgumentException iae) {
+				System.out.println("Invalid date format. Use YYYY-MM-DD");
+				return;
+			}
+			
+		    System.out.print("Insert blood bank ID: ");
+		    int bbId = Integer.parseInt(reader.readLine());
+		    BloodBank bloodBank = donationsManager.getBloodBankById(bbId);
+		    if (bloodBank == null) {
+		        System.out.println("Blood bank not found.");
+		        return;
+		    }
+		    
+			System.out.print("Insert donor ID: ");
+		    int donorId = Integer.parseInt(reader.readLine());
+		    Donor donor = donationsManager.getDonorById(donorId);
+		    if (donor == null) {
+		        System.out.println("Donor not found.");
+		        return;
+		    }
+
+	
+		
+		    DonationsWorker dw=donationsManager.getDonationsWorker(id);
+		    Donation donation=new Donation(status,ddate,quantity,edate,bloodBank,donor,dw);
+		    /*public Donation(String status, Date donation_date, Integer quantity, Date expiration_date, BloodBank bloodbank,
+		     */
+	        donationsManager.newDonation(donation);
+	        System.out.println("New donotion registerd correctly!");	
 			
 		}
 		
@@ -273,7 +325,7 @@ public class Menu {
 	        try {
 	        	dobDate=Date.valueOf(dob);
 	        }catch(IllegalArgumentException ia) {
-	        	System.out.println("Invalid date format. Use YYY-MM-DD");
+	        	System.out.println("Invalid date format. Use YYYY-MM-DD");
 	        	return;
 	        }
 	        System.out.print("Blood type: ");
@@ -342,97 +394,143 @@ public class Menu {
 		
 		
 		private static void updateDonor(int id) throws IOException {
-			Donor donor=donationsManager.getDonorById(id);
-			System.out.println("Type the new data, or press enter to keep actual data");
-			System.out.println("First name (" + donor.getFirst_name() + "):");
-			String firstname = reader.readLine();
-			if (!firstname.equals("")) {
-				donor.setFirst_name(firstname);
-			}
-			System.out.println("Last name (" + donor.getLast_name() + "):");
-			String lastname = reader.readLine();
-			if (!lastname.equals("")) {
-				donor.setLast_name(lastname);
+			
+			System.out.println("List of all egisters donors: ");
+			List<Donor>donors=donationsManager.getAllDonors();
+			
+			if(donors.isEmpty()) {
+				System.out.println("No donors found in system.");
+				return;
 			}
 			
-		    System.out.println("Blood type (" + donor.getBlood_type() + "):");
-		    String bloodType = reader.readLine();
-		    if (!bloodType.equals("")) {
-		        donor.setBlood_type(bloodType);
-		    }
-
-		    System.out.println("Country (" + donor.getCountry() + "):");
-		    String country = reader.readLine();
-		    if (!country.equals("")) {
-		        donor.setCountry(country);
-		    }
-
-		    System.out.println("Eligible to donate? (" + donor.getEligible_donate() + ") [true/false]:");
-		    String eligible = reader.readLine();
-		    if (!eligible.equals("")) {
-		        donor.setEligible_donate(Boolean.parseBoolean(eligible));
-		    }
-
-		    System.out.println("Contact number (" + donor.getContact_number() + "):");
-		    String contactNumber = reader.readLine();
-		    if (!contactNumber.equals("")) {
-		        donor.setContact_number(contactNumber);
-		    }
-
-		    System.out.println("Emergency contact number (" + donor.getEmergency_contact_number() + "):");
-		    String emergencyContact = reader.readLine();
-		    if (!emergencyContact.equals("")) {
-		        donor.setEmergency_contact_number(emergencyContact);
-		    }
-
-			donationsManager.updateDonor(donor);
-			System.out.println("Donor updated successfully.");
-		}
+	       
 			
-		private static void updateDonation(int id) throws IOException {
-			 Donation donation = donationsManager.getDonationById(id);
-			    System.out.println("Type the new data, or press enter to keep actual data");
+			for(Donor d:donors){
+				System.out.println("ID: "+d.getId()+
+						           " |First name:  "+d.getFirst_name()+
+						           " |Last name: "+d.getLast_name()+
+						           " |Status: "+d.getDOB());
+			
+				
+			}
+			
+			
+		    System.out.print("Enter the ID of the donor to update: ");
+		    int donorId = Integer.parseInt(reader.readLine());
+		    Donor donor = donationsManager.getDonorById(donorId);
+		    if (donor == null) {
+		        System.out.println("Donor not found.");
+		        return;
+		    }
+			 System.out.println("Type the new data, or press enter to keep current values:");
 
-			    System.out.println("Status (" + donation.getStatus() + "):");
-			    String status = reader.readLine();
-			    if (!status.equals("")) {
-			        donation.setStatus(status);
-			    }
+			    System.out.print("First name (" + donor.getFirst_name() + "): ");
+			    String fn = reader.readLine();
+			    if (!fn.isEmpty()) donor.setFirst_name(fn);
 
-			    System.out.println("Donation date (" + donation.getDonation_date() + ") [yyyy-mm-dd]:");
-			    String dateDonationStr = reader.readLine();
-			    if (!dateDonationStr.equals("")) {
-			        try {
-			            donation.setDonation_date(Date.valueOf(dateDonationStr));
-			        } catch (IllegalArgumentException e) {
-			            System.out.println("Invalid date format. Skipping update of donation date.");
-			        }
-			    }
+			    System.out.print("Last name (" + donor.getLast_name() + "): ");
+			    String ln = reader.readLine();
+			    if (!ln.isEmpty()) donor.setLast_name(ln);
 
-			    System.out.println("Quantity (" + donation.getQuantity() + "):");
-			    String quantityStr = reader.readLine();
-			    if (!quantityStr.equals("")) {
-			        try {
-			            donation.setQuantity(Integer.parseInt(quantityStr));
-			        } catch (NumberFormatException e) {
-			            System.out.println("Invalid number. Skipping update of quantity.");
-			        }
-			    }
+			    System.out.print("Blood type (" + donor.getBlood_type() + "): ");
+			    String bt = reader.readLine();
+			    if (!bt.isEmpty()) donor.setBlood_type(bt);
 
-			    System.out.println("Expiration date (" + donation.getExpiration_date() + ") [yyyy-mm-dd]:");
-			    String expirationDateStr = reader.readLine();
-			    if (!expirationDateStr.equals("")) {
-			        try {
-			            donation.setExpiration_date(Date.valueOf(expirationDateStr));
-			        } catch (IllegalArgumentException e) {
-			            System.out.println("Invalid date format. Skipping update of expiration date.");
-			        }
-			    }
+			    System.out.print("Country (" + donor.getCountry() + "): ");
+			    String country = reader.readLine();
+			    if (!country.isEmpty()) donor.setCountry(country);
 
-			    donationsManager.updateDonation(donation);
-			    System.out.println("Donation updated successfully.");
+			    System.out.print("Eligible to donate? (" + donor.getEligible_donate() + ") [true/false]: ");
+			    String eligible = reader.readLine();
+			    if (!eligible.isEmpty()) donor.setEligible_donate(Boolean.parseBoolean(eligible));
+
+			    System.out.print("Contact number (" + donor.getContact_number() + "): ");
+			    String contact = reader.readLine();
+			    if (!contact.isEmpty()) donor.setContact_number(contact);
+
+			    System.out.print("Emergency contact number (" + donor.getEmergency_contact_number() + "): ");
+			    String emergency = reader.readLine();
+			    if (!emergency.isEmpty()) donor.setEmergency_contact_number(emergency);
+
+			    donationsManager.updateDonor(donor);
+			    System.out.println("Donor updated successfully.");
+			}
+			
+			
+		private static void updateDonation(int donationsWorkerId) throws IOException {
+		    System.out.println("To update a donation, first search by status.");
+		    
+		    System.out.print("Enter donation status (e.g., stored, tested): ");
+		    String status = reader.readLine();
+
+		    List<Donation> results = donationsManager.searchDonation(status);
+		    
+		    if (results.isEmpty()) {
+		        System.out.println("No donations found with that status.");
+		        return;
+		    }
+
+		    System.out.println("Matching donations:");
+		    for (Donation d : results) {
+		        System.out.println("ID: " + d.getId() + 
+		                           " | Date: " + d.getDonation_date() +
+		                           " | Donor ID: " + d.getDonor().getId() +
+		                           " | Status: " + d.getStatus());
+		    }
+
+		    System.out.print("Enter the ID of the donation to update: ");
+		    int donationId = Integer.parseInt(reader.readLine());
+
+		    Donation donation = donationsManager.getDonationById(donationId);
+		    if (donation == null) {
+		        System.out.println("Donation not found.");
+		        return;
+		    }
+
+		    System.out.println("Type the new data, or press enter to keep current values:");
+
+		    System.out.print("Status (" + donation.getStatus() + "): ");
+		    String newStatus = reader.readLine();
+		    if (!newStatus.isEmpty()) donation.setStatus(newStatus);
+
+		    System.out.print("Donation date (" + donation.getDonation_date() + ") (YYYY-MM-DD): ");
+		    String newDateStr = reader.readLine();
+		    if (!newDateStr.isEmpty()) {
+		        try {
+		            donation.setDonation_date(Date.valueOf(newDateStr));
+		        } catch (IllegalArgumentException e) {
+		            System.out.println("Invalid date format.");
+		            return;
+		        }
+		    }
+
+		    System.out.print("Quantity (" + donation.getQuantity() + "): ");
+		    String quantityStr = reader.readLine();
+		    if (!quantityStr.isEmpty()) {
+		        try {
+		            donation.setQuantity(Integer.parseInt(quantityStr));
+		        } catch (NumberFormatException e) {
+		            System.out.println("Invalid quantity.");
+		            return;
+		        }
+		    }
+
+		    System.out.print("Expiration date (" + donation.getExpiration_date() + ") (YYYY-MM-DD): ");
+		    String expStr = reader.readLine();
+		    if (!expStr.isEmpty()) {
+		        try {
+		            donation.setExpiration_date(Date.valueOf(expStr));
+		        } catch (IllegalArgumentException e) {
+		            System.out.println("Invalid date format.");
+		            return;
+		        }
+		    }
+
+		  
+		    donationsManager.updateDonation(donation);
+		    System.out.println("Donation updated successfully.");
 		}
-		
+
 
 		
 		private static void requestsWorkerMenu(String email) {

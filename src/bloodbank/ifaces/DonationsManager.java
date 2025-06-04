@@ -24,8 +24,11 @@ public interface DonationsManager {
 	public Donation getDonationById(int id);
 	public List<Donation> searchDonation(String status);
 	
+	public BloodBank getBloodBankById(int id);
+	
 	public void updateDonor(Donor donor);
 	public void updateDonation(Donation donation);
+	public List<Donor> getAllDonors();
 	
 
 	

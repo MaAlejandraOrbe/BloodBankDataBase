@@ -16,6 +16,7 @@ import bloodbank.db.pojos.BloodBank;
 import bloodbank.db.pojos.Donation;
 import bloodbank.db.pojos.DonationsWorker;
 import bloodbank.ifaces.DonationsManager;
+import bloodbank.ifaces.*;
 
 public class DonationsManagerImpl implements DonationsManager {
 
@@ -278,7 +279,7 @@ public class DonationsManagerImpl implements DonationsManager {
         return null;
     }
     
-    private BloodBank getBloodBankById(int id) {
+    public BloodBank getBloodBankById(int id) {
         try {
             String sql = "SELECT * FROM BloodBank WHERE ID = ?";
             PreparedStatement p = c.prepareStatement(sql);
@@ -383,4 +384,35 @@ public class DonationsManagerImpl implements DonationsManager {
             e.printStackTrace();
         }
     }
+    
+    @Override
+    public List<Donor> getAllDonors() {
+        List<Donor> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Donor";
+            PreparedStatement p = c.prepareStatement(sql);
+            ResultSet rs = p.executeQuery();
+            while (rs.next()) {
+                Donor d = new Donor(
+                    rs.getInt("ID"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getDate("DOB"),
+                    rs.getString("blood_type"),
+                    rs.getString("country"),
+                    rs.getBoolean("eligible_to_donate"),
+                    rs.getString("contact_number"),
+                    rs.getString("emergency_contact_number")
+                );
+                list.add(d);
+            }
+            rs.close();
+            p.close();
+        } catch (SQLException e) {
+            System.out.println("Database error in getAllDonors.");
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }

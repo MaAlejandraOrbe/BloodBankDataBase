@@ -12,8 +12,7 @@ import java.util.ArrayList;
 
 public class Donor implements Serializable {
 	
-	//aqui lo d edonations, creo que debe ser asi. 
-	//TODO Confirmar que está bien lo de donations aquí.
+
 	
 	private static final long serialVersionUID =1L;
 	private Integer id;
@@ -28,7 +27,7 @@ public class Donor implements Serializable {
 	private String emergency_contact_number;
 	private List<Donation> donations;
 	
-	//TODO: CHECK THESE:
+	
 	private DonationsWorker donationsWorker;
 	
 	
