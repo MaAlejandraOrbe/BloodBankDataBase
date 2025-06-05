@@ -26,10 +26,22 @@ public class Recipient implements Serializable{
 		super();
 		
 	}
+	
+	public Recipient(String first_nanme, String last_name, Date DOB, String blood_type, String country, String contact_number, String emergency_contact_number) {
+
+		super();
+		this.first_name = first_nanme;
+		this.last_name = last_name;
+		this.DOB = DOB;
+		this.blood_type = blood_type;
+		this.country = country;
+		this.contact_number = contact_number;
+		this.emergency_contact_number = emergency_contact_number;
+
+	}
 
 	//TODO: CONFIRMAR QUE LO DE HSOPTIALS ES ASI O NO SE PONE EN CONSTRUCTOR
-	public Recipient(Integer id, String first_nanme, String last_name, Date DOB, String blood_type, String country,
-			String contact_number, String emergency_contact_number) {
+	public Recipient(Integer id, String first_nanme, String last_name, Date DOB, String blood_type, String country, String contact_number, String emergency_contact_number) {
 
 		super();
 		this.id = id;

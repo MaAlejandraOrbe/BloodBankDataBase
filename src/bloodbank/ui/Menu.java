@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -681,58 +682,59 @@ public class Menu {
 			
 			while(true) {
 				
-			try {
-				System.out.println("Welcome Requests Worker, choose what do you want to do");
-				System.out.println("1.Create blood request");
-				System.out.println("2.Create recipient");
-				System.out.println("3.Create hospital");
-				System.out.println("4.Delete recipient");
-				System.out.println("5.Delete hospital");
-				System.out.println("6.Search blood request");
-				System.out.println("7.Search hospital");
-				System.out.println("8.Search recipient");
-				System.out.println("9.Fulfill requests ");
-				System.out.println("10.Update blood request");
-				System.out.println("0.Back to main menu");
-				int choice=Integer.parseInt(reader.readLine());
-			
-			
-			switch(choice) {
-			case 1:
-				createBloodRequest(rW.getId());
-				break;
-			case 2: 
-				createRecipient(rW.getId());
-				break;
-			case 3:
-				createHospital(rW.getId());
-				break;
-			case 4:
-				deleteRecipient(rW.getId());
-				break;
-			case 5:
-				deleteHospital(rW.getId());
-				break;
-			case 6:
-				searchBloodRequest();
-				break;
-			case 7:
-				//searchHospital(rW.getId());
-				break;
-			case 8:
-				//searchRecipient(rW.getId());
-				break;
-			case 9:
-				//TODO: CONFIRMAR TIPO
-				//fullfillRequests(rW.getId());
-				
-			case 10:
-				//updateBloodRequest(rW.getId());
-			case 0:
-				return;
-			
-			
-			}
+				try {
+				    System.out.println("Welcome Requests Worker, choose what do you want to do");
+				    System.out.println("1. Create blood request");
+				    System.out.println("2. Create recipient");
+				    System.out.println("3. Create hospital");
+				    System.out.println("4. Delete recipient");
+				    System.out.println("5. Link recipient to blood request");
+				    System.out.println("6. Search blood request");
+				    System.out.println("7. Search hospital");
+				    System.out.println("8. Search recipient");
+				    System.out.println("9. Fulfill requests");
+				    System.out.println("10. Update blood request");
+				    System.out.println("0. Back to main menu");
+
+				    int choice = Integer.parseInt(reader.readLine());
+
+				    switch (choice) {
+				        case 1:
+				            createBloodRequest(rW.getId());
+				            break;
+				        case 2:
+				            createRecipient(rW.getId());
+				            break;
+				        case 3:
+				            createHospital(rW.getId());
+				            break;
+				        case 4:
+				            deleteRecipient(rW.getId());
+				            break;
+				        case 5:
+				            linkRecipientToBloodRequest();
+				            break;
+				        case 6:
+				            searchBloodRequest(rW.getId());
+				            break;
+				        case 7:
+				            searchHospital(rW.getId());
+				            break;
+				        case 8:
+				            searchRecipient(rW.getId());
+				            break;
+				        case 9:
+				            fullfillBloodRequest();
+				            break;
+				        case 10:
+				            //updateBloodRequest(rW.getId());
+				            break;
+				        case 0:
+				            return;
+				        default:
+				            System.out.println("Invalid option. Please try again.");
+				            break;
+				    }
 			
 		}
 			catch (NumberFormatException e) {
@@ -746,92 +748,229 @@ public class Menu {
 			
 			
 		}
+		
+		private static void createBloodRequest(int id) throws IOException {
+		    System.out.println("Please, input the Blood Request info:");
+		    System.out.print("Quantity requested: ");
+		    int quantity = Integer.parseInt(reader.readLine());
 
-		private static void deleteHospital(int id) {
-			/*
-			requestsManager.removeHospital(id);
-			System.out.println("The hospital has been removed. :(");
-			*/
+		    String status = "pending";
+
+		    System.out.print("BloodBank ID: ");
+		    int bbid = Integer.parseInt(reader.readLine());
+		    BloodBank bb = donationsManager.getBloodBankById(bbid);
+		    if (bb == null) {
+		        System.out.println("BloodBank not found.");
+		        return;
+		    }
+
+		    System.out.print("Recipient ID: ");
+		    int rid = Integer.parseInt(reader.readLine());
+		    Recipient recipient = requestsManager.getRecipientById(rid);
+		    if (recipient == null) {
+		        System.out.println("Recipient not found.");
+		        return;
+		    }
+
+		    System.out.print("Donation ID: ");
+		    int did = Integer.parseInt(reader.readLine());
+		    Donation donation = donationsManager.getDonationById(did);
+		    if (donation == null) {
+		        System.out.println("Donation not found.");
+		        return;
+		    }
+
+		    BloodRequest br = new BloodRequest(quantity, status, bb, recipient, donation);
+		    requestsManager.newBloodRequest(br);
+		    System.out.println("New blood request created successfully!");
 		}
 
-		private static void searchBloodRequest() {
-			/*
-			System.out.println("Enter the information of the blood request that you wish to search for: ");
-			System.out.println("Enter status: ");
-			String status=reader.readLine();
-			System.out.println("Enter last name: ");
-			String lastName=reader.readLine();
-			System.out.print(" Enter date of birth (YYYY-MM-DD): ");
-	        String dob = reader.readLine();
-	        Date dobDate;
-	        try {
-	        	dobDate=Date.valueOf(dob);
-	        }catch(IllegalArgumentException ia) {
-	        	System.out.println("Invalid date format. Use YYY-MM-DD");
-	        	return;
-	        }
-	        
-	        List<Donor> results =donationsManager.searchDonor(firstName,lastName,dobDate);
-	        
-	        if(results.isEmpty()) {
-	        	System.out.println("No donors found matching the information given.");
-	        	
-	        }else {
-	        	System.out.println("Donor found !");
-	        	for(Donor d:results) {
-	        		System.out.println(d);
-	        	}
-	        }
-			*/
-		}
-
-		private static void deleteRecipient(int id) {
-			// TODO Auto-generated method stub
+		
+		private static void createHospital(int id) throws IOException {
+			System.out.println("Please, input the Hospital info:");
+			System.out.print("Name: ");
+			String name = reader.readLine();
+			System.out.print("City: ");
+			String city = reader.readLine();
+			System.out.print("Address: ");
+			String address = reader.readLine();
+			System.out.print("Person responsible: ");
+			String responsible = reader.readLine();
+			System.out.print("Contact number: ");
+			String contact = reader.readLine();
 			
-		}
-
-		private static void createBloodRequest(int id) {
-			/*
-			 * System.out.println("Please, input the Blood request info:");
-	        System.out.print("Quantity required: ");
-	        Integer quantity_order = Integer.parseInt(reader.readLine());
-	        System.out.print("Recipient: "); //TODO deberia de existir un recipient antes de crear un blood request
-	        String recipient = reader.readLine();
-  
-	        RequestsWorker rw = requestsManager.getRequestsWorker(id);
-	        Donor donor=new Donor(firstName,lastName,dobDate,bloodType,country,eligible,contact,emergency,dw);
-	        BloodRequest blood_request = new BloodRequest()
-	        donationsManager.newDonor(donor);
-	        System.out.println("New donor registerd correctly!");	
-	        */
-		}
-			
-
-		private static void createRecipient(int id) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		private static void createHospital(int id) {
-			// TODO Auto-generated method stub
-			
+			Hospital hospital = new Hospital(name, city, address, responsible, contact);
+			requestsManager.newHospital(hospital);
+			System.out.println("New hospital registered successfully!");
 		}
 
 		
+		private static void createRecipient(int id) throws IOException {
+			System.out.println("Please, input the Recipient info:");
+		    System.out.print("First name: ");
+		    String firstName = reader.readLine();
+		    System.out.print("Last name: ");
+		    String lastName = reader.readLine();
+		    System.out.print("DOB (YYYY-MM-DD): ");
+		    String dob = reader.readLine();
+		    Date dobDate;
+		    try {
+		    	dobDate=Date.valueOf(dob);
+		    }catch(IllegalArgumentException ia) {
+		    	System.out.println("Invalid date format. Use YYYY-MM-DD");
+		    	return;
+		    }
+		    System.out.print("Blood type: ");
+		    String bloodType = reader.readLine();
+		    System.out.print("Country: ");
+		    String country = reader.readLine();
+		    System.out.print("Contact number: ");
+		    String contact = reader.readLine();
+		    System.out.print("Emergency contact number: ");
+		    String emergency = reader.readLine();
+		    
+		    Recipient recipient = new Recipient(firstName, lastName, dobDate, bloodType, country, contact, emergency);
+		    requestsManager.newRecipient(recipient);
+		    System.out.println("New recipient registered successfully!");
+		}
+		
+		private static void searchBloodRequest(int id) throws IOException {
+		    System.out.print("Enter the Blood Request ID to search: ");
+		    int bloodRequestId = Integer.parseInt(reader.readLine());
+
+		    List<BloodRequest> allRequests = requestsManager.getAllBloodRequests();
+
+		    BloodRequest bloodRequest = null;
+		    for (BloodRequest br : allRequests) {
+		        if (br.getId() == bloodRequestId) {
+		            bloodRequest = br;
+		            break;
+		        }
+		    }
+
+		    if (bloodRequest != null) {
+		        System.out.println("Blood Request found: ");
+		        System.out.println("ID: " + bloodRequest.getId() +
+		                           " | Quantity Requested: " + bloodRequest.getQuantity_order() +
+		                           " | Status: " + bloodRequest.getStatus());
+		    } else {
+		        System.out.println("No Blood Request found with ID: " + bloodRequestId);
+		    }
+		}
+
+		private static void linkRecipientToBloodRequest() throws IOException {
+		    System.out.print("Enter the Recipient ID: ");
+		    int recipientId = Integer.parseInt(reader.readLine());
+		    System.out.print("Enter the Blood Request ID: ");
+		    int bloodRequestId = Integer.parseInt(reader.readLine());
+
+		    requestsManager.linkRecipientToBloodRequest(recipientId, bloodRequestId);
+		    System.out.println("Recipient linked to Blood Request successfully!");
+		}
 		
 		
+		private static void fullfillBloodRequest() throws IOException {
+		    System.out.println("List of all Blood Requests: ");
+		    List<BloodRequest> allRequests = requestsManager.getAllBloodRequests();
+
+		    if (allRequests.isEmpty()) {
+		        System.out.println("No blood requests found in the system.");
+		        return;
+		    }
+
+		    for (BloodRequest request : allRequests) {
+		        System.out.println("ID: " + request.getId() +
+		                " | Status: " + request.getStatus() +
+		                " | Quantity: " + request.getQuantity_order() +
+		                " | Recipient: " + request.getRecipient().getFirst_name());
+		    }
+
+		    System.out.print("Enter the ID of the Blood Request to fulfill: ");
+		    int requestId = Integer.parseInt(reader.readLine());
+
+		    BloodRequest bloodRequest = requestsManager.getBloodRequestById(requestId);
+		    if (bloodRequest == null) {
+		        System.out.println("Blood Request not found.");
+		        return;
+		    }
+
+		    System.out.println("Current status: " + bloodRequest.getStatus());
+		    System.out.print("Enter the new status (press enter to keep 'completed'): ");
+		    String newStatus = reader.readLine();
+		    if (!newStatus.isEmpty()) {
+		        bloodRequest.setStatus(newStatus);
+		    } else {
+		        bloodRequest.setStatus("completed");
+		    }
+
+		    requestsManager.fullfillBloodRequest(bloodRequest);
+		    System.out.println("Blood request with ID " + requestId + " has been marked as " + bloodRequest.getStatus() + ".");
+		}
+
+		private static void searchHospital(int id) throws IOException {
+		    System.out.print("Enter the Hospital ID to search: ");
+		    int hospitalId = Integer.parseInt(reader.readLine());
+		    
+		    Hospital hospital = requestsManager.getHospitalById(hospitalId);
+		    if (hospital != null) {
+		        System.out.println("Hospital found: ");
+		        System.out.println(hospital);
+		    } else {
+		        System.out.println("Hospital not found.");
+		    }
+		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		private static void searchRecipient(int id) throws IOException {
+		    System.out.print("Enter the Recipient ID to search: ");
+		    int recipientId = Integer.parseInt(reader.readLine());
+		    
+		    Recipient recipient = requestsManager.getRecipientById(recipientId);
+		    if (recipient != null) {
+		        System.out.println("Recipient found: ");
+		        System.out.println(recipient);
+		    } else {
+		        System.out.println("Recipient not found.");
+		    }
+		}
 		
 
+		private static void deleteRecipient(int id) throws IOException {
+			System.out.print("Enter the ID of the recipient to delete: ");
+			int recipientId = Integer.parseInt(reader.readLine());
+			requestsManager.deleteRecipient(recipientId);
+			System.out.println("Recipient deleted successfully.");
+		}
+
+		/*private static void updateBloodRequest(int id) throws IOException, SQLException {
+		    System.out.print("Enter the BloodRequest ID to update: ");
+		    int bloodRequestId = Integer.parseInt(reader.readLine());
+
+		    BloodRequest bloodRequest = requestsManager.getBloodRequestById(bloodRequestId);
+		    if (bloodRequest == null) {
+		        System.out.println("BloodRequest not found.");
+		        return;
+		    }
+
+		    System.out.println("Current details: ");
+		    System.out.println("ID: " + bloodRequest.getId() + 
+		                       " | Quantity: " + bloodRequest.getQuantity_order() + 
+		                       " | Status: " + bloodRequest.getStatus());
+
+		    System.out.print("Enter new quantity (current: " + bloodRequest.getQuantity_order() + "): ");
+		    String newQuantity = reader.readLine();
+		    if (!newQuantity.isEmpty()) {
+		        bloodRequest.setQuantity_order(Integer.parseInt(newQuantity));
+		    }
+
+		    System.out.print("Enter new status (current: " + bloodRequest.getStatus() + "): ");
+		    String newStatus = reader.readLine();
+		    if (!newStatus.isEmpty()) {
+		        bloodRequest.setStatus(newStatus);
+		    }
+
+		    //requestsManager.updateBloodRequest(bloodRequest);
+			System.out.println("BloodRequest updated successfully!");
+		}*/
+		}
 		
-		
-}
+	

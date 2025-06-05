@@ -18,6 +18,16 @@ public class Hospital implements Serializable{
 		super();
 	}
 
+	public Hospital(String name, String city, String address, String person_responsible,
+			String contact_number) {
+		super();
+		this.name = name;
+		this.city = city;
+		this.address = address;
+		this.person_responsible = person_responsible;
+		this.contact_number = contact_number;
+	}
+	
 	public Hospital(Integer id, String name, String city, String address, String person_responsible,
 			String contact_number) {
 		super();
@@ -29,8 +39,6 @@ public class Hospital implements Serializable{
 		this.contact_number = contact_number;
 	}
 	
-	 //Hospital h = new Hospital(id,name, city, address,personResponsible,contactNumber);
-     
 
 	public Integer getId() {
 		return id;

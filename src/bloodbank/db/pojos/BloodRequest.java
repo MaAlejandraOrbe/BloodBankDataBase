@@ -27,11 +27,6 @@ public class BloodRequest implements Serializable{
 		this.quantity_order=quantity_order;
 		this.status=status;
 	}
-	
-	
-
-	
-	
 
 	public BloodRequest(Integer quantity_order, String status, BloodBank bloodBank, Recipient recipient,
 			Donation donation) {

@@ -6,12 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-import bloodbank.db.pojos.BloodRequest;
-import bloodbank.db.pojos.DonationsWorker;
-import bloodbank.db.pojos.Hospital;
-import bloodbank.db.pojos.Recipient;
-import bloodbank.db.pojos.RequestsWorker;
+import bloodbank.db.pojos.*;
 import bloodbank.ifaces.RequestsManager;
 
 public class RequestsManagerImpl implements RequestsManager {
@@ -188,6 +186,112 @@ public class RequestsManagerImpl implements RequestsManager {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public BloodRequest getBloodRequestById(int id) {
+	    try {
+	        String sql = "SELECT * FROM BloodRequest WHERE ID = ?";
+	        PreparedStatement p = c.prepareStatement(sql);
+	        p.setInt(1, id);
+	        ResultSet rs = p.executeQuery();
+
+	        BloodRequest bloodRequest = null;
+	        if (rs.next()) {
+	            int quantityOrder = rs.getInt("quantity_order");
+	            String status = rs.getString("status");
+
+	            bloodRequest = new BloodRequest(id, quantityOrder, status);
+	        }
+	        rs.close();
+	        p.close();
+	        return bloodRequest;
+	    } catch (SQLException e) {
+	        System.out.println("Error retrieving BloodRequest with ID " + id);
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+
+	@Override
+	public List<BloodRequest> getAllBloodRequests() {
+	    List<BloodRequest> list = new ArrayList<>();
+	    try {
+	        String sql = "SELECT * FROM BloodRequest";
+	        PreparedStatement p = c.prepareStatement(sql);
+	        ResultSet rs = p.executeQuery();
+
+	        while (rs.next()) {
+	            BloodRequest bloodRequest = new BloodRequest(
+	                rs.getInt("ID"),
+	                rs.getInt("quantity_order"),
+	                rs.getString("status")
+	            );
+	            list.add(bloodRequest);
+	        }
+	        rs.close();
+	        p.close();
+	    } catch (SQLException e) {
+	        System.out.println("Database error in getAllBloodRequests.");
+	        e.printStackTrace();
+	    }
+	    return list;
+	}
+
+	@Override
+	public Hospital getHospitalById(int id) {
+	    try {
+	        String sql = "SELECT * FROM Hospitals WHERE ID = ?";
+	        PreparedStatement p = c.prepareStatement(sql);
+	        p.setInt(1, id);
+	        ResultSet rs = p.executeQuery();
+
+	        if (rs.next()) {
+	            return new Hospital(
+	                rs.getInt("ID"),
+	                rs.getString("name"),
+	                rs.getString("city"),
+	                rs.getString("address"),
+	                rs.getString("person_responsible"),
+	                rs.getString("contact_number")
+	            );
+	        }
+	        rs.close();
+	        p.close();
+	    } catch (SQLException e) {
+	        System.out.println("Error retrieving Hospital with ID " + id);
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+	
+	@Override
+	public Recipient getRecipientById(int id) {
+	    try {
+	        String sql = "SELECT * FROM Recipients WHERE ID = ?";
+	        PreparedStatement p = c.prepareStatement(sql);
+	        p.setInt(1, id);
+	        ResultSet rs = p.executeQuery();
+
+	        if (rs.next()) {
+	            return new Recipient(
+	                rs.getInt("ID"),
+	                rs.getString("first_name"),
+	                rs.getString("last_name"),
+	                rs.getDate("DOB"),
+	                rs.getString("blood_type"),
+	                rs.getString("country"),
+	                rs.getString("contact_number"),
+	                rs.getString("emergency_contact_number")
+	            );
+	        }
+	        rs.close();
+	        p.close();
+	    } catch (SQLException e) {
+	        System.out.println("Error retrieving Recipient with ID " + id);
+	        e.printStackTrace();
+	    }
+	    return null;
 	}
 
 	

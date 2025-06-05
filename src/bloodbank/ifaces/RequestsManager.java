@@ -14,6 +14,11 @@ public interface RequestsManager {
 	public void newHospital(Hospital hospital);
 	public void linkRecipientToBloodRequest(int recipientId, int bloodRequestId);
 	public void deleteRecipient(int id);
+	
+	public List<BloodRequest> getAllBloodRequests();
+	public Hospital getHospitalById(int id);
+	public Recipient getRecipientById(int id);
+	public BloodRequest getBloodRequestById(int id);
 
 }
 
