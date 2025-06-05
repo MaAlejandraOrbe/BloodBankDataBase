@@ -28,6 +28,7 @@ public class BloodBank implements Serializable{
 	private BloodBankManager bbManager;
 	private List<Donation> donations;
 	
+	private BloodBankWorker bloodbankWorker;
 	//POJOs must have their lists initialized in the constructor
 	//POJOs need an empty constructor (without parameters), can have others but this one is mandatory
 	public BloodBank() {
@@ -58,6 +59,18 @@ public class BloodBank implements Serializable{
 		this.contact_number = contact_number;
 		this.donations = new ArrayList<Donation>();
 	}
+	
+	public BloodBank(String name, String address, String city, String contact_number,BloodBankWorker bloodbankWorker) {
+		super();
+		this.name = name;
+		this.address = address;
+		this.city = city;
+		this.contact_number = contact_number;
+		this.donations = new ArrayList<Donation>();
+		this.bloodbankWorker=bloodbankWorker;
+	}
+	
+	
 
 
 	//POJOs need getters and setters

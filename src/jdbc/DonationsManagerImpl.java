@@ -21,42 +21,12 @@ import bloodbank.ifaces.*;
 public class DonationsManagerImpl implements DonationsManager {
 
     private Connection c;
-    
-    //bloodbank_database.db
-    //String dbName="bloodbank_database.db";
-
+   
     public DonationsManagerImpl(Connection c) {
         this.c = c;
     }
     
-   /* public DonationsManagerImpl() {
-    	try {
-    		Class.forName("org.sqlite.JDBC");
-    		c=DriverManager.getConnection("jdbc:sqlite:./db/"+dbName);
-    		c.createStatement().execute("PRAGMA foreign_keys=ON");
-    		this.createTables();
-    	}catch(SQLException e) {
-    		System.out.println("Problem with the database connection");
-    		e.printStackTrace();
-    	}catch(ClassNotFoundException e) {
-    		System.out.println("JDBC libraries not present.");
-    		e.printStackTrace();
-    	}
-    	
-    }
-    
-    
-    
-    private void createTables() throws SQLException {
-		String sql="CREATE TABLE donationsWorkers("+
-                   "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-				   "name TEXT NOT NULL,"+
-                   "phone INTEGER,"+
-				   "email TEXT NOT NULL)";
-		Statement s=c.createStatement();
-		s.executeUpdate(sql);
-		
-	}*/
+   
 
 	@Override
     public void insertDonationsWorker(DonationsWorker donationsWorker) {
@@ -347,7 +317,7 @@ public class DonationsManagerImpl implements DonationsManager {
     
     @Override
     public void updateDonor(Donor donor) {
-        String sql = "UPDATE donors SET first_name = ?, last_name = ?, dob = ?, blood_type = ?, country = ?, " +
+        String sql = "UPDATE Donor SET first_name = ?, last_name = ?, dob = ?, blood_type = ?, country = ?, " +
                      "eligible_to_donate = ?, contact_number = ?, emergency_contact_number = ? WHERE id = ?";
         try (PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, donor.getFirst_name());
@@ -414,5 +384,40 @@ public class DonationsManagerImpl implements DonationsManager {
         }
         return list;
     }
+    
+    @Override
+    public List<Donation> getAllDonations() {
+        List<Donation> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Donations";
+            PreparedStatement p = c.prepareStatement(sql);
+            ResultSet rs = p.executeQuery();
+            
+            int bbid=rs.getInt("bloodBank_id");
+    		int donorid=rs.getInt("donor_id");
+    		
+    		
+    		BloodBank bloodbank=getBloodBankById(bbid);
+    		Donor donor=getDonorById(donorid);
+    		
+            while (rs.next()) {
+                Donation d = new Donation(
+                    rs.getInt("ID"),
+                    rs.getString("status"),
+                    rs.getDate("date_donation"),
+                    rs.getInt("quantity"),
+                    rs.getDate("expiration_date"),
+                    bloodbank, donor);
+                list.add(d);
+            }
+            rs.close();
+            p.close();
+        } catch (SQLException e) {
+            System.out.println("Database error in getAllDonations.");
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 
 }

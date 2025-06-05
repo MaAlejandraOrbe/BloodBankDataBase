@@ -29,6 +29,7 @@ public interface DonationsManager {
 	public void updateDonor(Donor donor);
 	public void updateDonation(Donation donation);
 	public List<Donor> getAllDonors();
+	public List<Donation> getAllDonations();
 	
 
 	

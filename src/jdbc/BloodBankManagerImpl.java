@@ -18,7 +18,69 @@ public class BloodBankManagerImpl implements BloodBankManager {
     public BloodBankManagerImpl(Connection c) {
         this.c = c;
     }
-
+    
+   
+    
+    //TODO: REVISAR NOMBRE TABLE DATABASE
+    public void insertBloodBankWorker(BloodBankWorker bloodbankWorker) {
+    	try {
+			Statement s = c.createStatement();
+			String sql = "INSERT INTO bloodbankWorker (name, phone, email) VALUES ('" + bloodbankWorker.getName() + "', "
+					+ bloodbankWorker.getPhone() + ", '" + bloodbankWorker.getEmail() + "')";
+			s.executeUpdate(sql);
+			s.close();
+		} catch (SQLException e) {
+			System.out.println("Database exception.");
+			e.printStackTrace();
+		}
+    }
+    
+    //TODO: REVISAR NOMBRE TABLE DATABASE
+    public BloodBankWorker getBloodBankWorkerByEmail(String email) {
+    	try {
+			String sql = "SELECT * FROM bloodbankWorker WHERE email = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setString(1, email);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			Integer id = rs.getInt("id");
+			String name = rs.getString("name");
+			Integer phone = rs.getInt("phone");
+			BloodBankWorker bbw = new BloodBankWorker(id, name, phone, email);
+			rs.close();
+			p.close();
+			return bbw;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
+    }
+    
+    //TODO: REVISAR NOMBRE TABLE DATABASE
+    public BloodBankWorker getBloodBankWorker(int id) {
+    	try {
+			String sql = "SELECT * FROM bloodbankWorker WHERE id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			String name = rs.getString("name");
+			Integer phone = rs.getInt("phone");
+			String email = rs.getString("email");
+			BloodBankWorker bbw = new BloodBankWorker(id, name, phone, email);
+			rs.close();
+			p.close();
+			return bbw;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
+    }
+    
+    
+  
     @Override
     public void newBloodBank(BloodBank bloodbank) {
         try {
