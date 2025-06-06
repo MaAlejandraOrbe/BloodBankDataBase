@@ -21,10 +21,11 @@ public class RequestsManagerImpl implements RequestsManager {
 	    }
 	    
 	
+	    //TODO CHECK TABLES NAMES IN DATABASE: 
 	    public void insertRequestsWorker(RequestsWorker requestsWorker) {
 	    	try {
 	    		Statement s=c.createStatement();
-	    		String sql="INSERT INTO owners (name, phone, email) VALUES ('" + requestsWorker.getName() + "', "
+	    		String sql="INSERT INTO requestsWorker (name, phone, email) VALUES ('" + requestsWorker.getName() + "', "
 						+ requestsWorker.getPhone() + ", '" + requestsWorker.getEmail() + "')";
 				s.executeUpdate(sql);
 				s.close();
@@ -37,7 +38,7 @@ public class RequestsManagerImpl implements RequestsManager {
 	    
 	    public RequestsWorker getRequestsWorkerByEmail(String email) {
 	    	try {
-				String sql = "SELECT * FROM owners WHERE email = ?";
+				String sql = "SELECT * FROM requestsWorker WHERE email = ?";
 				PreparedStatement p = c.prepareStatement(sql);
 				p.setString(1, email);
 				ResultSet rs = p.executeQuery();
@@ -58,7 +59,7 @@ public class RequestsManagerImpl implements RequestsManager {
 	    
 	    public RequestsWorker getRequestsWorker(int id) {
 	      	try {
-				String sql = "SELECT * FROM donationsWorker WHERE id = ?";
+				String sql = "SELECT * FROM requestsWorker WHERE id = ?";
 				PreparedStatement p = c.prepareStatement(sql);
 				p.setInt(1, id);
 				ResultSet rs = p.executeQuery();

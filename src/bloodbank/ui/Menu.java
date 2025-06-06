@@ -81,7 +81,7 @@ public class Menu {
 		}
 	
 	private static void registerBloodBankWorker() throws IOException {
-		System.out.println("\nPlease, input the donations worker data: ");
+		System.out.println("\nPlease, input the BloodBank worker data: ");
 		System.out.println("\nName: ");
 		String name=reader.readLine();
 		System.out.println("\nPhone: ");
@@ -204,62 +204,113 @@ public class Menu {
 			String city=reader.readLine();
 			System.out.println("Enter contact number: ");
 			String contact_number=reader.readLine();
-			
+			System.out.println("Enter person responsible: ");
+			String person_responsible=reader.readLine();
+			System.out.println("Enter capacity stock: ");
+			Integer capacity_stock=Integer.parseInt(reader.readLine());
 			BloodBankWorker bbW=bbManager.getBloodBankWorker(id);
-			BloodBank bloodbank=new BloodBank(name,address,city,contact_number,bbW);
+			BloodBank bloodbank=new BloodBank(name,address,city,contact_number,person_responsible,capacity_stock,bbW);
 			bbManager.newBloodBank(bloodbank);
 			System.out.println("New BloodBank registerd correctly!");	
 			
 			
 		}
-		private static void searchBloodBank() {
-			//public List<BloodBank> searchBloodBank(String name, String city);
+		private static void searchBloodBank() throws IOException {
 			System.out.println("Search Blood Bank");
+			System.out.println("Enter name: ");
+			String name=reader.readLine();
+			System.out.println("Enter city: ");
+			String city=reader.readLine();
+			List<BloodBank> results=bbManager.searchBloodBank(name, city);
 			
-			
+			if(results.isEmpty()) {
+	        	System.out.println("No bloodbank found matching the information given.");
+	        	
+	        }else {
+	        	System.out.println("BloodBank found !");
+	        	for(BloodBank bb:results) {
+	        		System.out.println(bb);
+	        	}
+	        }
 			
 		}
 		
-		/*			System.out.println("\nSearch Donor ");
-			System.out.println("Enter first name: ");
-			String firstName=reader.readLine();
-			System.out.println("Enter last name: ");
-			String lastName=reader.readLine();
-			System.out.print(" Enter date of birth (YYYY-MM-DD): ");
-	        String dob = reader.readLine();
-	        Date dobDate;
-	        try {
-	        	dobDate=Date.valueOf(dob);
-	        }catch(IllegalArgumentException ia) {
-	        	System.out.println("Invalid date format. Use YYY-MM-DD");
-	        	return;
-	        }
-	        
-	        List<Donor> results =donationsManager.searchDonor(firstName,lastName,dobDate);
-	        
-	        if(results.isEmpty()) {
-	        	System.out.println("No donors found matching the information given.");
-	        	
-	        }else {
-	        	System.out.println("Donor found !");
-	        	for(Donor d:results) {
-	        		System.out.println(d);
-	        	}
-	        }
-	    }
-		*/
-		private static void updateBloodBank(Integer id) {
-			// TODO Auto-generated method stub
+		
+		private static void updateBloodBank(Integer id) throws NumberFormatException, IOException {
+			System.out.println("List of all registerd Bloodbanks: ");
+			List<BloodBank> bloodbanks=bbManager.getAllBloodBanks();
+			if(bloodbanks.isEmpty()) {
+				System.out.println("No Bloodbanks found in system.");
+				return;
+			}
+			for(BloodBank bb:bloodbanks){
+				System.out.println("ID: "+bb.getId()+
+						           " |Name:  "+bb.getName()+
+						           " |Address: "+bb.getAddress()+
+						           " |City: "+bb.getCity()+
+						           " |Contact number: "+bb.getContact_number()+
+						           " |Person responsible: "+bb.getPerson_responsible()+
+						           " |Capacity stock: "+bb.getCapacity_stock()
+						           );
+			}
+			System.out.println("Enter the ID of the bloodbank to update: ");
+			int bbId=Integer.parseInt(reader.readLine());
+			BloodBank bloodbank=bbManager.getBloodBankByIdManager(bbId);
+			if(bloodbank==null) {
+				System.out.println("BloodBank not found");
+				return;
+			}
+			 System.out.println("Type the new data, or press enter to keep current values:");
+
+			    System.out.print("Name (" +bloodbank.getName() + "): ");
+			    String n = reader.readLine();
+			    if (!n.isEmpty()) bloodbank.setName(n);
+			    
+			    System.out.print("Address (" +bloodbank.getAddress() + "): ");
+			    String a = reader.readLine();
+			    if (!a.isEmpty()) bloodbank.setAddress(a);
+
+			    System.out.print("City (" +bloodbank.getCity() + "): ");
+			    String c = reader.readLine();
+			    if (!c.isEmpty()) bloodbank.setName(c);
+			    
+			    System.out.print("Contact Number (" +bloodbank.getContact_number() + "): ");
+			    String cn = reader.readLine();
+			    if (!cn.isEmpty()) bloodbank.setName(cn);
+
+			    System.out.print("Person Responsible (" +bloodbank.getPerson_responsible() + "): ");
+			    String pr = reader.readLine();
+			    if (!pr.isEmpty()) bloodbank.setPerson_responsible(pr);
+			    
+			 
+			    
+			    System.out.print("Capacity stock (" + bloodbank.getCapacity_stock() + "): ");
+			    String input = reader.readLine();  
+
+			    if (!input.isEmpty()) {
+			        
+			            Integer cs = Integer.parseInt(input);
+			            bloodbank.setCapacity_stock(cs);
+			    }
+
 			
 		}
-		private static void deleteBloodBank(Integer id) {
-			// TODO Auto-generated method stub
+		
+		
+		private static void deleteBloodBank(Integer id) throws NumberFormatException, IOException {
+			System.out.print("Enter the ID of the Bloodbank to delete: ");
+			int bbId = Integer.parseInt(reader.readLine());
+			bbManager.deleteBloodBank(bbId);;
+			System.out.println("Bloodbank deleted successfully.");
 			
 		}
 
 
-		private static void deleteDonation(Integer id) {
-			// TODO Auto-generated method stub
+		private static void deleteDonation(Integer id) throws NumberFormatException, IOException {
+			System.out.print("Enter the ID of the donation to delete: ");
+			int donationId = Integer.parseInt(reader.readLine());
+			bbManager.deleteBloodBank(donationId);;
+			System.out.println("Donation deleted successfully.");
 			
 		}
 
@@ -378,7 +429,7 @@ public class Menu {
 				break;
 			case 3:
 				
-				//TODO: THESE OF SEARCH I THINK THEY ARE CORRECT WITHOUT PARAMETERS
+				
 				searchDonor();
 				break;
 			case 4:
@@ -463,7 +514,7 @@ public class Menu {
 		    Donation donation=new Donation(status,ddate,quantity,edate,bloodBank,donor,dw);
 
 	        donationsManager.newDonation(donation);
-	        System.out.println("New donotion registerd correctly!");	
+	        System.out.println("New donation registerd correctly!");	
 			
 		}
 		

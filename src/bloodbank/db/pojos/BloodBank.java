@@ -12,10 +12,7 @@ import bloodbank.ifaces.*;
 //POJOs need to import the class serializable (means it can be saved to a file/database...)
 
 public class BloodBank implements Serializable{
- //TODO añadir nombre
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	//POJOs used to contain attributes
 	private Integer id;
@@ -51,13 +48,16 @@ public class BloodBank implements Serializable{
 	}
 	
 
-	public BloodBank(String name, String address, String city, String contact_number) {
+	public BloodBank(String name, String address, String city, String contact_number,String person_responsible,Integer capacity_stock,BloodBankWorker bloodbankWorker) {
 		super();
 		this.name = name;
 		this.address = address;
 		this.city = city;
 		this.contact_number = contact_number;
+		this.person_responsible = person_responsible;
+		this.capacity_stock = capacity_stock;
 		this.donations = new ArrayList<Donation>();
+		this.bloodbankWorker=bloodbankWorker;
 	}
 	
 	public BloodBank(String name, String address, String city, String contact_number,BloodBankWorker bloodbankWorker) {

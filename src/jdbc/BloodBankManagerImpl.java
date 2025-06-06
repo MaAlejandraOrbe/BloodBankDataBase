@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import bloodbank.db.pojos.*;
 import bloodbank.ifaces.BloodBankManager;
 
@@ -147,7 +149,7 @@ public class BloodBankManagerImpl implements BloodBankManager {
         return list;
     }
     
-   /* public BloodBank getBloodBankById(int id) {
+   public BloodBank getBloodBankByIdManager(int id) {
         try {
             String sql = "SELECT * FROM BloodBank WHERE ID = ?";
             PreparedStatement p = c.prepareStatement(sql);
@@ -174,8 +176,74 @@ public class BloodBankManagerImpl implements BloodBankManager {
             e.printStackTrace();
         }
         return null;
-    }*/
+    }
 
+    public List<BloodBank> getAllBloodBanks() {
+        List<BloodBank> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM BloodBank";
+            PreparedStatement p = c.prepareStatement(sql);
+            ResultSet rs = p.executeQuery();
+            
+            int bbid=rs.getInt("bloodBank_id");
+    		
+    	
+    		BloodBank bloodbank=getBloodBankByIdManager(bbid);
+    		
+    		
+            while (rs.next()) {
+                BloodBank bb = new BloodBank(
+                        rs.getInt("ID"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("city"),
+                        rs.getString("contactNumber"),
+                        rs.getString("personResponsible"),
+                        rs.getInt("current_stock")
+                    );
+                list.add(bb);
+            }
+            rs.close();
+            p.close();
+        } catch (SQLException e) {
+            System.out.println("Database error in getAllBloodBanksManager.");
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    @Override
+    public void updateBloodBank(BloodBank bloodbank) {
+        try {
+            String sql = "UPDATE BloodBank SET name = ?, address = ?, city = ?, contact_number = ?, person_responsible = ?, capacity_stock = ? WHERE ID = ?";
+            PreparedStatement p = c.prepareStatement(sql);
+            p.setString(1, bloodbank.getName());
+            p.setString(2, bloodbank.getAddress());
+            p.setString(3, bloodbank.getCity());
+            p.setString(4,bloodbank.getContact_number());
+            p.setString(5, bloodbank.getPerson_responsible());
+            p.setInt(6, bloodbank.getCapacity_stock());
+            p.executeUpdate();
+            p.close();
+        } catch (SQLException e) {
+            System.out.println("Database error in updateBloodBank.");
+            e.printStackTrace();
+        }
+    }
+    
+    @Override
+    public void deleteDonation(int id) {
+        try {
+            String sql = "DELETE FROM Donations WHERE ID = ?";
+            PreparedStatement p = c.prepareStatement(sql);
+            p.setInt(1, id);
+            p.executeUpdate();
+            p.close();
+        } catch (SQLException e) {
+            System.out.println("Database error in deleteDonation.");
+            e.printStackTrace();
+        }
+    }
 }
 
     
