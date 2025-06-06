@@ -139,7 +139,16 @@ public class SQLCreate {
 			           + ");";
 			stmt10.executeUpdate(sql10);
 			stmt10.close();
+			
+			Statement stmt11 = c.createStatement();
+			String sql11 = "CREATE TABLE IF NOT EXISTS roles ("
+			           + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+			           + "name TEXT NOT NULL, "
+			           + ");";
+			stmt11.executeUpdate(sql11);
+			stmt11.close();
 
+			
 
 
 			c.close();
