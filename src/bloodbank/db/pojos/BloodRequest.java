@@ -48,10 +48,12 @@ public class BloodRequest implements Serializable{
 		this.status = status;
 		this.bloodBank = bloodBank;
 		this.recipient = recipient;
+		this.donation=donation;
 		
 		
 	}
 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -93,7 +95,7 @@ public class BloodRequest implements Serializable{
 	}
 
 	public Donation getDonation() {
-		return donation;
+		return this.donation;
 	}
 
 	public void setDonation(Donation donation) {
