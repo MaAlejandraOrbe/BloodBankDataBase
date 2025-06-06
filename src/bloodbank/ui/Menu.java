@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import bloodBankXMLutilis.XMLManagerImpl;
 import bloodbank.db.pojos.*;
 import bloodbank.ifaces.*;
 import jdbc.*;
@@ -25,9 +26,7 @@ public class Menu {
 	private static RequestsManager requestsManager;
 	
 	private static UserManager userManager;
-	
-	
-	//TODO private static XMLManager xmlManager = new XMLManagerImpl();
+	private static XMLManager xmlManager = new XMLManagerImpl();
 
 	public static void main(String[] args) throws IOException {
 		
@@ -380,7 +379,7 @@ public class Menu {
 		}
 		
 		private static void registerRequestsWorker() throws IOException {
-			System.out.println("Please, input the donations worker data: ");
+			System.out.println("Please, input the requests worker data: ");
 			System.out.println("Name: ");
 			String name=reader.readLine();
 			System.out.println("Phone: ");
