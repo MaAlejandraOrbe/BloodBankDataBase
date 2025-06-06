@@ -19,6 +19,7 @@ public interface RequestsManager {
 	public Hospital getHospitalById(int id);
 	public Recipient getRecipientById(int id);
 	public BloodRequest getBloodRequestById(int id);
+	public void updateBloodRequest(BloodRequest bloodrequest);
 
 }
 

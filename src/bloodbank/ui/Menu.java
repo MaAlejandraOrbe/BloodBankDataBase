@@ -778,7 +778,7 @@ public class Menu {
 				            fullfillBloodRequest();
 				            break;
 				        case 10:
-				            //updateBloodRequest(rW.getId());
+				            updateBloodRequest();
 				            break;
 				        case 0:
 				            return;
@@ -992,7 +992,7 @@ public class Menu {
 			System.out.println("Recipient deleted successfully.");
 		}
 
-		/*private static void updateBloodRequest(int id) throws IOException, SQLException {
+		private static void updateBloodRequest() throws IOException {
 		    System.out.print("Enter the BloodRequest ID to update: ");
 		    int bloodRequestId = Integer.parseInt(reader.readLine());
 
@@ -1004,24 +1004,32 @@ public class Menu {
 
 		    System.out.println("Current details: ");
 		    System.out.println("ID: " + bloodRequest.getId() + 
-		                       " | Quantity: " + bloodRequest.getQuantity_order() + 
+		                       " | Quantity Requested: " + bloodRequest.getQuantity_order() + 
 		                       " | Status: " + bloodRequest.getStatus());
 
-		    System.out.print("Enter new quantity (current: " + bloodRequest.getQuantity_order() + "): ");
+		    System.out.println("Type the new data, or press enter to keep current values:");
+
+		    System.out.print("Quantity (" + bloodRequest.getQuantity_order() + "): ");
 		    String newQuantity = reader.readLine();
 		    if (!newQuantity.isEmpty()) {
-		        bloodRequest.setQuantity_order(Integer.parseInt(newQuantity));
+		        try {
+		            bloodRequest.setQuantity_order(Integer.parseInt(newQuantity));
+		        } catch (NumberFormatException e) {
+		            System.out.println("Invalid quantity format.");
+		            return;
+		        }
 		    }
 
-		    System.out.print("Enter new status (current: " + bloodRequest.getStatus() + "): ");
+		    System.out.print("Status (" + bloodRequest.getStatus() + "): ");
 		    String newStatus = reader.readLine();
 		    if (!newStatus.isEmpty()) {
 		        bloodRequest.setStatus(newStatus);
 		    }
 
-		    //requestsManager.updateBloodRequest(bloodRequest);
-			System.out.println("BloodRequest updated successfully!");
-		}*/
+		    requestsManager.updateBloodRequest(bloodRequest);
+		    System.out.println("BloodRequest updated successfully!");
 		}
+
+	}
 		
 	

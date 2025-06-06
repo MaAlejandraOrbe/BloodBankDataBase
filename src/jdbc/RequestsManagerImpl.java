@@ -1,11 +1,6 @@
 package jdbc;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +15,6 @@ public class RequestsManagerImpl implements RequestsManager {
 	        this.c = c;
 	    }
 	    
-	
-	    //TODO CHECK TABLES NAMES IN DATABASE: 
 	    public void insertRequestsWorker(RequestsWorker requestsWorker) {
 	    	try {
 	    		Statement s=c.createStatement();
@@ -79,30 +72,26 @@ public class RequestsManagerImpl implements RequestsManager {
 	    }
 	    
 
-	
-	    //TODO: COMPROBAR QUE ESTO SEA CORRECTO
-	@Override
-	public void fullfillBloodRequest(BloodRequest bloodRequest) {
-		try {
+	    @Override
+	    public void fullfillBloodRequest(BloodRequest bloodRequest) {
+	    	try {
 			
-			String sql="UPDATE bloodRequest SET" +" quantity order = ?, " + "status = ?, " + "WHERE id = ? ";
-			PreparedStatement p;
-			p=c.prepareStatement(sql);
-			p.setInt(1,bloodRequest.getQuantity_order());
-			p.setString(2,bloodRequest.getStatus());
-			p.executeUpdate();
-			p.close();
+	    		String sql="UPDATE BloodRequest SET" +" quantity_order = ?, " + "status = ?, " + "WHERE id = ? ";
+	    		PreparedStatement p;
+	    		p=c.prepareStatement(sql);
+				p.setInt(1,bloodRequest.getQuantity_order());
+				p.setString(2,bloodRequest.getStatus());
+				p.executeUpdate();
+				p.close();
 			
-		}catch (SQLException e) {
-			System.out.println("Database error.");
-			e.printStackTrace();
-		}
+	    	}catch (SQLException e) {
+	    		System.out.println("Database error.");
+	    		e.printStackTrace();
+	    	}
 
-	}
+	    }
 	
 	
-
-	//TODO: COMPROBAR QUE SEA CORRECTO
 	@Override
 	public void newBloodRequest(BloodRequest bloodRequest) {
 		try {
@@ -171,23 +160,21 @@ public class RequestsManagerImpl implements RequestsManager {
 
 	}
 
-	//TODO: COMPROBAR QUE SEA CORRECTO
-	
 	@Override
 	public void linkRecipientToBloodRequest(int recipientId, int bloodRequestId) {
-		try {
-			String sql="INSERT INTO recipientsBloodRequest(recipientId, bloodRequestId) VALUES (?,?)";
-			PreparedStatement p=c.prepareStatement(sql);
-			p.setInt(1, recipientId);
-			p.setInt(2, bloodRequestId);
-			p.executeUpdate();
-			p.close();
-		}catch (SQLException e) {
-			System.out.println("Database error.");
-			e.printStackTrace();
-		}
-
+	    try {
+	        String sql = "UPDATE BloodRequest SET recipient_id = ? WHERE id = ?";
+	        PreparedStatement p = c.prepareStatement(sql);
+	        p.setInt(1, recipientId);
+	        p.setInt(2, bloodRequestId);
+	        p.executeUpdate();
+	        p.close();
+	    } catch (SQLException e) {
+	        System.out.println("Database error.");
+	        e.printStackTrace();
+	    }
 	}
+
 
 	@Override
 	public BloodRequest getBloodRequestById(int id) {
@@ -269,7 +256,7 @@ public class RequestsManagerImpl implements RequestsManager {
 	@Override
 	public Recipient getRecipientById(int id) {
 	    try {
-	        String sql = "SELECT * FROM Recipients WHERE ID = ?";
+	        String sql = "SELECT * FROM Recipient WHERE ID = ?";
 	        PreparedStatement p = c.prepareStatement(sql);
 	        p.setInt(1, id);
 	        ResultSet rs = p.executeQuery();
@@ -311,5 +298,23 @@ public class RequestsManagerImpl implements RequestsManager {
         }
 
 	}
+	
+	@Override
+	public void updateBloodRequest(BloodRequest bloodRequest) {
+	    try {
+	        String sql = "UPDATE BloodRequest SET quantity_order = ?, status = ? WHERE id = ?";
+	        PreparedStatement p = c.prepareStatement(sql);
+	        p.setInt(1, bloodRequest.getQuantity_order());
+	        p.setString(2, bloodRequest.getStatus());
+	        p.setInt(3, bloodRequest.getId());
+	        p.executeUpdate();
+	        p.close();
+	    } catch (SQLException e) {
+	        System.out.println("Database error in updateBloodRequest.");
+	        e.printStackTrace();
+	    }
+	}
+
+	
 
 }
