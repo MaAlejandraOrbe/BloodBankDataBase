@@ -164,8 +164,8 @@ public class BloodBankManagerImpl implements BloodBankManager {
                     rs.getString("address"),
                     rs.getString("city"),
                     rs.getString("contact_number"),
-                    rs.getString("personResponsible"),
-                    rs.getInt("current_stock")
+                    rs.getString("person_responsible"),
+                    rs.getInt("capacity_stock")
                 );
             }
             rs.close();
@@ -196,8 +196,8 @@ public class BloodBankManagerImpl implements BloodBankManager {
                         rs.getString("address"),
                         rs.getString("city"),
                         rs.getString("contact_number"),
-                        rs.getString("personResponsible"),
-                        rs.getInt("current_stock")
+                        rs.getString("person_responsible"),
+                        rs.getInt("capacity_stock")
                     );
                 list.add(bb);
             }
