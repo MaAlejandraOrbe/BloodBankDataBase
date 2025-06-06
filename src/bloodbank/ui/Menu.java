@@ -149,8 +149,7 @@ public class Menu {
 				System.out.println("2.Search bloodbank");
 				System.out.println("3.Update bloodbank");
 				System.out.println("4.Delete bloodbank");
-				System.out.println("5.Delete donation donor"); //esta creo que es innecesaria
-				System.out.println("0.Back to main menu");
+				System.out.println("5.Delete donation donor"); 
 				int choice=Integer.parseInt(reader.readLine());
 			
 			
@@ -169,7 +168,7 @@ public class Menu {
 				deleteBloodBank(bbW.getId());
 				break;
 			case 5:
-				deleteDonation(bbW.getId()); //ns
+				deleteDonation(bbW.getId()); 
 				break;
 
 			case 0:

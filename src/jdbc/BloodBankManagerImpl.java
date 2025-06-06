@@ -59,7 +59,7 @@ public class BloodBankManagerImpl implements BloodBankManager {
 		return null;
     }
     
-    //TODO: REVISAR NOMBRE TABLE DATABASE
+    
     public BloodBankWorker getBloodBankWorker(int id) {
     	try {
 			String sql = "SELECT * FROM bloodbankWorker WHERE id = ?";
@@ -185,12 +185,10 @@ public class BloodBankManagerImpl implements BloodBankManager {
             PreparedStatement p = c.prepareStatement(sql);
             ResultSet rs = p.executeQuery();
             
-            int bbid=rs.getInt("bloodBank_id");
-    		
-    	
-    		BloodBank bloodbank=getBloodBankByIdManager(bbid);
+           
     		
     		
+       
             while (rs.next()) {
                 BloodBank bb = new BloodBank(
                         rs.getInt("ID"),
