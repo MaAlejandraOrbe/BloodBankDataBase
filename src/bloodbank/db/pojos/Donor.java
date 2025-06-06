@@ -3,6 +3,11 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import bloodBankXMLutilis.SQLDateAdapter;
@@ -10,25 +15,36 @@ import bloodBankXMLutilis.SQLDateAdapter;
 import java.util.List;
 import java.util.ArrayList;
 
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder= {"first_name","last_name","DOB","blood_type","country","eligible_donate","contact_number","emergency_contact_number","donations"})
 public class Donor implements Serializable {
 	
 
 	
 	private static final long serialVersionUID =1L;
+	@XmlTransient
 	private Integer id;
+	@XmlElement
 	private String first_name;
+	@XmlElement
 	private String last_name;
 	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date DOB;
+	@XmlElement
 	private String blood_type;
+	@XmlElement
 	private String country;
+	@XmlElement
 	private Boolean eligible_donate;
+	@XmlElement
 	private String contact_number;
+	@XmlElement
 	private String emergency_contact_number;
+	@XmlTransient
+	
 	private List<Donation> donations;
 	
-	
+	@XmlElement
 	private DonationsWorker donationsWorker;
 	
 	

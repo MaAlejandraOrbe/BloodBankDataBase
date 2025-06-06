@@ -46,7 +46,7 @@ public class BloodBank implements Serializable{
 	}
 	
 	
-	//Not nceeded for POJOs but useful to me
+
 	public BloodBank(Integer id,String name, String address, String city, String contact_number,String person_responsible, Integer capacity_stock) {
 		super();
 		this.id = id;
@@ -174,7 +174,6 @@ public class BloodBank implements Serializable{
 					+ "]";
 		}
 
-		//could have other methods such as to string
 		
 		
 		

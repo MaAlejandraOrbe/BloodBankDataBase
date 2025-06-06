@@ -1,15 +1,30 @@
 package bloodbank.db.pojos;
 import java.io.Serializable;
+
 import java.util.Objects;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder= {"name","city","address","person_responsible","contact_number"})
 
 public class Hospital implements Serializable{
 	
 	private static final long serialVersionUID =1L;
+	@XmlTransient
 	private Integer id;
+	@XmlElement
 	private String name;
+	@XmlElement
 	private String city;
+	@XmlElement
 	private String address;
+	@XmlElement
 	private String person_responsible;
+	@XmlElement
 	private String contact_number;
 	
 	

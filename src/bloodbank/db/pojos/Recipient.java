@@ -1,25 +1,40 @@
 package bloodbank.db.pojos;
 import java.io.Serializable;
+
 import java.sql.Date;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import bloodBankXMLutilis.SQLDateAdapter;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder= {"first_name","last_name","DOB","blood_type","country","contact_number","emergency_contact_number"})
 
 public class Recipient implements Serializable{
 	
-	//TODO: CONFIRMAR QUE HOSPITAL ID SEA ASI
+	
 	
 	private static final long serialVersionUID =1L;
+	@XmlTransient
 	private Integer id;
+	@XmlElement
 	private String first_name;
+	@XmlElement
 	private String last_name;
 	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date DOB;
+	@XmlElement
 	private String blood_type;
+	@XmlElement
 	private String country;
+	@XmlElement
 	private String  contact_number;
+	@XmlElement
 	private String  emergency_contact_number;
 
 	public Recipient() {
