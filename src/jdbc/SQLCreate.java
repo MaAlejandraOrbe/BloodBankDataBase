@@ -41,6 +41,7 @@ public class SQLCreate {
 			stmt2.executeUpdate(sql2);
 			stmt2.close();
 
+			
 			Statement stmt3 = c.createStatement();
 			String sql3 = "CREATE TABLE IF NOT EXISTS Donations ("
 			           + "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -119,25 +120,25 @@ public class SQLCreate {
 			stmt8.close();
 			
 
-//			Statement stmt9 = c.createStatement();
-//			String sql9 = "CREATE TABLE IF NOT EXISTS requestsWorker ("
-//			           + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-//			           + "name TEXT NOT NULL, "
-//			           + "phone INTEGER, "
-//			           + "email TEXT NOT NULL"
-//			           + ");";
-//			stmt9.executeUpdate(sql9);
-//			stmt9.close();
-//			
-//			Statement stmt10 = c.createStatement();
-//			String sql10 = "CREATE TABLE IF NOT EXISTS bloodbankWorker ("
-//			           + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-//			           + "name TEXT NOT NULL, "
-//			           + "phone INTEGER, "
-//			           + "email TEXT NOT NULL"
-//			           + ");";
-//			stmt10.executeUpdate(sql10);
-//			stmt10.close();
+			Statement stmt9 = c.createStatement();
+			String sql9 = "CREATE TABLE IF NOT EXISTS requestsWorker ("
+			           + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+			           + "name TEXT NOT NULL, "
+			           + "phone INTEGER, "
+			           + "email TEXT NOT NULL"
+			           + ");";
+			stmt9.executeUpdate(sql9);
+			stmt9.close();
+			
+			Statement stmt10 = c.createStatement();
+			String sql10 = "CREATE TABLE IF NOT EXISTS bloodbankWorker ("
+			           + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+			           + "name TEXT NOT NULL, "
+			           + "phone INTEGER, "
+			           + "email TEXT NOT NULL"
+			           + ");";
+			stmt10.executeUpdate(sql10);
+			stmt10.close();
 
 
 
