@@ -119,7 +119,7 @@ public class Menu {
 			}
 			
 				
-				if(user.getRole().getName().equals("bloodbankManager")){
+				if(user.getRole().getName().equals("bloodbankWorker")){
 					bloodBankWorkerMenu(user.getEmail());
 					break;
 					

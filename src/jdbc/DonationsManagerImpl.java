@@ -263,9 +263,9 @@ public class DonationsManagerImpl implements DonationsManager {
                     rs.getString("name"),
                     rs.getString("address"),
                     rs.getString("city"),
-                    rs.getString("contactNumber"),
-                    rs.getString("personResponsible"),
-                    rs.getInt("current_stock")
+                    rs.getString("contact_number"),
+                    rs.getString("person_responsible"),
+                    rs.getInt("capacity_stock")
                 );
             }
             rs.close();
