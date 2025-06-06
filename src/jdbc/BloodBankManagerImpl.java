@@ -23,7 +23,7 @@ public class BloodBankManagerImpl implements BloodBankManager {
     
    
     
-    //TODO: REVISAR NOMBRE TABLE DATABASE
+    
     public void insertBloodBankWorker(BloodBankWorker bloodbankWorker) {
     	try {
 			Statement s = c.createStatement();
@@ -163,7 +163,7 @@ public class BloodBankManagerImpl implements BloodBankManager {
                     rs.getString("name"),
                     rs.getString("address"),
                     rs.getString("city"),
-                    rs.getString("contactNumber"),
+                    rs.getString("contact_number"),
                     rs.getString("personResponsible"),
                     rs.getInt("current_stock")
                 );

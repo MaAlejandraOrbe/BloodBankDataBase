@@ -237,7 +237,7 @@ public class Menu {
 		
 		
 		private static void updateBloodBank(Integer id) throws NumberFormatException, IOException {
-			System.out.println("List of all registerd Bloodbanks: ");
+			System.out.println("List of all registered Bloodbanks: ");
 			List<BloodBank> bloodbanks=bbManager.getAllBloodBanks();
 			if(bloodbanks.isEmpty()) {
 				System.out.println("No Bloodbanks found in system.");

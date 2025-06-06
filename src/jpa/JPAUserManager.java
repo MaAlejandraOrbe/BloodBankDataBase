@@ -17,7 +17,7 @@ public class JPAUserManager implements UserManager{
 		
 		if(this.getRoles().isEmpty()) {
 			
-			//TODO: VERIFY THESE ARE THE ROLES WE SHOULD DO.
+			
 			Role bloodbankWorker=new Role("bloodbankWorker");
 			Role donationsWorker=new Role("donationsWorker");
 			Role requestsWorker=new Role("requestsWorker");
