@@ -150,6 +150,8 @@ public class Menu {
 				System.out.println("3.Update bloodbank");
 				System.out.println("4.Delete bloodbank");
 				System.out.println("5.Delete donation donor"); 
+				System.out.println("\n0. Back to main menu");
+				
 				int choice=Integer.parseInt(reader.readLine());
 			
 			
