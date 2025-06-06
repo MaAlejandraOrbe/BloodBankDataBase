@@ -3,17 +3,30 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = { "quantity_order", "status", "bloodbank", "recipient", "donation" })
 public class BloodRequest implements Serializable{
 	
 	//TODO: COMPROBAR LOS OBJETOS DE LAS OTRAS CLASES
 	
-	
 	private static final long serialVersionUID=1L;
+	@XmlTransient
 	private Integer id;
+	@XmlElement
 	private Integer quantity_order;
+	@XmlElement
 	private String status;
+	@XmlElement
 	private BloodBank bloodBank;
+	@XmlElement
 	private Recipient recipient;
+	@XmlTransient
 	private Donation donation;
 	
 	public BloodRequest() {

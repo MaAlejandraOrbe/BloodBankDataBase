@@ -4,25 +4,43 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import bloodBankXMLutilis.SQLDateAdapter;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Donation")
+@XmlType(propOrder = { "status", "donation_date", "quantity", "expiration_date", "bloodbank", "donor"})
 public class Donation implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@XmlTransient
 	private Integer id;
+	@XmlElement
 	private String status;
+	@XmlElement
 	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date donation_date; //Date fecha = Date.of(1995, 4, 10); (ano, mes, dia)
+	@XmlElement
 	private Integer quantity;
 	@XmlJavaTypeAdapter(SQLDateAdapter.class)
+	@XmlElement
 	private Date expiration_date;
+	@XmlElement
 	private BloodBank bloodbank;
+	@XmlElement
 	private Donor donor;
+	@XmlAttribute
 	private DonationsWorker donationsWorker;
 	
 	

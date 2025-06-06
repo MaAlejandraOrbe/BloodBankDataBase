@@ -5,29 +5,41 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
 import bloodbank.ifaces.*;
 
-//POJO (plain old java object)
-//POJOs must use object wrappers (Integer, Float, etc.) instead of primitive types (int, floar, etc.)
-//POJOs need to import the class serializable (means it can be saved to a file/database...)
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = { "name", "city", "contact_numer", "person_responsible", "capacity_stock","bbManager", "donations", "bloodbankWorker"} )
 public class BloodBank implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	//POJOs used to contain attributes
-	private Integer id;
-	private String name;
-	private String address;
-	private String city;
-	private String contact_number;
-	private String person_responsible;
-	private Integer capacity_stock;
-	private BloodBankManager bbManager;
-	private List<Donation> donations;
 	
+	@XmlTransient
+	private Integer id;
+	@XmlElement
+	private String name;
+	@XmlElement
+	private String address;
+	@XmlElement
+	private String city;
+	@XmlElement
+	private String contact_number;
+	@XmlElement
+	private String person_responsible;
+	@XmlTransient
+	private Integer capacity_stock;
+	@XmlElement
+	private BloodBankManager bbManager;
+	@XmlTransient
+	private List<Donation> donations;
+	@XmlElement
 	private BloodBankWorker bloodbankWorker;
-	//POJOs must have their lists initialized in the constructor
-	//POJOs need an empty constructor (without parameters), can have others but this one is mandatory
+
 	public BloodBank() {
 		super();
 		this.donations = new ArrayList<Donation>();
